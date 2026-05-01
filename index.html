@@ -46,6 +46,12 @@
   .screen {
     position: fixed; inset: 0; display: flex; flex-direction: column;
     padding: clamp(10px,1.5vw,20px); animation: fadeIn .25s;
+    overflow: hidden;
+  }
+  /* 가운데 정렬 화면은 내부 스크롤 허용 */
+  .center-wrap, .speak-wrap {
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
   @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
   .hidden { display: none !important; }
@@ -1432,6 +1438,11 @@ function stopSpeakRecording() {
   }
   const nextBtn = document.getElementById('speakNextBtn');
   nextBtn.disabled = false;
+  // 다음 단계 버튼을 강조 + 화면에 보이도록 스크롤
+  nextBtn.classList.add('pulse-attention');
+  setTimeout(() => {
+    nextBtn.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }, 100);
 }
 
 function stopAllRecording() {
