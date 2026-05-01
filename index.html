@@ -384,23 +384,23 @@
     height: 100%; justify-content: center;
   }
   .explore-info-title {
-    font-size: clamp(15px,2vh,22px); font-weight: 900;
+    font-size: clamp(18px,2.4vh,26px); font-weight: 900;
     color: #78350F; text-align: center;
   }
   .explore-info-num {
-    font-size: clamp(48px,7.5vh,90px); font-weight: 900;
+    font-size: clamp(56px,9vh,108px); font-weight: 900;
     color: #92400E; line-height: 1; letter-spacing: .04em;
   }
   .explore-info-read {
-    font-size: clamp(20px,2.8vh,30px); font-weight: 900;
+    font-size: clamp(24px,3.4vh,38px); font-weight: 900;
     color: #92400E; line-height: 1.2;
-    background: white; padding: clamp(6px,1vh,10px) clamp(12px,1.8vh,20px);
-    border-radius: 12px;
-    border: 2px solid #F59E0B;
+    background: white; padding: clamp(8px,1.2vh,14px) clamp(14px,2vh,24px);
+    border-radius: 14px;
+    border: 3px solid #F59E0B;
     text-align: center;
   }
   .explore-info-note {
-    font-size: clamp(13px,1.7vh,18px); font-weight: 800;
+    font-size: clamp(15px,2vh,22px); font-weight: 800;
     color: #78350F; line-height: 1.4;
     text-align: center; margin-top: 4px;
   }
@@ -408,10 +408,11 @@
     position: absolute; top: clamp(12px,1.6vh,18px); right: clamp(14px,1.8vh,22px);
     background: white; padding: clamp(8px,1.2vh,14px) clamp(16px,2.2vh,24px);
     border-radius: 14px;
-    font-size: clamp(28px,3.8vh,46px); font-weight: 900;
+    font-size: clamp(32px,4.4vh,52px); font-weight: 900;
     color: var(--primary-dark);
     border: 3px solid var(--primary);
     box-shadow: 0 3px 10px rgba(14,165,233,.2);
+    z-index: 5;
   }
 
   /* ============ 학습 메인 ============ */
@@ -442,56 +443,64 @@
     border: 5px solid var(--green); border-radius: 32px;
     padding: clamp(16px,2.4vh,32px);
     display: flex; flex-wrap: wrap; align-content: center; align-items: flex-end;
-    justify-content: center; gap: clamp(20px,3vh,48px);
+    justify-content: center; gap: clamp(16px,2.4vh,40px);
     position: relative; overflow: hidden; min-height: 0;
     box-shadow: inset 0 4px 14px rgba(0,0,0,.06);
   }
-  .blocks-area .group { display: grid; gap: 4px; }
-  .blocks-area .group.h { grid-template-columns: repeat(3,auto); gap: clamp(10px,1.6vh,16px); }
-  .blocks-area .group.t { grid-template-columns: repeat(5,auto); gap: clamp(4px,.8vh,8px); }
-  .blocks-area .group.o { grid-template-columns: repeat(3,auto); gap: clamp(4px,.8vh,8px); }
+  .blocks-area .group {
+    display: flex; flex-wrap: wrap; align-content: flex-end; justify-content: center;
+    gap: clamp(4px,.8vh,10px);
+    max-height: 100%;
+  }
+  .blocks-area .group.h { gap: clamp(8px,1.4vh,14px); }
+  .blocks-area .group.t { gap: clamp(3px,.6vh,6px); max-width: clamp(220px,28vh,360px); }
+  .blocks-area .group.o { gap: clamp(4px,.6vh,8px); max-width: clamp(160px,20vh,240px); }
   .now-tag {
-    position: absolute; top: clamp(12px,1.6vh,18px); left: clamp(14px,1.8vh,22px);
+    position: absolute; top: clamp(10px,1.4vh,16px); left: clamp(12px,1.6vh,20px);
     background: white; color: var(--text);
     padding: clamp(8px,1.2vh,14px) clamp(14px,2vh,22px);
     border-radius: 14px; font-weight: 900;
-    font-size: clamp(15px,2vh,22px);
+    font-size: clamp(17px,2.4vh,26px);
     box-shadow: 0 3px 10px rgba(0,0,0,.1);
     border: 2px solid #E2E8F0;
-    display: flex; gap: clamp(8px,1.2vh,14px);
+    display: flex; gap: clamp(10px,1.6vh,16px);
+    z-index: 5;
   }
   .now-tag .label-h { color: var(--hundred-d); }
   .now-tag .label-t { color: var(--ten-d); }
   .now-tag .label-o { color: var(--one-d); }
 
-  /* 수 모형 (큼지막) */
+  /* 수 모형 (큼지막하지만 영역에 따라 자동 축소) */
   .h-block {
-    width: clamp(90px,13vh,170px); height: clamp(90px,13vh,170px);
+    width: clamp(60px,9vh,140px); height: clamp(60px,9vh,140px);
     background: linear-gradient(135deg,#7DD3FC 0%,#0EA5E9 50%,#0369A1 100%);
-    border: 4px solid var(--hundred-d); border-radius: 14px;
+    border: 4px solid var(--hundred-d); border-radius: 12px;
     display: grid; grid-template-columns: repeat(10,1fr); grid-template-rows: repeat(10,1fr);
     box-shadow: 0 6px 16px rgba(2,132,199,.4),
                 inset 0 3px 0 rgba(255,255,255,.5),
                 inset 0 -3px 0 rgba(0,0,0,.15);
+    flex-shrink: 0;
   }
   .h-block > div { border: 1px solid rgba(2,132,199,.4); }
   .t-block {
-    width: clamp(26px,3.4vh,44px); height: clamp(90px,13vh,170px);
+    width: clamp(18px,2.4vh,32px); height: clamp(60px,9vh,140px);
     background: linear-gradient(135deg,#D8B4FE 0%,#A855F7 50%,#7E22CE 100%);
-    border: 3px solid var(--ten-d); border-radius: 8px;
+    border: 3px solid var(--ten-d); border-radius: 7px;
     display: grid; grid-template-rows: repeat(10,1fr);
     box-shadow: 0 5px 14px rgba(126,34,206,.4),
                 inset 0 3px 0 rgba(255,255,255,.5),
                 inset 0 -3px 0 rgba(0,0,0,.15);
+    flex-shrink: 0;
   }
   .t-block > div { border: 1px solid rgba(126,34,206,.4); }
   .o-block {
-    width: clamp(34px,4.2vh,56px); height: clamp(34px,4.2vh,56px);
+    width: clamp(24px,3vh,42px); height: clamp(24px,3vh,42px);
     background: linear-gradient(135deg,#FDBA74 0%,#F97316 50%,#C2410C 100%);
-    border: 3px solid var(--one-d); border-radius: 8px;
+    border: 3px solid var(--one-d); border-radius: 7px;
     box-shadow: 0 5px 14px rgba(194,65,12,.4),
                 inset 0 3px 0 rgba(255,255,255,.5),
                 inset 0 -3px 0 rgba(0,0,0,.15);
+    flex-shrink: 0;
   }
   .interactive { cursor: pointer; transition: filter .12s, transform .12s; }
   .interactive:hover { filter: brightness(1.1); transform: scale(1.08); }
@@ -1985,14 +1994,21 @@ function renderExplore() {
     b.onclick = () => expRemove('o');
     grpO.appendChild(b);
   }
+  // 모형이 많을 때 자동 축소
+  const total = c.h + c.t + c.o;
+  const area = document.getElementById('blocksAreaExp');
+  area.classList.remove('dense','very-dense');
+  if (total >= 30) area.classList.add('very-dense');
+  else if (total >= 15) area.classList.add('dense');
+
   document.getElementById('nowTagExp').innerHTML =
     `<span class="label-h">백 ${c.h}</span>` +
     `<span class="label-t">십 ${c.t}</span>` +
     `<span class="label-o">일 ${c.o}</span>`;
-  const total = c.h*100 + c.t*10 + c.o;
-  document.getElementById('exploreTotal').textContent = total;
-  document.getElementById('exploreInfoNum').textContent = total;
-  document.getElementById('exploreInfoRead').textContent = numberToKoreanRead(total);
+  const totalNum = c.h*100 + c.t*10 + c.o;
+  document.getElementById('exploreTotal').textContent = totalNum;
+  document.getElementById('exploreInfoNum').textContent = totalNum;
+  document.getElementById('exploreInfoRead').textContent = numberToKoreanRead(totalNum);
 }
 
 /* ===== 활동방법 팝업 (단계별) ===== */
@@ -2152,6 +2168,13 @@ function renderBlocks() {
     if (isBuilding) b.onclick = () => removeBlock('o');
     grpO.appendChild(b);
   }
+  // 모형이 많을 때 자동 축소
+  const total = counts.h + counts.t + counts.o;
+  const area = document.getElementById('blocksArea');
+  area.classList.remove('dense','very-dense');
+  if (total >= 30) area.classList.add('very-dense');
+  else if (total >= 15) area.classList.add('dense');
+
   document.getElementById('nowTag').innerHTML =
     `<span class="label-h">백 ${STATE.buildCounts.h}</span>` +
     `<span class="label-t">십 ${STATE.buildCounts.t}</span>` +
