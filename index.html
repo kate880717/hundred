@@ -46,8 +46,8 @@
     position: fixed; inset: 0;
     display: grid;
     grid-template-rows: auto auto 1fr auto;
-    gap: clamp(8px,1.2vh,14px);
-    padding: clamp(8px,1.4vh,16px);
+    gap: clamp(6px,1vh,12px);
+    padding: clamp(6px,1vh,12px);
     overflow: hidden;
     animation: fadeIn .25s;
   }
@@ -133,12 +133,17 @@
   /* ============ 3행: 메인 영역 (가운데) ============ */
   .main-area {
     display: flex; flex-direction: column; align-items: center;
-    justify-content: center; gap: clamp(12px,2vh,24px);
+    justify-content: center; gap: clamp(10px,1.6vh,20px);
     overflow: hidden; min-height: 0;
+    width: 100%;
   }
   .main-area.row {
     flex-direction: row; align-items: stretch;
     gap: clamp(8px,1.4vh,16px);
+  }
+  /* 학습 메인용 - 좌우 여백 없이 꽉 채움 */
+  .main-area.no-pad {
+    padding: 0;
   }
 
   /* ============ 4행: 하단 액션 ============ */
@@ -289,11 +294,11 @@
   .mic-status.done { background: var(--green-light); color: var(--green-d); }
   .transcript-box {
     background: white; border: 4px dashed #CBD5E1;
-    padding: clamp(14px,2.2vh,28px); border-radius: 22px;
-    width: min(820px, 92%);
-    font-size: clamp(20px,2.8vh,30px); font-weight: 800;
+    padding: clamp(20px,3vh,38px); border-radius: 24px;
+    width: min(95%, 1100px);
+    font-size: clamp(26px,3.6vh,42px); font-weight: 800;
     color: var(--text); text-align: center; line-height: 1.5;
-    min-height: clamp(56px,7vh,90px);
+    min-height: clamp(80px,10vh,140px);
   }
   .transcript-box.empty { color: #94A3B8; font-weight: 500; }
 
@@ -372,11 +377,14 @@
   .activity-text b { color: var(--primary-dark); }
 
   /* ============ 학습 메인 ============ */
+  .main-area-full {
+    width: 100%; height: 100%;
+  }
   .main-row {
     display: grid;
-    grid-template-columns: 1fr clamp(170px,18vh,230px);
-    gap: clamp(10px,1.6vh,18px);
-    height: 100%;
+    grid-template-columns: 1fr clamp(190px,20vh,260px);
+    gap: clamp(8px,1.4vh,16px);
+    height: 100%; width: 100%;
   }
   .main-col-left {
     display: grid;
@@ -420,9 +428,9 @@
 
   /* 수 모형 (큼지막) */
   .h-block {
-    width: clamp(80px,11vh,140px); height: clamp(80px,11vh,140px);
+    width: clamp(90px,13vh,170px); height: clamp(90px,13vh,170px);
     background: linear-gradient(135deg,#7DD3FC 0%,#0EA5E9 50%,#0369A1 100%);
-    border: 4px solid var(--hundred-d); border-radius: 12px;
+    border: 4px solid var(--hundred-d); border-radius: 14px;
     display: grid; grid-template-columns: repeat(10,1fr); grid-template-rows: repeat(10,1fr);
     box-shadow: 0 6px 16px rgba(2,132,199,.4),
                 inset 0 3px 0 rgba(255,255,255,.5),
@@ -430,9 +438,9 @@
   }
   .h-block > div { border: 1px solid rgba(2,132,199,.4); }
   .t-block {
-    width: clamp(22px,2.8vh,36px); height: clamp(80px,11vh,140px);
+    width: clamp(26px,3.4vh,44px); height: clamp(90px,13vh,170px);
     background: linear-gradient(135deg,#D8B4FE 0%,#A855F7 50%,#7E22CE 100%);
-    border: 3px solid var(--ten-d); border-radius: 7px;
+    border: 3px solid var(--ten-d); border-radius: 8px;
     display: grid; grid-template-rows: repeat(10,1fr);
     box-shadow: 0 5px 14px rgba(126,34,206,.4),
                 inset 0 3px 0 rgba(255,255,255,.5),
@@ -440,9 +448,9 @@
   }
   .t-block > div { border: 1px solid rgba(126,34,206,.4); }
   .o-block {
-    width: clamp(28px,3.4vh,46px); height: clamp(28px,3.4vh,46px);
+    width: clamp(34px,4.2vh,56px); height: clamp(34px,4.2vh,56px);
     background: linear-gradient(135deg,#FDBA74 0%,#F97316 50%,#C2410C 100%);
-    border: 3px solid var(--one-d); border-radius: 7px;
+    border: 3px solid var(--one-d); border-radius: 8px;
     box-shadow: 0 5px 14px rgba(194,65,12,.4),
                 inset 0 3px 0 rgba(255,255,255,.5),
                 inset 0 -3px 0 rgba(0,0,0,.15);
@@ -506,73 +514,123 @@
   .conv-btn.o-side { background: #FFF7ED; color: var(--one-d);
                      border: 2px solid #FED7AA; border-bottom-color: #FB923C; }
 
-  /* 정답 입력 모드 */
-  .answer-mode { display: flex; flex-direction: column; gap: clamp(10px,1.6vh,16px); }
-  .answer-line {
-    font-size: clamp(20px,2.8vh,32px); font-weight: 900; color: var(--text);
+  /* 정답 입력 모드 - 새 디자인 */
+  .answer-mode {
+    display: flex; flex-direction: column;
+    gap: clamp(10px,1.6vh,18px);
+    width: 100%;
+  }
+  .answer-row1 {
     display: flex; align-items: center; justify-content: center;
-    gap: clamp(6px,1vh,12px); flex-wrap: wrap;
+    gap: clamp(8px,1.4vh,14px); flex-wrap: wrap;
+    font-size: clamp(22px,3vh,32px); font-weight: 900; color: var(--text);
   }
-  .ans-input {
-    width: clamp(56px,7vh,84px); height: clamp(46px,5.5vh,68px);
-    border: 4px solid; border-radius: 14px;
-    font-weight: 900; font-size: clamp(26px,3.6vh,40px);
-    transition: all .15s; cursor: pointer;
+  .answer-row2 {
+    display: flex; align-items: center; justify-content: center;
+    gap: clamp(8px,1.4vh,14px); flex-wrap: wrap;
+    padding-top: clamp(8px,1.4vh,14px);
+    border-top: 2px dashed #E2E8F0;
   }
-  .ans-input.active { transform: scale(1.08); }
-  .ans-input.h { color: var(--hundred-d); border-color: #BFDBFE; background: #EFF6FF; }
-  .ans-input.h.active { border-color: var(--hundred-d); background: #DBEAFE; }
-  .ans-input.t { color: var(--ten-d); border-color: #DDD6FE; background: #F5F3FF; }
-  .ans-input.t.active { border-color: var(--ten-d); background: #EDE9FE; }
-  .ans-input.o { color: var(--one-d); border-color: #FED7AA; background: #FFF7ED; }
-  .ans-input.o.active { border-color: var(--one-d); background: #FFEDD5; }
+  .answer-row2 .row2-label {
+    font-size: clamp(20px,2.8vh,30px); font-weight: 900;
+    color: var(--text);
+  }
 
-  .ans-bottom {
+  /* 자릿값 칸 - 위/아래 화살표 포함 */
+  .digit-input {
+    display: inline-flex; flex-direction: column; align-items: center;
+    gap: 2px;
+    background: white; border-radius: 16px;
+    padding: clamp(4px,.6vh,6px);
+    border: 4px solid;
+  }
+  .digit-input.h { border-color: #BFDBFE; background: #EFF6FF; }
+  .digit-input.t { border-color: #DDD6FE; background: #F5F3FF; }
+  .digit-input.o { border-color: #FED7AA; background: #FFF7ED; }
+  .digit-input.active { transform: scale(1.05); }
+  .digit-input.h.active { border-color: var(--hundred-d); background: #DBEAFE; }
+  .digit-input.t.active { border-color: var(--ten-d); background: #EDE9FE; }
+  .digit-input.o.active { border-color: var(--one-d); background: #FFEDD5; }
+
+  .digit-arrow {
+    width: clamp(48px,6vh,72px); height: clamp(28px,3.4vh,40px);
+    border-radius: 8px;
+    background: rgba(255,255,255,.7);
     display: flex; align-items: center; justify-content: center;
-    gap: clamp(8px,1.4vh,16px); flex-wrap: wrap;
+    font-size: clamp(16px,2vh,24px); font-weight: 900;
+    color: var(--text-soft);
+    transition: all .1s;
   }
-  .ans-num {
-    width: clamp(110px,13vh,170px); height: clamp(50px,6vh,72px);
-    border: 4px solid #BFDBFE; border-radius: 16px;
-    background: #EFF6FF;
-    font-size: clamp(28px,3.8vh,42px); font-weight: 900;
+  .digit-arrow:hover { background: white; color: var(--primary); }
+  .digit-arrow:active { transform: scale(.92); }
+
+  .digit-value {
+    width: clamp(48px,6vh,72px); height: clamp(48px,6vh,72px);
+    background: white; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: clamp(34px,4.6vh,52px); font-weight: 900;
+    cursor: pointer;
+    border: 2px solid transparent;
+  }
+  .digit-input.h .digit-value { color: var(--hundred-d); }
+  .digit-input.t .digit-value { color: var(--ten-d); }
+  .digit-input.o .digit-value { color: var(--one-d); }
+  .digit-input.active .digit-value { border-color: currentColor; }
+
+  /* 합친 수 칸 - 더 큼지막 */
+  .total-num-input {
+    width: clamp(140px,17vh,220px); height: clamp(60px,7.5vh,92px);
+    border: 4px solid var(--primary); border-radius: 18px;
+    background: white;
+    font-size: clamp(36px,5vh,60px); font-weight: 900;
     color: var(--primary); cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
   }
-  .ans-num.active {
-    border-color: var(--primary); background: #DBEAFE;
+  .total-num-input.active {
+    background: var(--primary-light);
     transform: scale(1.05);
+    box-shadow: 0 6px 16px rgba(14,165,233,.3);
   }
-  .method-toggle {
-    display: flex; padding: 4px; background: #F1F5F9;
-    border-radius: 14px; gap: 2px;
-  }
-  .method-toggle button {
-    padding: clamp(8px,1.2vh,12px) clamp(12px,1.6vh,18px); border-radius: 10px;
-    font-weight: 900;
-    font-size: clamp(14px,1.8vh,20px); color: #94A3B8; background: transparent;
-  }
-  .method-toggle button.active { background: var(--primary); color: white; }
-  .ans-read {
-    width: clamp(180px,21vh,290px); height: clamp(50px,6vh,72px);
-    border: 4px solid #FED7AA; border-radius: 18px; background: #FFF7ED;
-    padding: 0 18px; text-align: center;
-    font-size: clamp(18px,2.4vh,28px); font-weight: 900;
+
+  /* 읽기 입력 */
+  .read-input {
+    width: clamp(220px,28vh,400px); height: clamp(60px,7.5vh,92px);
+    border: 4px solid var(--orange); border-radius: 22px;
+    background: #FFF7ED; padding: 0 22px; text-align: center;
+    font-size: clamp(22px,3vh,32px); font-weight: 900;
     color: var(--one-d); outline: none;
   }
-  .ans-read.active {
-    border-color: var(--orange); background: #FFEDD5;
-    transform: scale(1.04);
-  }
-  .ans-mic {
-    width: clamp(46px,5.5vh,64px); height: clamp(46px,5.5vh,64px);
-    border-radius: 50%; background: var(--primary); color: white;
-    display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 4px 10px rgba(14,165,233,.35);
-  }
-  .ans-mic.recording { background: var(--red); animation: micPulse 1.2s infinite; }
-  .ans-mic svg { width: 50%; height: 50%; }
+  .read-input.active { background: #FFEDD5; transform: scale(1.04); }
+  .read-input::placeholder { color: #FDBA74; font-weight: 700; }
 
-  /* 키패드 */
+  /* 입력 방법 아이콘 버튼 */
+  .input-method-row {
+    display: flex; gap: clamp(8px,1.2vh,12px);
+    align-items: center;
+  }
+  .input-method-btn {
+    width: clamp(60px,7.5vh,92px); height: clamp(60px,7.5vh,92px);
+    border-radius: 18px;
+    background: white; border: 4px solid #E2E8F0;
+    display: flex; flex-direction: column; align-items: center;
+    justify-content: center; gap: 2px;
+    transition: all .1s;
+    color: var(--text-soft);
+  }
+  .input-method-btn .icon-emoji { font-size: clamp(22px,2.8vh,32px); line-height: 1; }
+  .input-method-btn .label { font-size: clamp(11px,1.4vh,15px); font-weight: 900; }
+  .input-method-btn.active {
+    background: var(--primary); color: white;
+    border-color: var(--primary-dark);
+    box-shadow: 0 4px 12px rgba(14,165,233,.4);
+  }
+  .input-method-btn.recording {
+    background: var(--red); color: white;
+    border-color: var(--red);
+    animation: micPulse 1.2s infinite;
+  }
+
+  /* 키패드 (사이드용 - 학습 메인) */
   .keypad {
     background: #F1F5F9; padding: clamp(8px,1.4vh,14px);
     border-radius: 24px;
@@ -580,6 +638,24 @@
     gap: clamp(6px,1vh,10px);
     border: 2px solid #E2E8F0;
     box-shadow: inset 0 3px 6px rgba(0,0,0,.05);
+  }
+  /* 가로 키패드 (정리·책쪽수용) */
+  .keypad-wide {
+    background: #F1F5F9; padding: clamp(8px,1.4vh,14px);
+    border-radius: 22px;
+    display: grid;
+    grid-template-columns: repeat(11, 1fr);
+    gap: clamp(4px,.8vh,8px);
+    border: 2px solid #E2E8F0;
+    box-shadow: inset 0 3px 6px rgba(0,0,0,.05);
+    width: min(95%, 800px);
+  }
+  .keypad-wide .key {
+    min-height: clamp(48px,6vh,72px);
+    font-size: clamp(22px,3vh,32px);
+  }
+  .keypad-wide .key.del {
+    grid-column: span 1;
   }
   .key {
     background: white; border-radius: 14px;
@@ -612,29 +688,25 @@
   /* ============ 활동3: 책 쪽수 정하기 ============ */
   .book-prompt {
     background: white; border: 5px solid var(--orange);
-    border-radius: 32px; padding: clamp(24px,3.6vh,48px);
-    width: min(800px, 95%); text-align: center;
+    border-radius: 28px;
+    padding: clamp(16px,2.4vh,32px);
+    width: min(820px, 95%); text-align: center;
     box-shadow: 0 10px 28px rgba(0,0,0,.1);
   }
-  .book-icon { font-size: clamp(60px,10vh,120px); margin-bottom: 12px; }
+  .book-icon { font-size: clamp(50px,7vh,86px); }
   .book-prompt h3 {
-    font-size: clamp(24px,3.4vh,38px); font-weight: 900;
-    color: var(--orange-d); margin-bottom: clamp(10px,1.6vh,18px);
-    line-height: 1.4;
-  }
-  .book-prompt p {
-    font-size: clamp(18px,2.4vh,26px); font-weight: 800;
-    color: var(--text-soft); margin-bottom: clamp(10px,1.6vh,18px);
+    font-size: clamp(22px,3vh,34px); font-weight: 900;
+    color: var(--orange-d); line-height: 1.4;
   }
   .page-input-row {
     display: flex; gap: clamp(8px,1.4vh,16px); justify-content: center;
-    margin-bottom: clamp(14px,2vh,22px);
+    margin-bottom: clamp(10px,1.6vh,18px);
   }
   .page-digit {
-    width: clamp(70px,9vh,120px); height: clamp(80px,10vh,134px);
+    width: clamp(64px,8vh,108px); height: clamp(74px,9vh,124px);
     border: 5px solid var(--orange-light); border-radius: 18px;
     background: white;
-    font-size: clamp(42px,6vh,80px); font-weight: 900;
+    font-size: clamp(38px,5.5vh,72px); font-weight: 900;
     color: var(--orange-d); cursor: pointer;
   }
   .page-digit.active { border-color: var(--orange); background: #FFF7ED; }
@@ -1068,24 +1140,38 @@
             </div>
           </div>
           <div id="answerControls" class="answer-mode hidden">
-            <div class="answer-line">
+            <div class="answer-row1">
               <span class="strong-blue">100이</span>
-              <button class="ans-input h" data-field="inputH" onclick="setActive('inputH')"></button>개,
-              <span class="strong-purple">10이</span>
-              <button class="ans-input t" data-field="inputT" onclick="setActive('inputT')"></button>개,
-              <span class="strong-orange">1이</span>
-              <button class="ans-input o" data-field="inputO" onclick="setActive('inputO')"></button>개
-            </div>
-            <div class="ans-bottom">
-              <button class="ans-num" data-field="inputNum" onclick="setActive('inputNum')"></button>
-              <div class="method-toggle">
-                <button id="mtVoice" onclick="setInputMethod('voice')">🎤 말하기</button>
-                <button id="mtKey" onclick="setInputMethod('keypad')">⌨️ 쓰기</button>
+              <div class="digit-input h" id="digitH">
+                <button class="digit-arrow" onclick="adjustDigit('h',1)" aria-label="올리기">▲</button>
+                <button class="digit-value" data-field="inputH" onclick="setActive('inputH')">0</button>
+                <button class="digit-arrow" onclick="adjustDigit('h',-1)" aria-label="내리기">▼</button>
               </div>
-              <input type="text" class="ans-read" data-field="inputRead" id="inputRead"
-                placeholder="읽기..." onfocus="setActive('inputRead')" oninput="onReadType(event)" readonly>
-              <button class="ans-mic" id="ansMicBtn" onclick="toggleAnswerMic()" aria-label="음성">
-                <svg><use href="#i-mic"/></svg>
+              <span>개,</span>
+              <span class="strong-purple">10이</span>
+              <div class="digit-input t" id="digitT">
+                <button class="digit-arrow" onclick="adjustDigit('t',1)" aria-label="올리기">▲</button>
+                <button class="digit-value" data-field="inputT" onclick="setActive('inputT')">0</button>
+                <button class="digit-arrow" onclick="adjustDigit('t',-1)" aria-label="내리기">▼</button>
+              </div>
+              <span>개,</span>
+              <span class="strong-orange">1이</span>
+              <div class="digit-input o" id="digitO">
+                <button class="digit-arrow" onclick="adjustDigit('o',1)" aria-label="올리기">▲</button>
+                <button class="digit-value" data-field="inputO" onclick="setActive('inputO')">0</button>
+                <button class="digit-arrow" onclick="adjustDigit('o',-1)" aria-label="내리기">▼</button>
+              </div>
+              <span>개</span>
+            </div>
+            <div class="answer-row2">
+              <span class="row2-label">⇒ 합치면</span>
+              <button class="total-num-input" data-field="inputNum" onclick="setActive('inputNum')">_ _ _</button>
+              <span class="row2-label">, 읽기:</span>
+              <input type="text" class="read-input" data-field="inputRead" id="inputRead"
+                placeholder="예: 삼백사십육" onfocus="setActive('inputRead')" oninput="onReadType(event)">
+              <button class="input-method-btn" id="micMethodBtn" onclick="toggleAnswerMic()" title="말하기로 입력">
+                <span class="icon-emoji">🎤</span>
+                <span class="label">말하기</span>
               </button>
             </div>
           </div>
@@ -1129,15 +1215,16 @@
   </div>
   <div class="main-area">
     <div class="book-prompt">
-      <div class="book-icon">📖</div>
-      <h3>좋아하는 책의<br>마지막 쪽수를 정해요!</h3>
-      <p>아래 빈칸을 차례대로 눌러서 숫자를 입력해요</p>
+      <div style="display:flex;align-items:center;gap:clamp(14px,2vh,24px);justify-content:center;margin-bottom:clamp(10px,1.6vh,18px)">
+        <div class="book-icon" style="margin:0">📖</div>
+        <h3 style="margin:0;text-align:left">내가 좋아하는 책의<br>마지막 쪽수를 정해요!</h3>
+      </div>
       <div class="page-input-row">
         <button class="page-digit active" data-pos="0" onclick="bookPickFocus(0)">?</button>
         <button class="page-digit" data-pos="1" onclick="bookPickFocus(1)">?</button>
         <button class="page-digit" data-pos="2" onclick="bookPickFocus(2)">?</button>
       </div>
-      <div class="keypad" style="max-width:340px;margin:0 auto">
+      <div class="keypad-wide" style="margin:0 auto">
         <button class="key" onclick="bookPickInput('1')">1</button>
         <button class="key" onclick="bookPickInput('2')">2</button>
         <button class="key" onclick="bookPickInput('3')">3</button>
@@ -1180,7 +1267,7 @@
       1이 <button class="blank-input" data-pos="2" onclick="summaryFocus(2)"></button>개인 수는<br>
       <button class="blank-input big" data-pos="3" onclick="summaryFocus(3)"></button>입니다.
     </div>
-    <div class="keypad" style="max-width:340px">
+    <div class="keypad-wide">
       <button class="key" onclick="summaryInput('1')">1</button>
       <button class="key" onclick="summaryInput('2')">2</button>
       <button class="key" onclick="summaryInput('3')">3</button>
@@ -1277,7 +1364,7 @@
 <div class="screen hidden" id="screenReport">
   <div class="top-bar">
     <button class="icon-btn" onclick="goStudent()" aria-label="홈"><svg><use href="#i-home"/></svg></button>
-    <span class="stage-badge">🏆 수료증</span>
+    <span class="stage-badge">🏆 학습 완료!</span>
     <div class="progress-track" style="visibility:hidden"></div>
     <div style="width:48px"></div>
   </div>
@@ -1288,9 +1375,12 @@
       <h2 class="cert-name" id="certName">○○○ 박사</h2>
       <p class="cert-text">
         위 어린이는 <b>수 모형의 가르기와 모으기</b> 원리를<br>
-        완벽하게 이해하고 모든 활동을 훌륭하게<br>
-        해결하였기에 이 박사 학위 증서를 수여합니다.
+        이해하고 모든 활동을 훌륭하게 해결하였기에<br>
+        이 박사 학위 증서를 수여합니다.
       </p>
+      <div class="cert-results" id="certResults">
+        <!-- JS로 채움 -->
+      </div>
       <div class="cert-foot">
         <span class="cert-date" id="certDate"></span>
         <div class="cert-stamp">참 잘했어요</div>
@@ -1761,16 +1851,19 @@ function startActivity(actNum) {
   STATE.qIndex = 0;
   const stepsByActivity = {
     1: [
-      { icon: '📕', text: '화면에 <b>도서 대출증의 수</b>가 나와요.' },
-      { icon: '🟦🟪🟧', text: '<b>+100, +10, +1</b> 버튼으로<br>모형을 똑같이 쌓아요!' },
-      { icon: '👆', text: '잘못 놓은 모형은<br><b>꾹 누르면</b> 사라져요.' },
-      { icon: '✅', text: '다 쌓으면 <b>[확인]</b> 버튼을 눌러요!' }
+      { icon: '📕', text: '화면에 <b>도서 대출증의 수</b>가 나와요.<br>그 수만큼 모형을 쌓아요!' },
+      { icon: '🟦🟪🟧', text: '<b>+100</b>은 백 모형,<br><b>+10</b>은 십 모형,<br><b>+1</b>은 일 모형이에요.' },
+      { icon: '🤚', text: '⚠️ 잘못 놓은 모형은<br><b>모형을 손가락으로 콕!</b><br>누르면 사라져요.' },
+      { icon: '🔄', text: '<b>가르기·모으기</b> 버튼으로<br>백을 십 10개로 바꾸거나<br>십 10개를 백으로 모을 수 있어요.' },
+      { icon: '✅', text: '다 쌓으면 오른쪽<br><b>[확인]</b> 버튼을 눌러요!' }
     ],
     2: [
-      { icon: '👀', text: '화면에 나온<br><b>모형</b>을 잘 보세요.' },
+      { icon: '👀', text: '화면에 나온<br><b>모형의 수</b>를 잘 보세요.' },
       { icon: '🟦🟪🟧', text: '<b>+100, +10, +1</b> 버튼으로<br>똑같이 쌓아요!' },
-      { icon: '✏️', text: '<b>100이 □개, 10이 □개, 1이 □개</b><br>를 차례로 써요.' },
-      { icon: '🎉', text: '합친 수와 읽기까지 쓰면<br><b>완성!</b>' }
+      { icon: '✏️', text: '아래에 <b>100이 □개,<br>10이 □개, 1이 □개</b>를<br>차례로 써요.' },
+      { icon: '🔢', text: '⚠️ <b>합친 수</b>는<br>백·십·일을 모두 합친 수예요!<br>예) 백 3, 십 4, 일 6 → <b>346</b>' },
+      { icon: '🗣️', text: '<b>읽기</b> 칸에는<br>한글로 어떻게 읽는지 써요.<br>예: 삼백사십육' },
+      { icon: '🎉', text: '다 쓰면 <b>[확인]</b>!<br>완성!' }
     ],
     3: [
       { icon: '📖', text: '내가 좋아하는 책의<br><b>마지막 쪽수</b>를 정해요!<br>(100~999)' },
@@ -1881,61 +1974,88 @@ function convert(op) {
 
 function setActive(field) {
   STATE.activeField = field;
-  document.querySelectorAll('.ans-input,.ans-num,.ans-read').forEach(el => {
-    el.classList.toggle('active', el.dataset.field === field);
+  document.querySelectorAll('.digit-input,.total-num-input,.read-input').forEach(el => {
+    if (el.dataset && el.dataset.field) {
+      el.classList.toggle('active', el.dataset.field === field);
+    }
   });
+  // digit-input 컨테이너도 활성화
+  document.getElementById('digitH').classList.toggle('active', field === 'inputH');
+  document.getElementById('digitT').classList.toggle('active', field === 'inputT');
+  document.getElementById('digitO').classList.toggle('active', field === 'inputO');
   let msg = '';
   switch(field) {
-    case 'inputH': msg='백의 자리 칸에 숫자를 써요'; break;
-    case 'inputT': msg='십의 자리 칸에 숫자를 써요'; break;
-    case 'inputO': msg='일의 자리 칸에 숫자를 써요'; break;
-    case 'inputNum': msg='합친 세 자리 수를 써요'; break;
-    case 'inputRead': msg = STATE.inputMethod==='voice' ? '마이크를 누르고 읽어요!' : '읽는 방법을 한글로 써요'; break;
+    case 'inputH': msg='<b>백의 자리</b>: ▲▼ 또는 키패드로 숫자를 정해요'; break;
+    case 'inputT': msg='<b>십의 자리</b>: ▲▼ 또는 키패드로 숫자를 정해요'; break;
+    case 'inputO': msg='<b>일의 자리</b>: ▲▼ 또는 키패드로 숫자를 정해요'; break;
+    case 'inputNum': msg='이 칸은 <b>합친 수</b>! 백·십·일을 모두 합친 세 자리 수를 써요 (예: 3·4·6 → 346)'; break;
+    case 'inputRead': msg='수를 한글로 어떻게 읽는지 써요 (예: 삼백사십육)'; break;
   }
   setMainGuide(msg);
 }
-function setInputMethod(m) {
-  STATE.inputMethod = m;
-  document.getElementById('mtVoice').classList.toggle('active', m==='voice');
-  document.getElementById('mtKey').classList.toggle('active', m==='keypad');
-  document.getElementById('inputRead').readOnly = (m === 'voice');
+
+function adjustDigit(type, delta) {
+  const fieldKey = 'input' + type.toUpperCase();
+  const cur = parseInt(STATE.inputs[fieldKey] || '0');
+  let next = cur + delta;
+  if (next < 0) next = 9;
+  if (next > 9) next = 0;
+  STATE.inputs[fieldKey] = String(next);
+  setActive(fieldKey);
+  syncInputUI();
+  speak(String(next));
 }
+
 function keypadInput(val) {
   if (STATE.phase !== 'answer') return;
-  if (STATE.activeField === 'inputRead' && STATE.inputMethod === 'voice') return;
-  const order = ['inputH','inputT','inputO','inputNum','inputRead'];
-  const cur = STATE.inputs[STATE.activeField] + val;
-  STATE.inputs[STATE.activeField] = cur;
-  if (['inputH','inputT','inputO'].includes(STATE.activeField) && cur.length>=1) {
-    setActive(order[order.indexOf(STATE.activeField)+1]);
-  } else if (STATE.activeField==='inputNum' && cur.length>=3) {
-    setActive('inputRead');
+  if (STATE.activeField === 'inputRead') return; // 읽기는 키보드만
+  const order = ['inputH','inputT','inputO','inputNum'];
+  if (['inputH','inputT','inputO'].includes(STATE.activeField)) {
+    // 자릿값 칸은 한 자리 - 덮어쓰기
+    STATE.inputs[STATE.activeField] = val;
+    const idx = order.indexOf(STATE.activeField);
+    if (idx < order.length - 1) setActive(order[idx + 1]);
+  } else if (STATE.activeField === 'inputNum') {
+    const cur = STATE.inputs.inputNum + val;
+    STATE.inputs.inputNum = cur.slice(0, 3);
+    if (STATE.inputs.inputNum.length >= 3) setActive('inputRead');
   }
   syncInputUI();
 }
 function keypadDelete() {
   if (STATE.phase !== 'answer') return;
-  STATE.inputs[STATE.activeField] = '';
+  if (STATE.activeField === 'inputRead') {
+    STATE.inputs.inputRead = STATE.inputs.inputRead.slice(0, -1);
+  } else if (STATE.activeField === 'inputNum') {
+    STATE.inputs.inputNum = STATE.inputs.inputNum.slice(0, -1);
+  } else {
+    STATE.inputs[STATE.activeField] = '';
+  }
   syncInputUI();
 }
 function syncInputUI() {
-  document.querySelectorAll('.ans-input').forEach(el => {
-    el.textContent = STATE.inputs[el.dataset.field] || '';
+  ['inputH','inputT','inputO'].forEach(f => {
+    const el = document.querySelector(`.digit-value[data-field="${f}"]`);
+    if (el) el.textContent = STATE.inputs[f] || '0';
   });
-  const numEl = document.querySelector('.ans-num');
-  if (numEl) numEl.textContent = STATE.inputs.inputNum || '';
+  const numEl = document.querySelector('.total-num-input');
+  if (numEl) numEl.textContent = STATE.inputs.inputNum || '_ _ _';
   document.getElementById('inputRead').value = STATE.inputs.inputRead || '';
 }
 function onReadType(e) { STATE.inputs.inputRead = e.target.value; }
+
 function toggleAnswerMic() {
   if (!('webkitSpeechRecognition' in window)) {
     alert('이 브라우저는 음성 인식을 지원하지 않아요.'); return;
   }
-  const btn = document.getElementById('ansMicBtn');
+  const btn = document.getElementById('micMethodBtn');
   if (btn.classList.contains('recording')) {
     if (STATE.recognition) try { STATE.recognition.stop(); } catch(e){}
-    btn.classList.remove('recording'); return;
+    btn.classList.remove('recording');
+    return;
   }
+  // 읽기 칸 자동 활성화
+  setActive('inputRead');
   const rec = new webkitSpeechRecognition();
   rec.lang = 'ko-KR';
   rec.onstart = () => btn.classList.add('recording');
@@ -1945,7 +2065,7 @@ function toggleAnswerMic() {
     if (/^\d+$/.test(t)) t = numberToKoreanRead(parseInt(t));
     STATE.inputs.inputRead = t;
     syncInputUI();
-    speak(`${t}라고 입력했어요`);
+    speak(`${t}이라고 입력했어요`);
   };
   STATE.recognition = rec;
   rec.start();
@@ -2095,7 +2215,7 @@ function checkSummary() {
   const num = parseInt(STATE.summaryDigits[3]);
   if (h*100 + t*10 + o === num) {
     playSound('correct');
-    showFeedback(true, '훌륭해요! 자릿값을<br>정확하게 이해했어요 ⭐', () => show('screenNext'));
+    showFeedback(true, '훌륭해요! 자릿값을<br>정확하게 이해했어요 ⭐', () => goPostSpeaking());
   } else {
     playSound('incorrect');
     showFeedback(false, `100이 ${h}개, 10이 ${t}개, 1이 ${o}개이면<br><b>${h*100+t*10+o}</b>이에요!`);
