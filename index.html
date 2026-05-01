@@ -1157,13 +1157,31 @@ function hideLoading() { document.getElementById('loading').classList.add('hidde
 function goStudent() { stopAllRecording(); show('screenStudent'); }
 
 /* ============= 학생 드롭다운 ============= */
+function safeText(v) {
+  // 어떤 형태든(객체, 날짜, null) 안전하게 문자열로
+  if (v === null || v === undefined) return '';
+  if (typeof v === 'string') return v.trim();
+  if (typeof v === 'number') return String(v);
+  if (v instanceof Date) return String(v.getTime()); // 혹시 모를 폴백
+  // 객체가 들어오면 빈 문자열 (이상한 ISO 문자열 방지)
+  return '';
+}
+
 function renderStudentDropdown() {
   const sel = document.getElementById('studentDropdown');
   sel.innerHTML = '<option value="">— 선택 —</option>';
   STATE.students.forEach((s, idx) => {
+    const cls  = safeText(s.cls);
+    const no   = safeText(s.no);
+    const name = safeText(s.name);
+    if (!name) return;  // 이름 없으면 스킵
     const opt = document.createElement('option');
     opt.value = idx;
-    opt.textContent = `${s.cls || ''}  ${s.no}번  ${s.name}`;
+    const parts = [];
+    if (cls)  parts.push(cls);
+    if (no)   parts.push(no + '번');
+    parts.push(name);
+    opt.textContent = parts.join('  ');
     sel.appendChild(opt);
   });
 }
