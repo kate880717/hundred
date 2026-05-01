@@ -897,13 +897,14 @@
   /* 수료증 */
   #screenReport {
     background: linear-gradient(135deg,#E0F2FE,#FEF3C7);
-    grid-template-rows: auto auto 1fr auto;
+    grid-template-rows: auto 1fr auto;
   }
   .cert-content {
     display: flex; flex-direction: column; align-items: center;
-    justify-content: center; gap: clamp(8px,1.4vh,16px);
+    gap: clamp(8px,1.4vh,16px);
     overflow: hidden; min-height: 0;
     width: 100%;
+    padding: clamp(6px,1vh,14px) 0;
   }
   .cert-header {
     display: flex; align-items: center; justify-content: center;
@@ -911,12 +912,12 @@
     flex-shrink: 0;
   }
   .trophy svg {
-    width: clamp(44px,6.5vh,80px); height: clamp(44px,6.5vh,80px);
+    width: clamp(40px,6vh,72px); height: clamp(40px,6vh,72px);
     color: var(--yellow);
     filter: drop-shadow(0 6px 12px rgba(251,191,36,.5));
   }
   .cert-title {
-    font-size: clamp(26px,4.5vh,48px); font-weight: 900;
+    font-size: clamp(24px,4vh,44px); font-weight: 900;
     color: var(--primary-dark); letter-spacing: .15em;
     margin: 0;
   }
@@ -925,7 +926,7 @@
     border: clamp(6px,1vh,12px) solid var(--primary-light);
     border-radius: 22px; box-shadow: 0 12px 28px rgba(0,0,0,.12);
     width: min(900px, 96%);
-    flex: 1 1 0;
+    flex: 1 1 auto;
     min-height: 0;
     display: flex; flex-direction: column;
     gap: clamp(6px,1vh,12px);
@@ -955,9 +956,10 @@
     grid-template-columns: repeat(4, 1fr);
     gap: clamp(5px,.8vh,10px);
     text-align: left;
-    flex: 1 1 0;
+    flex: 1 1 auto;
     min-height: 0;
     overflow: hidden;
+    align-content: stretch;
   }
   .cert-result-item {
     display: flex; flex-direction: column; gap: 2px;
@@ -965,7 +967,9 @@
     background: white; border-radius: 10px;
     border: 2px solid var(--primary-light);
     min-width: 0;
+    min-height: 0;
     overflow: hidden;
+    justify-content: center;
   }
   .cert-result-item .label {
     font-size: clamp(10px,1.3vh,14px); font-weight: 800;
@@ -984,7 +988,6 @@
     white-space: normal;
     font-size: clamp(11px,1.5vh,15px);
     line-height: 1.4;
-    max-height: 3em;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
@@ -995,16 +998,15 @@
   .cert-foot {
     display: flex; justify-content: space-between; align-items: center;
     flex-shrink: 0;
-    margin-top: auto;
   }
   .cert-date { font-size: clamp(10px,1.4vh,15px); color: #94A3B8; font-weight: 800; }
   .cert-stamp {
-    width: clamp(48px,6.5vh,78px); height: clamp(48px,6.5vh,78px);
-    background: #FEE2E2; border: clamp(4px,.7vh,7px) solid var(--red);
+    width: clamp(44px,6vh,72px); height: clamp(44px,6vh,72px);
+    background: #FEE2E2; border: clamp(4px,.6vh,6px) solid var(--red);
     border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
     color: var(--red); font-weight: 900;
-    font-size: clamp(10px,1.3vh,14px);
+    font-size: clamp(9px,1.2vh,13px);
     transform: rotate(-12deg); box-shadow: 0 3px 6px rgba(0,0,0,.1);
     text-align: center; line-height: 1.2;
     flex-shrink: 0;
