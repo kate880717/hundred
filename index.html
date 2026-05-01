@@ -47,7 +47,7 @@
     display: grid;
     grid-template-rows: auto auto 1fr auto;
     gap: clamp(6px,1vh,12px);
-    padding: clamp(8px,1.2vh,14px) clamp(8px,1.2vh,14px) clamp(16px,2.4vh,28px) clamp(8px,1.2vh,14px);
+    padding: clamp(10px,1.6vh,18px) clamp(10px,1.6vh,18px) clamp(28px,4.5vh,52px) clamp(10px,1.6vh,18px);
     overflow: hidden;
     animation: fadeIn .25s;
   }
@@ -151,7 +151,8 @@
     display: flex; align-items: center; justify-content: center;
     gap: clamp(12px,2vh,24px);
     flex-wrap: wrap;
-    padding: clamp(6px,1vh,12px) 0 clamp(8px,1.4vh,16px) 0;
+    padding: clamp(10px,1.6vh,18px) 0 clamp(14px,2.4vh,28px) 0;
+    margin-bottom: clamp(8px,1.4vh,18px);
   }
 
   /* ============ 큰 버튼 ============ */
@@ -332,10 +333,10 @@
     justify-content: center; flex-wrap: wrap;
   }
   .btn-big {
-    padding: clamp(24px,4vh,52px) clamp(32px,5vh,72px);
-    border-radius: 28px;
-    font-size: clamp(28px,5vh,54px); font-weight: 900;
-    transition: transform .1s; min-width: clamp(180px,26vh,320px);
+    padding: clamp(18px,2.8vh,36px) clamp(28px,4vh,60px);
+    border-radius: 26px;
+    font-size: clamp(24px,4vh,46px); font-weight: 900;
+    transition: transform .1s; min-width: clamp(160px,22vh,280px);
     display: flex; align-items: center; justify-content: center; gap: 14px;
   }
   .btn-big:active { transform: translateY(4px); }
