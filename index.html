@@ -1716,7 +1716,8 @@ const STATE = {
   isSpeakRecording: false,
   mediaRecorder: null, recChunks: [],
   recognition: null,
-  howtoSteps: [], howtoIndex: 0, howtoOnComplete: null
+  howtoSteps: [], howtoIndex: 0, howtoOnComplete: null,
+  keypadHintTimer: null
 };
 
 /* ===== API ===== */
@@ -1903,6 +1904,33 @@ function setMainGuide(text) {
 }
 function setSpeakGuide(text) {
   document.getElementById('speakGuideText').innerHTML = text;
+}
+
+/* ===== 키패드 입력 안내 타이머 ===== */
+function startKeypadHintTimer() {
+  clearKeypadHintTimer();
+  // 6초 동안 입력이 없으면 안내 문구 표시
+  STATE.keypadHintTimer = setTimeout(() => {
+    if (STATE.phase !== 'answer') return;
+    if (STATE.activeField === 'inputRead') {
+      // 읽기 칸은 키보드/마이크 사용
+      setMainGuide('🎤 <b>말하기</b> 버튼을 누르거나 <b>키보드</b>로 한글을 입력해 봐요!');
+    } else {
+      const fieldName = {
+        inputH: '백의 자리',
+        inputT: '십의 자리',
+        inputO: '일의 자리',
+        inputNum: '합친 수'
+      }[STATE.activeField] || '숫자';
+      setMainGuide(`👉 오른쪽 <b>숫자 버튼</b>을 눌러서 <b>${fieldName}</b>를 입력해요!`);
+    }
+  }, 6000);
+}
+function clearKeypadHintTimer() {
+  if (STATE.keypadHintTimer) {
+    clearTimeout(STATE.keypadHintTimer);
+    STATE.keypadHintTimer = null;
+  }
 }
 
 /* ===== 사전·사후 녹음 ===== */
@@ -2520,6 +2548,7 @@ function setActive(field) {
 }
 
 function adjustDigit(type, delta) {
+  clearKeypadHintTimer();
   const fieldKey = 'input' + type.toUpperCase();
   const cur = parseInt(STATE.inputs[fieldKey] || '0');
   let next = cur + delta;
@@ -2529,11 +2558,13 @@ function adjustDigit(type, delta) {
   setActive(fieldKey);
   syncInputUI();
   speak(String(next));
+  startKeypadHintTimer();
 }
 
 function keypadInput(val) {
   if (STATE.phase !== 'answer') return;
   if (STATE.activeField === 'inputRead') return;
+  clearKeypadHintTimer();
   const order = ['inputH','inputT','inputO','inputNum'];
   if (['inputH','inputT','inputO'].includes(STATE.activeField)) {
     STATE.inputs[STATE.activeField] = val;
@@ -2545,9 +2576,11 @@ function keypadInput(val) {
     if (STATE.inputs.inputNum.length >= 3) setActive('inputRead');
   }
   syncInputUI();
+  startKeypadHintTimer();
 }
 function keypadDelete() {
   if (STATE.phase !== 'answer') return;
+  clearKeypadHintTimer();
   if (STATE.activeField === 'inputRead') {
     STATE.inputs.inputRead = STATE.inputs.inputRead.slice(0, -1);
   } else if (STATE.activeField === 'inputNum') {
@@ -2556,6 +2589,7 @@ function keypadDelete() {
     STATE.inputs[STATE.activeField] = '';
   }
   syncInputUI();
+  startKeypadHintTimer();
 }
 function syncInputUI() {
   ['inputH','inputT','inputO'].forEach(f => {
@@ -2566,7 +2600,11 @@ function syncInputUI() {
   if (numEl) numEl.textContent = STATE.inputs.inputNum || '_ _ _';
   document.getElementById('inputRead').value = STATE.inputs.inputRead || '';
 }
-function onReadType(e) { STATE.inputs.inputRead = e.target.value; }
+function onReadType(e) {
+  STATE.inputs.inputRead = e.target.value;
+  clearKeypadHintTimer();
+  startKeypadHintTimer();
+}
 
 function toggleAnswerMic() {
   if (!('webkitSpeechRecognition' in window)) {
@@ -2622,6 +2660,8 @@ function checkBuild() {
       setActive('inputH');
       syncInputUI();
       renderBlocks();
+      // 입력 안내 시작
+      startKeypadHintTimer();
     }
   } else {
     playSound('incorrect');
@@ -2661,6 +2701,7 @@ function resetAllInputs() {
   if (readEl) readEl.value = '';
 }
 function nextProblem() {
+  clearKeypadHintTimer();
   if (STATE.qIndex < STATE.problems.length - 1) {
     STATE.qIndex++; enterProblem();
   } else nextActivity();
