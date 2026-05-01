@@ -332,8 +332,15 @@
     padding: clamp(18px,2.8vh,36px) clamp(28px,4vh,60px);
     border-radius: 26px;
     font-size: clamp(24px,4vh,46px); font-weight: 900;
-    transition: transform .1s; min-width: clamp(160px,22vh,280px);
+    transition: transform .1s;
+    width: clamp(220px,28vh,340px);
+    height: clamp(80px,11vh,140px);
     display: flex; align-items: center; justify-content: center; gap: 14px;
+  }
+  .intro-buttons {
+    display: flex; flex-direction: column;
+    gap: clamp(14px,2vh,24px);
+    align-items: center;
   }
   .btn-big:active { transform: translateY(4px); }
   .btn-big.bigger {
@@ -451,14 +458,41 @@
     position: relative; overflow: hidden; min-height: 0;
     box-shadow: inset 0 4px 14px rgba(0,0,0,.06);
   }
+  /* 모형이 많아지면 자동 축소 */
+  .blocks-area.dense { gap: clamp(10px,1.6vh,24px); padding: clamp(10px,1.6vh,20px); }
+  .blocks-area.dense .h-block {
+    width: clamp(48px,7vh,100px); height: clamp(48px,7vh,100px);
+  }
+  .blocks-area.dense .t-block {
+    width: clamp(14px,1.8vh,24px); height: clamp(48px,7vh,100px);
+  }
+  .blocks-area.dense .o-block {
+    width: clamp(20px,2.4vh,34px); height: clamp(20px,2.4vh,34px);
+  }
+  .blocks-area.very-dense { gap: clamp(6px,1vh,14px); padding: clamp(8px,1.2vh,14px); }
+  .blocks-area.very-dense .h-block {
+    width: clamp(38px,5.5vh,72px); height: clamp(38px,5.5vh,72px);
+  }
+  .blocks-area.very-dense .t-block {
+    width: clamp(10px,1.4vh,18px); height: clamp(38px,5.5vh,72px);
+  }
+  .blocks-area.very-dense .o-block {
+    width: clamp(16px,1.9vh,26px); height: clamp(16px,1.9vh,26px);
+  }
   .blocks-area .group {
     display: flex; flex-wrap: wrap; align-content: flex-end; justify-content: center;
     gap: clamp(4px,.8vh,10px);
     max-height: 100%;
   }
   .blocks-area .group.h { gap: clamp(8px,1.4vh,14px); }
+  .blocks-area.dense .group.h { gap: clamp(6px,1vh,10px); }
+  .blocks-area.very-dense .group.h { gap: clamp(4px,.6vh,7px); }
   .blocks-area .group.t { gap: clamp(3px,.6vh,6px); max-width: clamp(220px,28vh,360px); }
+  .blocks-area.dense .group.t { max-width: clamp(180px,22vh,280px); gap: clamp(2px,.4vh,4px); }
+  .blocks-area.very-dense .group.t { max-width: clamp(150px,18vh,220px); gap: 2px; }
   .blocks-area .group.o { gap: clamp(4px,.6vh,8px); max-width: clamp(160px,20vh,240px); }
+  .blocks-area.dense .group.o { max-width: clamp(140px,16vh,200px); gap: clamp(2px,.4vh,5px); }
+  .blocks-area.very-dense .group.o { max-width: clamp(110px,13vh,160px); gap: 2px; }
   .now-tag {
     position: absolute; top: clamp(10px,1.4vh,16px); left: clamp(12px,1.6vh,20px);
     background: white; color: var(--text);
@@ -1066,7 +1100,7 @@
   </div>
   <div class="guide-bar">
     <div class="point-icon">🎤</div>
-    <div class="text" id="speakGuideText"><b>녹음 시작</b> 버튼을 누르고 세 수를 큰 소리로 읽어요!</div>
+    <div class="text" id="speakGuideText"><b>녹음 시작</b> 버튼을 누르고 세 수를 <b>자연스럽게</b> 큰 소리로 읽어요!</div>
   </div>
   <div class="speak-area">
     <div class="target-row" id="speakTargets" style="grid-row:1"></div>
@@ -1112,13 +1146,14 @@
       </div>
       <div style="display:flex;flex-direction:column;gap:clamp(16px,2.4vh,28px);align-items:center">
         <h3 class="compare-question" id="introQuestion"></h3>
+        <div class="intro-buttons">
+          <button class="btn-big bigger" onclick="introAnswer('big')">➕ 커요</button>
+          <button class="btn-big smaller" onclick="introAnswer('small')">➖ 작아요</button>
+        </div>
       </div>
     </div>
   </div>
-  <div class="action-bar" style="flex-direction:column;gap:clamp(10px,1.6vh,18px)">
-    <button class="btn-big bigger" onclick="introAnswer('big')">➕ 커요</button>
-    <button class="btn-big smaller" onclick="introAnswer('small')">➖ 작아요</button>
-  </div>
+  <div class="action-bar" style="visibility:hidden;height:0;padding:0;margin:0"></div>
 </div>
 
 <!-- 학습 활동 안내 -->
@@ -1592,11 +1627,11 @@ const EXPLORE_STAGES = {
   7: {
     name: '🌟 통합 단계',
     title: '가르기·모으기 한꺼번에',
-    guide: '이제 <b>모든 버튼</b>을 자유롭게 사용해서 가르기·모으기를 해 봐요!',
+    guide: '🎉 마지막 단계! <b>모든 버튼</b>을 자유롭게 사용해 봐요. 충분히 해 봤으면 <b>아래 버튼</b>을 눌러 활동으로 넘어가요!',
     icon: '🌟',
     addEnabled: { h: true, t: true, o: true },
     convertOps: ['h-split', 't-merge', 't-split', 'o-merge'],
-    hint: '💡 자유롭게 탐색!',
+    hint: '💡 충분히 했으면<br>다음으로 가요!',
     nextLabel: '활동으로 가기'
   }
 };
@@ -1830,7 +1865,7 @@ function setupSpeakingScreen(phase) {
   STATE.recPhase = phase;
   document.getElementById('speakStageBadge').textContent =
     phase === 'pre' ? '🎤 사전 말하기' : '🌟 사후 말하기';
-  setSpeakGuide('<b>녹음 시작</b> 버튼을 누르고 세 수를 큰 소리로 읽어요!');
+  setSpeakGuide('<b>녹음 시작</b> 버튼을 누르고 세 수를 <b>자연스럽게</b> 큰 소리로 읽어요!');
 
   const row = document.getElementById('speakTargets');
   row.innerHTML = '';
@@ -1921,7 +1956,7 @@ async function startSpeakRecording() {
   document.getElementById('speakMicLabel').textContent = '녹음 완료';
   document.getElementById('speakMicIcon').innerHTML = '<use href="#i-stop"/>';
   setMicStatus('recording');
-  setSpeakGuide('🔴 <b>녹음 중!</b> 세 수를 또박또박 읽어 주세요');
+  setSpeakGuide('🔴 <b>녹음 중!</b> 세 수를 자연스럽게 또박또박 읽어 주세요');
   playSound('start');
 }
 function stopSpeakRecording() {
@@ -2043,9 +2078,14 @@ function setupExploreScreen() {
     row.appendChild(btn);
   });
 
-  // 다음 버튼 라벨
+  // 다음 버튼 라벨 + 통합 단계에서는 시선 끌기
   const nextBtn = document.getElementById('exploreNextBtn');
   nextBtn.innerHTML = `${stage.nextLabel} <svg><use href="#i-arrow"/></svg>`;
+  if (STATE.exploreStage === 7) {
+    nextBtn.classList.add('pulse-attention');
+  } else {
+    nextBtn.classList.remove('pulse-attention');
+  }
 
   renderExplore();
 }
@@ -2053,11 +2093,17 @@ function setupExploreScreen() {
 function exploreNextStep() {
   if (STATE.exploreStage < 7) {
     STATE.exploreStage++;
-    // 새 단계 시작 시 모형 초기화 (단계 4 시작 시는 가르기로 넘어가니 더 의미있게 초기화)
     STATE.exploreCounts = { h:0, t:0, o:0 };
     setupExploreScreen();
+    // 통합 단계(7) 진입 시 안내 팝업
+    if (STATE.exploreStage === 7) {
+      showHowtoSteps([
+        { icon: '🌟', text: '<b>마지막 단계예요!</b><br>모든 버튼을 자유롭게<br>사용할 수 있어요' },
+        { icon: '🎨', text: '가르기·모으기를<br>마음껏 연습해 봐요' },
+        { icon: '👇', text: '<b>충분히 해 봤다고 생각되면</b><br>아래 <b>[활동으로 가기]</b> 버튼을<br>눌러서 다음으로 넘어가요!' }
+      ], () => {});
+    }
   } else {
-    // 7단계 완료 → 활동으로
     show('screenActivities');
   }
 }
@@ -2192,6 +2238,14 @@ function renderExplore() {
     b.onclick = () => expRemove('o');
     grpO.appendChild(b);
   }
+
+  // 모형 개수에 따라 자동 축소 (가르기로 만들어지는 십·일이 많을 수 있음)
+  // 가중치: 백 1개 = 십 3개 = 일 5개 정도의 시각적 부피로 계산
+  const visualWeight = c.h * 5 + c.t * 1.2 + c.o * 0.5;
+  const area = document.getElementById('blocksAreaExp');
+  area.classList.remove('dense','very-dense');
+  if (visualWeight >= 30) area.classList.add('very-dense');
+  else if (visualWeight >= 18) area.classList.add('dense');
 
   document.getElementById('nowTagExp').innerHTML =
     `<span class="label-h">백 ${c.h}</span>` +
@@ -2358,6 +2412,14 @@ function renderBlocks() {
     if (isBuilding) b.onclick = () => removeBlock('o');
     grpO.appendChild(b);
   }
+
+  // 모형 개수에 따라 자동 축소
+  const visualWeight = counts.h * 5 + counts.t * 1.2 + counts.o * 0.5;
+  const area = document.getElementById('blocksArea');
+  area.classList.remove('dense','very-dense');
+  if (visualWeight >= 30) area.classList.add('very-dense');
+  else if (visualWeight >= 18) area.classList.add('dense');
+
   document.getElementById('nowTag').innerHTML =
     `<span class="label-h">백 ${STATE.buildCounts.h}</span>` +
     `<span class="label-t">십 ${STATE.buildCounts.t}</span>` +
