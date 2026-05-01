@@ -46,8 +46,8 @@
     position: fixed; inset: 0;
     display: grid;
     grid-template-rows: auto auto 1fr auto;
-    gap: clamp(6px,1vh,12px);
-    padding: clamp(6px,1vh,12px);
+    gap: clamp(4px,.8vh,10px);
+    padding: clamp(4px,.8vh,10px);
     overflow: hidden;
     animation: fadeIn .25s;
   }
@@ -64,24 +64,24 @@
   /* ============ 1행: 상단 바 (지금 어디?) ============ */
   .top-bar {
     display: flex; align-items: center; justify-content: space-between;
-    gap: clamp(10px,1.6vh,18px);
-    padding: clamp(10px,1.6vh,18px) clamp(16px,2vh,24px);
+    gap: clamp(8px,1.4vh,16px);
+    padding: clamp(8px,1.2vh,14px) clamp(14px,1.8vh,22px);
     background: white; border: 3px solid var(--primary);
-    border-radius: 22px;
+    border-radius: 20px;
     box-shadow: 0 3px 10px rgba(0,0,0,.06);
   }
   .stage-badge {
     background: linear-gradient(135deg,var(--primary-light),#BAE6FD);
     color: var(--primary-dark);
-    padding: clamp(8px,1.4vh,16px) clamp(16px,2.4vh,28px);
-    border-radius: 16px; font-weight: 900;
-    font-size: clamp(18px,2.6vh,28px);
+    padding: clamp(6px,1vh,12px) clamp(14px,2vh,24px);
+    border-radius: 14px; font-weight: 900;
+    font-size: clamp(17px,2.4vh,26px);
     border: 3px solid var(--primary);
     white-space: nowrap; line-height: 1.2;
   }
   .icon-btn {
-    width: clamp(48px,5.5vh,64px); height: clamp(48px,5.5vh,64px);
-    border-radius: 16px; background: white; border: 3px solid #E2E8F0;
+    width: clamp(44px,5vh,58px); height: clamp(44px,5vh,58px);
+    border-radius: 14px; background: white; border: 3px solid #E2E8F0;
     display: flex; align-items: center; justify-content: center;
     color: var(--primary); transition: all .15s; flex-shrink: 0;
   }
@@ -155,10 +155,10 @@
 
   /* ============ 큰 버튼 ============ */
   .btn-primary {
-    padding: clamp(16px,2.6vh,30px) clamp(36px,5vh,72px);
+    padding: clamp(14px,2.2vh,26px) clamp(32px,4.4vh,64px);
     background: var(--primary); color: white; border-radius: 999px;
-    font-size: clamp(22px,3.2vh,36px); font-weight: 900;
-    box-shadow: 0 8px 0 var(--primary-dark);
+    font-size: clamp(20px,2.8vh,32px); font-weight: 900;
+    box-shadow: 0 7px 0 var(--primary-dark);
     display: inline-flex; align-items: center; gap: 12px;
     transition: all .1s; justify-content: center;
   }
@@ -190,24 +190,20 @@
   }
   .start-content {
     display: flex; flex-direction: column; align-items: center;
-    gap: clamp(16px,2.5vh,32px);
+    gap: clamp(12px,1.8vh,24px);
   }
-  .start-icon {
-    background: transparent; transition: transform .2s;
-  }
-  .start-icon:hover { transform: scale(1.05); }
   .start-icon svg {
-    width: clamp(140px,22vh,260px); height: clamp(140px,22vh,260px);
+    width: clamp(120px,18vh,220px); height: clamp(120px,18vh,220px);
     color: var(--primary);
     filter: drop-shadow(0 12px 24px rgba(14,165,233,.35));
   }
   .start-title {
-    font-size: clamp(38px,8vh,90px); font-weight: 900;
+    font-size: clamp(34px,7vh,80px); font-weight: 900;
     color: var(--primary-dark); letter-spacing: -.04em;
     text-align: center;
   }
   .start-sub {
-    font-size: clamp(20px,3.2vh,34px); font-weight: 800;
+    font-size: clamp(18px,2.8vh,30px); font-weight: 800;
     color: var(--text-soft); text-align: center;
   }
 
@@ -353,28 +349,68 @@
 
   /* ============ 학습 문제 안내 ============ */
   .activity-list {
-    display: flex; flex-direction: column; gap: clamp(10px,1.6vh,18px);
+    display: flex; flex-direction: column; gap: clamp(8px,1.4vh,16px);
     width: min(900px, 95%);
   }
   .activity-item {
     background: white;
-    padding: clamp(16px,2.6vh,30px) clamp(24px,3.4vh,44px);
-    border-radius: 26px; border: 4px solid var(--primary-light);
-    display: flex; align-items: center; gap: clamp(16px,2.6vh,28px);
+    padding: clamp(12px,2vh,22px) clamp(20px,3vh,36px);
+    border-radius: 22px; border: 4px solid var(--primary-light);
+    display: flex; align-items: center; gap: clamp(14px,2.2vh,24px);
     box-shadow: 0 4px 14px rgba(0,0,0,.05);
   }
   .activity-num {
-    width: clamp(54px,7vh,84px); height: clamp(54px,7vh,84px);
+    width: clamp(46px,5.5vh,68px); height: clamp(46px,5.5vh,68px);
     background: var(--primary); color: white; border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
-    font-size: clamp(28px,3.8vh,42px); font-weight: 900; flex-shrink: 0;
+    font-size: clamp(24px,3.2vh,36px); font-weight: 900; flex-shrink: 0;
     box-shadow: 0 4px 12px rgba(14,165,233,.35);
   }
   .activity-text {
-    font-size: clamp(22px,3.2vh,34px); font-weight: 800; color: var(--text);
+    font-size: clamp(20px,2.8vh,30px); font-weight: 800; color: var(--text);
     line-height: 1.4;
   }
   .activity-text b { color: var(--primary-dark); }
+
+  /* ============ 자유 탐색 ============ */
+  .explore-info {
+    background: linear-gradient(135deg,#FEF3C7,#FBBF24);
+    border: 4px solid #F59E0B; border-radius: 24px;
+    padding: clamp(14px,2.2vh,24px);
+    display: flex; flex-direction: column; align-items: center;
+    gap: clamp(8px,1.4vh,14px);
+    height: 100%; justify-content: center;
+  }
+  .explore-info-title {
+    font-size: clamp(15px,2vh,22px); font-weight: 900;
+    color: #78350F; text-align: center;
+  }
+  .explore-info-num {
+    font-size: clamp(48px,7.5vh,90px); font-weight: 900;
+    color: #92400E; line-height: 1; letter-spacing: .04em;
+  }
+  .explore-info-read {
+    font-size: clamp(20px,2.8vh,30px); font-weight: 900;
+    color: #92400E; line-height: 1.2;
+    background: white; padding: clamp(6px,1vh,10px) clamp(12px,1.8vh,20px);
+    border-radius: 12px;
+    border: 2px solid #F59E0B;
+    text-align: center;
+  }
+  .explore-info-note {
+    font-size: clamp(13px,1.7vh,18px); font-weight: 800;
+    color: #78350F; line-height: 1.4;
+    text-align: center; margin-top: 4px;
+  }
+  .explore-total {
+    position: absolute; top: clamp(12px,1.6vh,18px); right: clamp(14px,1.8vh,22px);
+    background: white; padding: clamp(8px,1.2vh,14px) clamp(16px,2.2vh,24px);
+    border-radius: 14px;
+    font-size: clamp(28px,3.8vh,46px); font-weight: 900;
+    color: var(--primary-dark);
+    border: 3px solid var(--primary);
+    box-shadow: 0 3px 10px rgba(14,165,233,.2);
+  }
 
   /* ============ 학습 메인 ============ */
   .main-area-full {
@@ -539,9 +575,9 @@
   /* 자릿값 칸 - 위/아래 화살표 포함 */
   .digit-input {
     display: inline-flex; flex-direction: column; align-items: center;
-    gap: 2px;
-    background: white; border-radius: 16px;
-    padding: clamp(4px,.6vh,6px);
+    gap: 3px;
+    background: white; border-radius: 18px;
+    padding: clamp(5px,.8vh,8px);
     border: 4px solid;
   }
   .digit-input.h { border-color: #BFDBFE; background: #EFF6FF; }
@@ -553,11 +589,11 @@
   .digit-input.o.active { border-color: var(--one-d); background: #FFEDD5; }
 
   .digit-arrow {
-    width: clamp(48px,6vh,72px); height: clamp(28px,3.4vh,40px);
-    border-radius: 8px;
+    width: clamp(64px,8vh,98px); height: clamp(34px,4.4vh,54px);
+    border-radius: 10px;
     background: rgba(255,255,255,.7);
     display: flex; align-items: center; justify-content: center;
-    font-size: clamp(16px,2vh,24px); font-weight: 900;
+    font-size: clamp(20px,2.6vh,30px); font-weight: 900;
     color: var(--text-soft);
     transition: all .1s;
   }
@@ -565,10 +601,10 @@
   .digit-arrow:active { transform: scale(.92); }
 
   .digit-value {
-    width: clamp(48px,6vh,72px); height: clamp(48px,6vh,72px);
-    background: white; border-radius: 10px;
+    width: clamp(64px,8vh,98px); height: clamp(64px,8vh,98px);
+    background: white; border-radius: 12px;
     display: flex; align-items: center; justify-content: center;
-    font-size: clamp(34px,4.6vh,52px); font-weight: 900;
+    font-size: clamp(44px,6vh,72px); font-weight: 900;
     cursor: pointer;
     border: 2px solid transparent;
   }
@@ -577,12 +613,12 @@
   .digit-input.o .digit-value { color: var(--one-d); }
   .digit-input.active .digit-value { border-color: currentColor; }
 
-  /* 합친 수 칸 - 더 큼지막 */
+  /* 합친 수 칸 */
   .total-num-input {
-    width: clamp(140px,17vh,220px); height: clamp(60px,7.5vh,92px);
-    border: 4px solid var(--primary); border-radius: 18px;
+    width: clamp(170px,21vh,280px); height: clamp(72px,9vh,114px);
+    border: 4px solid var(--primary); border-radius: 22px;
     background: white;
-    font-size: clamp(36px,5vh,60px); font-weight: 900;
+    font-size: clamp(46px,6.5vh,80px); font-weight: 900;
     color: var(--primary); cursor: pointer;
     display: flex; align-items: center; justify-content: center;
   }
@@ -594,31 +630,27 @@
 
   /* 읽기 입력 */
   .read-input {
-    width: clamp(220px,28vh,400px); height: clamp(60px,7.5vh,92px);
-    border: 4px solid var(--orange); border-radius: 22px;
-    background: #FFF7ED; padding: 0 22px; text-align: center;
-    font-size: clamp(22px,3vh,32px); font-weight: 900;
+    width: clamp(260px,32vh,460px); height: clamp(72px,9vh,114px);
+    border: 4px solid var(--orange); border-radius: 24px;
+    background: #FFF7ED; padding: 0 26px; text-align: center;
+    font-size: clamp(28px,3.8vh,42px); font-weight: 900;
     color: var(--one-d); outline: none;
   }
   .read-input.active { background: #FFEDD5; transform: scale(1.04); }
-  .read-input::placeholder { color: #FDBA74; font-weight: 700; }
+  .read-input::placeholder { color: #FDBA74; font-weight: 700; font-size: .85em; }
 
   /* 입력 방법 아이콘 버튼 */
-  .input-method-row {
-    display: flex; gap: clamp(8px,1.2vh,12px);
-    align-items: center;
-  }
   .input-method-btn {
-    width: clamp(60px,7.5vh,92px); height: clamp(60px,7.5vh,92px);
-    border-radius: 18px;
+    width: clamp(72px,9vh,108px); height: clamp(72px,9vh,108px);
+    border-radius: 22px;
     background: white; border: 4px solid #E2E8F0;
     display: flex; flex-direction: column; align-items: center;
     justify-content: center; gap: 2px;
     transition: all .1s;
     color: var(--text-soft);
   }
-  .input-method-btn .icon-emoji { font-size: clamp(22px,2.8vh,32px); line-height: 1; }
-  .input-method-btn .label { font-size: clamp(11px,1.4vh,15px); font-weight: 900; }
+  .input-method-btn .icon-emoji { font-size: clamp(26px,3.4vh,38px); line-height: 1; }
+  .input-method-btn .label { font-size: clamp(13px,1.7vh,18px); font-weight: 900; }
   .input-method-btn.active {
     background: var(--primary); color: white;
     border-color: var(--primary-dark);
@@ -811,10 +843,35 @@
     text-underline-offset: 8px;
   }
   .cert-text {
-    font-size: clamp(16px,2.4vh,26px); font-weight: 700; color: #475569;
-    line-height: 1.9; margin-bottom: clamp(14px,2vh,28px);
+    font-size: clamp(15px,2.2vh,24px); font-weight: 700; color: #475569;
+    line-height: 1.7; margin-bottom: clamp(14px,2vh,24px);
   }
   .cert-text b { color: var(--primary-dark); font-weight: 900; }
+  .cert-results {
+    background: linear-gradient(135deg,#F0F9FF,#FEF3C7);
+    border: 3px solid var(--primary-light);
+    border-radius: 20px;
+    padding: clamp(14px,2vh,24px);
+    margin-bottom: clamp(14px,2vh,24px);
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(160px,1fr));
+    gap: clamp(8px,1.4vh,14px);
+    text-align: left;
+  }
+  .cert-result-item {
+    display: flex; flex-direction: column; gap: 4px;
+    padding: clamp(8px,1.2vh,12px);
+    background: white; border-radius: 12px;
+    border: 2px solid var(--primary-light);
+  }
+  .cert-result-item .label {
+    font-size: clamp(13px,1.6vh,17px); font-weight: 800;
+    color: var(--text-soft);
+  }
+  .cert-result-item .value {
+    font-size: clamp(18px,2.4vh,26px); font-weight: 900;
+    color: var(--primary-dark);
+  }
+  .cert-result-item .value .star { color: var(--yellow); }
   .cert-foot {
     display: flex; justify-content: space-between; align-items: center;
   }
@@ -1079,6 +1136,80 @@
   </div>
   <div class="action-bar">
     <button class="btn-primary" onclick="startActivity(1)">활동 시작하기 <svg><use href="#i-arrow"/></svg></button>
+  </div>
+</div>
+
+<!-- ===== 자유 탐색 (활동 0) ===== -->
+<div class="screen hidden" id="screenExplore">
+  <div class="top-bar">
+    <button class="icon-btn" onclick="goStudent()" aria-label="홈"><svg><use href="#i-home"/></svg></button>
+    <span class="stage-badge">🔬 수 모형 탐색</span>
+    <div class="progress-track" style="visibility:hidden"></div>
+    <button class="icon-btn muted" onclick="toggleSpeaker()" aria-label="스피커">
+      <svg id="speakerIconExp"><use href="#i-volume-off"/></svg>
+    </button>
+  </div>
+  <div class="guide-bar">
+    <div class="point-icon">🔬</div>
+    <div class="text" id="exploreGuide">
+      <b>가르기·모으기</b>로 백↔십↔일이 어떻게 바뀌는지 자유롭게 해 봐요!
+    </div>
+  </div>
+  <div class="main-area">
+    <div class="main-row">
+      <div class="main-col-left">
+        <div class="blocks-area" id="blocksAreaExp">
+          <div class="now-tag" id="nowTagExp">
+            <span class="label-h">백 0</span>
+            <span class="label-t">십 0</span>
+            <span class="label-o">일 0</span>
+          </div>
+          <div class="explore-total" id="exploreTotal">0</div>
+          <div class="group h" id="grpHexp"></div>
+          <div class="group t" id="grpTexp"></div>
+          <div class="group o" id="grpOexp"></div>
+        </div>
+        <div class="control-panel">
+          <div class="add-row">
+            <button class="add-btn h" onclick="expAdd('h')">+100</button>
+            <button class="add-btn t" onclick="expAdd('t')">+10</button>
+            <button class="add-btn o" onclick="expAdd('o')">+1</button>
+            <button class="reset-btn" onclick="expReset()" aria-label="초기화"><svg><use href="#i-refresh"/></svg></button>
+          </div>
+          <div class="convert-row">
+            <button class="conv-btn h-side" onclick="expConvert('h-split')">
+              <div class="conv-icon">💯→🟪</div>
+              <div>백 → 십 10개</div>
+            </button>
+            <button class="conv-btn t-side" onclick="expConvert('t-merge')">
+              <div class="conv-icon">🟪→💯</div>
+              <div>십 10개 → 백</div>
+            </button>
+            <button class="conv-btn t-side" onclick="expConvert('t-split')">
+              <div class="conv-icon">🟪→🟧</div>
+              <div>십 → 일 10개</div>
+            </button>
+            <button class="conv-btn o-side" onclick="expConvert('o-merge')">
+              <div class="conv-icon">🟧→🟪</div>
+              <div>일 10개 → 십</div>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="main-col-right">
+        <div class="explore-info">
+          <div class="explore-info-title">📊 지금 만든 수</div>
+          <div class="explore-info-num" id="exploreInfoNum">0</div>
+          <div class="explore-info-read" id="exploreInfoRead">영</div>
+          <div class="explore-info-note">💡 백 모형을<br>'십 10개'로<br>바꿔 봐요!</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="action-bar">
+    <button class="btn-primary" onclick="show('screenActivities')">
+      활동으로 가기 <svg><use href="#i-arrow"/></svg>
+    </button>
   </div>
 </div>
 
@@ -1417,6 +1548,7 @@ const STATE = {
   bookPickDigits: ['','',''], bookPickPos: 0,
   summaryDigits: ['','','',''], summaryPos: 0,
   introStep: 1,
+  exploreCounts: { h:0, t:0, o:0 },
   selfEval: { model:0, placeValue:0, readWrite:0 },
   retry: false,
   speakingTargets: [],
@@ -1778,12 +1910,87 @@ function introAnswer(choice) {
       : `맞아요! <b>${STATE.intro.libraryNum}</b>은(는)<br><b>${target}</b>보다 작아요!`,
       () => {
         if (STATE.introStep < 2) { STATE.introStep++; updateIntroQuestion(); }
-        else { show('screenActivities'); }
+        else { startExplore(); }
       });
   } else {
     playSound('incorrect');
     showFeedback(false, '다시 한 번 생각해 볼까요?<br>도서 대출증의 수와 비교해 봐요.');
   }
+}
+
+/* ===== 자유 탐색 ===== */
+function startExplore() {
+  STATE.exploreCounts = { h:0, t:0, o:0 };
+  renderExplore();
+  show('screenExplore');
+  // 활동 방법 팝업
+  showHowtoSteps([
+    { icon: '🔬', text: '먼저 <b>수 모형을 자유롭게</b><br>탐색해 봐요!' },
+    { icon: '🟦🟪🟧', text: '<b>+100, +10, +1</b> 버튼으로<br>모형을 쌓아 봐요.' },
+    { icon: '💯→🟪', text: '<b>백 → 십 10개</b>로 바꿔 봐요.<br>모양은 달라도 수는 같아요!' },
+    { icon: '🟪→🟧', text: '<b>십 → 일 10개</b>도 같은 수예요.<br>여러 가지로 만들어 봐요.' },
+    { icon: '✅', text: '다 했으면<br><b>[활동으로 가기]</b>를 눌러요!' }
+  ], () => {});
+}
+function expAdd(type) {
+  const max = type==='h' ? 9 : 19;
+  if (STATE.exploreCounts[type] >= max) return;
+  STATE.exploreCounts[type]++;
+  speak(type==='h'?'백':type==='t'?'십':'일');
+  renderExplore();
+}
+function expRemove(type) {
+  if (STATE.exploreCounts[type] <= 0) return;
+  STATE.exploreCounts[type]--;
+  playSound('remove');
+  renderExplore();
+}
+function expReset() {
+  STATE.exploreCounts = { h:0, t:0, o:0 };
+  renderExplore();
+}
+function expConvert(op) {
+  const c = STATE.exploreCounts;
+  if (op==='h-split' && c.h>0) { c.h--; c.t += 10; }
+  else if (op==='t-merge' && c.t>=10) { c.t -= 10; c.h++; }
+  else if (op==='t-split' && c.t>0) { c.t--; c.o += 10; }
+  else if (op==='o-merge' && c.o>=10) { c.o -= 10; c.t++; }
+  renderExplore();
+}
+function renderExplore() {
+  const c = STATE.exploreCounts;
+  const grpH = document.getElementById('grpHexp');
+  const grpT = document.getElementById('grpTexp');
+  const grpO = document.getElementById('grpOexp');
+  grpH.innerHTML = ''; grpT.innerHTML = ''; grpO.innerHTML = '';
+  for (let i=0; i<c.h; i++) {
+    const b = document.createElement('div');
+    b.className = 'h-block pop-in interactive';
+    for (let j=0; j<100; j++) b.appendChild(document.createElement('div'));
+    b.onclick = () => expRemove('h');
+    grpH.appendChild(b);
+  }
+  for (let i=0; i<c.t; i++) {
+    const b = document.createElement('div');
+    b.className = 't-block pop-in interactive';
+    for (let j=0; j<10; j++) b.appendChild(document.createElement('div'));
+    b.onclick = () => expRemove('t');
+    grpT.appendChild(b);
+  }
+  for (let i=0; i<c.o; i++) {
+    const b = document.createElement('div');
+    b.className = 'o-block pop-in interactive';
+    b.onclick = () => expRemove('o');
+    grpO.appendChild(b);
+  }
+  document.getElementById('nowTagExp').innerHTML =
+    `<span class="label-h">백 ${c.h}</span>` +
+    `<span class="label-t">십 ${c.t}</span>` +
+    `<span class="label-o">일 ${c.o}</span>`;
+  const total = c.h*100 + c.t*10 + c.o;
+  document.getElementById('exploreTotal').textContent = total;
+  document.getElementById('exploreInfoNum').textContent = total;
+  document.getElementById('exploreInfoRead').textContent = numberToKoreanRead(total);
 }
 
 /* ===== 활동방법 팝업 (단계별) ===== */
@@ -1905,11 +2112,11 @@ function enterProblem() {
   document.getElementById('nowTag').style.display = 'flex';
   renderBlocks();
   if (STATE.currentActivity === 1) {
-    setMainGuide(`목표는 <b>${currentQ().num}</b>! 모형을 똑같이 쌓고 [확인]을 눌러요`);
+    setMainGuide(`목표는 <b>${currentQ().num}</b>! 모형을 똑같이 쌓아요. (잘못 놓으면 모형을 콕 누르세요!)`);
   } else if (STATE.currentActivity === 2) {
-    setMainGuide(`목표는 <b>"${currentQ().read}"</b>! 모형을 쌓고 [확인]을 눌러요`);
+    setMainGuide(`목표는 <b>"${currentQ().read}"</b>! 모형 쌓기 → 자릿값 쓰기 → 합친 수 → 읽기 순서로!`);
   } else {
-    setMainGuide(`내가 정한 수 <b>${currentQ().num}</b>만큼 모형을 쌓아요!`);
+    setMainGuide(`내가 정한 수 <b>${currentQ().num}</b>만큼 모형을 쌓아요! (잘못 놓으면 모형을 콕!)`);
   }
   speak(STATE.currentActivity === 2
     ? `목표는 ${currentQ().read}이에요. 모형을 쌓아 보세요.`
@@ -2127,6 +2334,15 @@ function resetAllInputs() {
   STATE.inputs = { inputH:'', inputT:'', inputO:'', inputNum:'', inputRead:'' };
   STATE.buildCounts = { h:0, t:0, o:0 };
   STATE.activeField = 'inputH';
+  // 정답 입력 UI도 깨끗하게
+  ['inputH','inputT','inputO'].forEach(f => {
+    const el = document.querySelector(`.digit-value[data-field="${f}"]`);
+    if (el) el.textContent = '0';
+  });
+  const numEl = document.querySelector('.total-num-input');
+  if (numEl) numEl.textContent = '_ _ _';
+  const readEl = document.getElementById('inputRead');
+  if (readEl) readEl.value = '';
 }
 function nextProblem() {
   if (STATE.qIndex < STATE.problems.length - 1) {
@@ -2316,6 +2532,55 @@ function showRetryModal() {
 function showCertificate() {
   document.getElementById('certName').textContent = `${STATE.student.name} 박사`;
   document.getElementById('certDate').textContent = '발행일: ' + new Date().toLocaleDateString('ko-KR');
+
+  // 학습 결과 채우기
+  const e = STATE.selfEval;
+  const total = STATE.act1Total + STATE.act2Total + STATE.act3Total;
+  const correct = STATE.act1Correct + STATE.act2Correct + STATE.act3Correct;
+  const rate = total > 0 ? Math.round(correct/total*100) : 0;
+  const stars = (n) => '⭐'.repeat(n);
+  const preText = STATE.preTranscript ? STATE.preTranscript : '(녹음 없음)';
+  const postText = STATE.postTranscript ? STATE.postTranscript : '(녹음 없음)';
+  const targets = STATE.speakingTargets.map(t => t.num).join(', ');
+
+  document.getElementById('certResults').innerHTML = `
+    <div class="cert-result-item">
+      <div class="label">📕 활동 1 (도서 대출증)</div>
+      <div class="value">${STATE.act1Correct} / ${STATE.act1Total} 문제</div>
+    </div>
+    <div class="cert-result-item">
+      <div class="label">🔢 활동 2 (모형 읽기)</div>
+      <div class="value">${STATE.act2Correct} / ${STATE.act2Total} 문제</div>
+    </div>
+    <div class="cert-result-item">
+      <div class="label">📖 활동 3 (내 책 쪽수)</div>
+      <div class="value">${STATE.act3Correct} / ${STATE.act3Total} 문제</div>
+    </div>
+    <div class="cert-result-item">
+      <div class="label">🎯 전체 정답률</div>
+      <div class="value">${rate}%</div>
+    </div>
+    <div class="cert-result-item">
+      <div class="label">📦 수 모형 이해</div>
+      <div class="value"><span class="star">${stars(e.model)}</span></div>
+    </div>
+    <div class="cert-result-item">
+      <div class="label">🔢 자릿값</div>
+      <div class="value"><span class="star">${stars(e.placeValue)}</span></div>
+    </div>
+    <div class="cert-result-item">
+      <div class="label">🗣️ 읽고 쓰기</div>
+      <div class="value"><span class="star">${stars(e.readWrite)}</span></div>
+    </div>
+    <div class="cert-result-item" style="grid-column:span 2">
+      <div class="label">🎤 사전 말하기 (${targets})</div>
+      <div class="value" style="font-size:clamp(15px,2vh,20px)">${preText}</div>
+    </div>
+    <div class="cert-result-item" style="grid-column:span 2">
+      <div class="label">🌟 사후 말하기 (${targets})</div>
+      <div class="value" style="font-size:clamp(15px,2vh,20px)">${postText}</div>
+    </div>
+  `;
   show('screenReport');
 }
 function restartAll() { goStudent(); }
