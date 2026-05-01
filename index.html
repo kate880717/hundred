@@ -436,6 +436,23 @@
     gap: clamp(8px,1.4vh,16px);
     height: 100%; width: 100%;
   }
+  /* 모형 쌓기 단계 - 키패드 숨기고 확인 버튼만 */
+  .main-row.building-only {
+    grid-template-columns: 1fr clamp(140px,15vh,200px);
+  }
+  .main-row.building-only #mainKeypad {
+    display: none;
+  }
+  .main-row.building-only #mainCheckBtn {
+    height: 100%;
+    font-size: clamp(26px,3.6vh,40px);
+    flex-direction: column;
+    gap: clamp(6px,1vh,12px);
+  }
+  .main-row.building-only #mainCheckBtn svg {
+    width: clamp(40px,5.5vh,72px);
+    height: clamp(40px,5.5vh,72px);
+  }
   .main-col-left {
     display: grid;
     grid-template-rows: 1fr auto;
@@ -1357,8 +1374,8 @@
           </div>
         </div>
       </div>
-      <div class="main-col-right">
-        <div class="keypad">
+      <div class="main-col-right" id="mainColRight">
+        <div class="keypad" id="mainKeypad">
           <button class="key" onclick="keypadInput('1')">1</button>
           <button class="key" onclick="keypadInput('2')">2</button>
           <button class="key" onclick="keypadInput('3')">3</button>
@@ -1371,7 +1388,7 @@
           <button class="key" onclick="keypadInput('0')">0</button>
           <button class="key del" onclick="keypadDelete()" aria-label="지우기"><svg><use href="#i-delete"/></svg></button>
         </div>
-        <button class="check-btn" onclick="onCheck()">
+        <button class="check-btn" id="mainCheckBtn" onclick="onCheck()">
           <svg><use href="#i-check"/></svg> 확인
         </button>
       </div>
