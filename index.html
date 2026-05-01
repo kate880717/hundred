@@ -65,21 +65,22 @@
   /* ============ 상단 바 ============ */
   .top-bar {
     display: flex; align-items: center; justify-content: space-between;
-    gap: 12px; padding: clamp(8px,1vw,12px) clamp(12px,1.6vw,20px);
-    background: white; border: 2px solid var(--green);
-    border-radius: 18px; flex-shrink: 0;
-    margin-bottom: clamp(8px,1vw,14px);
-    box-shadow: 0 2px 6px rgba(0,0,0,.04);
+    gap: clamp(10px,1.6vh,18px);
+    padding: clamp(10px,1.4vh,16px) clamp(14px,1.8vh,22px);
+    background: white; border: 3px solid var(--green);
+    border-radius: 22px; flex-shrink: 0;
+    margin-bottom: clamp(8px,1.2vh,14px);
+    box-shadow: 0 2px 8px rgba(0,0,0,.05);
   }
   .top-bar .stage-tag {
     background: var(--green-light); color: var(--green-d);
-    padding: clamp(6px,.8vw,10px) clamp(12px,1.4vw,18px);
-    border-radius: 14px; font-weight: 900;
-    font-size: clamp(13px,1.4vw,18px);
-    border: 2px solid var(--green); white-space: nowrap;
+    padding: clamp(8px,1.2vh,14px) clamp(14px,2vh,22px);
+    border-radius: 16px; font-weight: 900;
+    font-size: clamp(16px,2.2vh,24px);
+    border: 3px solid var(--green); white-space: nowrap;
   }
   .progress-track {
-    flex: 1; height: clamp(10px,1.2vw,16px); background: #E2E8F0;
+    flex: 1; height: clamp(14px,1.8vh,20px); background: #E2E8F0;
     border-radius: 99px; overflow: hidden; position: relative;
   }
   .progress-fill {
@@ -89,17 +90,17 @@
   .progress-label {
     position: absolute; left: 50%; top: 50%;
     transform: translate(-50%,-50%); color: white;
-    font-size: clamp(10px,1.1vw,13px); font-weight: 900;
-    text-shadow: 0 1px 2px rgba(0,0,0,.2);
+    font-size: clamp(13px,1.6vh,17px); font-weight: 900;
+    text-shadow: 0 1px 2px rgba(0,0,0,.3);
     pointer-events: none;
   }
   .top-bar .right-info {
-    font-weight: 900; font-size: clamp(13px,1.4vw,18px); color: var(--text-soft);
+    font-weight: 900; font-size: clamp(15px,2vh,22px); color: var(--text-soft);
     white-space: nowrap;
   }
   .icon-btn {
-    width: clamp(40px,3.6vw,48px); height: clamp(40px,3.6vw,48px);
-    border-radius: 14px; background: white; border: 2px solid #E2E8F0;
+    width: clamp(46px,5vh,60px); height: clamp(46px,5vh,60px);
+    border-radius: 16px; background: white; border: 3px solid #E2E8F0;
     display: flex; align-items: center; justify-content: center;
     color: var(--primary); transition: all .15s; flex-shrink: 0;
   }
@@ -117,14 +118,14 @@
     margin-bottom: clamp(20px,2.5vw,40px); transition: transform .2s; background: transparent;
   }
   .start-icon:hover { transform: scale(1.05); }
-  .start-icon svg { width: clamp(120px,14vw,200px); height: clamp(120px,14vw,200px);
+  .start-icon svg { width: clamp(140px,20vh,240px); height: clamp(140px,20vh,240px);
     color: var(--primary); filter: drop-shadow(0 10px 20px rgba(14,165,233,.3)); }
   .start-title {
-    font-size: clamp(34px,5vw,68px); font-weight: 900;
-    color: var(--primary-dark); letter-spacing: -.04em; margin-bottom: 12px;
+    font-size: clamp(40px,8vh,84px); font-weight: 900;
+    color: var(--primary-dark); letter-spacing: -.04em; margin-bottom: 14px;
   }
   .start-sub {
-    font-size: clamp(15px,1.7vw,24px); font-weight: 800; color: var(--text-soft);
+    font-size: clamp(20px,3vh,32px); font-weight: 800; color: var(--text-soft);
   }
 
   /* ============ 학생 선택 (드롭다운) ============ */
@@ -134,10 +135,10 @@
     min-height: 0; overflow: hidden;
   }
   .h1-page {
-    font-size: clamp(22px,3.4vh,42px); font-weight: 900;
+    font-size: clamp(28px,5vh,56px); font-weight: 900;
     color: var(--primary-dark); letter-spacing: -.03em;
-    display: flex; align-items: center; gap: 12px; text-align: center;
-    flex-shrink: 0;
+    display: flex; align-items: center; gap: 14px; text-align: center;
+    flex-shrink: 0; line-height: 1.2;
   }
   .student-select-wrap {
     background: white; padding: clamp(22px,3vh,44px);
@@ -146,44 +147,45 @@
     display: flex; flex-direction: column; gap: clamp(12px,1.8vh,22px);
   }
   .label-big {
-    font-size: clamp(16px,2vh,24px); font-weight: 900; color: var(--text);
+    font-size: clamp(20px,2.8vh,30px); font-weight: 900; color: var(--text);
   }
   .student-dropdown {
-    width: 100%; padding: clamp(12px,1.8vh,20px) clamp(16px,2.2vh,24px);
-    font-size: clamp(18px,2.4vh,28px); font-weight: 900; color: var(--text);
-    background: var(--bg-soft); border: 3px solid var(--primary-light);
-    border-radius: 18px; outline: none; cursor: pointer;
+    width: 100%; padding: clamp(16px,2.4vh,26px) clamp(20px,2.6vh,30px);
+    font-size: clamp(22px,3.2vh,34px); font-weight: 900; color: var(--text);
+    background: var(--bg-soft); border: 4px solid var(--primary-light);
+    border-radius: 22px; outline: none; cursor: pointer;
     transition: all .15s;
     appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='none' stroke='%230EA5E9' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
-    background-repeat: no-repeat; background-position: right 16px center;
-    padding-right: 56px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' fill='none' stroke='%230EA5E9' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 20px center;
+    background-size: 32px 32px;
+    padding-right: 64px;
   }
   .student-dropdown:focus { border-color: var(--primary); }
 
   .btn-primary {
-    padding: clamp(12px,1.8vh,22px) clamp(26px,3.6vh,52px);
+    padding: clamp(16px,2.4vh,28px) clamp(32px,4.5vh,64px);
     background: var(--primary); color: white; border-radius: 999px;
-    font-size: clamp(18px,2.4vh,28px); font-weight: 900;
-    box-shadow: 0 6px 0 var(--primary-dark);
-    display: inline-flex; align-items: center; gap: 10px;
+    font-size: clamp(22px,3vh,34px); font-weight: 900;
+    box-shadow: 0 7px 0 var(--primary-dark);
+    display: inline-flex; align-items: center; gap: 12px;
     transition: all .1s; justify-content: center;
     flex-shrink: 0;
   }
-  .btn-primary:active { transform: translateY(4px); box-shadow: 0 2px 0 var(--primary-dark); }
+  .btn-primary:active { transform: translateY(5px); box-shadow: 0 2px 0 var(--primary-dark); }
   .btn-primary:disabled { opacity: .5; cursor: not-allowed; }
   .btn-primary svg { width: 1.2em; height: 1.2em; }
   .btn-primary.pulse-attention {
     animation: attentionPulse 1.2s ease-in-out infinite;
   }
   @keyframes attentionPulse {
-    0%,100% { transform: scale(1); box-shadow: 0 6px 0 var(--primary-dark); }
-    50% { transform: scale(1.06); box-shadow: 0 8px 24px rgba(14,165,233,.5), 0 6px 0 var(--primary-dark); }
+    0%,100% { transform: scale(1); box-shadow: 0 7px 0 var(--primary-dark); }
+    50% { transform: scale(1.06); box-shadow: 0 8px 24px rgba(14,165,233,.5), 0 7px 0 var(--primary-dark); }
   }
   .btn-soft {
-    padding: clamp(10px,1.2vw,16px) clamp(18px,2.2vw,32px);
+    padding: clamp(12px,1.8vh,20px) clamp(22px,3vh,40px);
     background: #F1F5F9; color: var(--text); border-radius: 999px;
-    font-size: clamp(13px,1.4vw,18px); font-weight: 900;
+    font-size: clamp(16px,2vh,22px); font-weight: 900;
   }
   .btn-soft:hover { background: #E2E8F0; }
   .btn-big {
@@ -205,54 +207,58 @@
   /* ============ 사전/사후 녹음 ============ */
   .speak-wrap {
     flex: 1; display: flex; flex-direction: column; align-items: center;
-    justify-content: center; gap: clamp(8px,1.4vh,18px);
+    justify-content: center; gap: clamp(10px,1.8vh,22px);
     padding: 8px 12px; min-height: 0; overflow: hidden;
   }
   .phase-tag {
     background: linear-gradient(135deg,#F97316,#EF4444); color: white;
-    padding: clamp(5px,.8vh,10px) clamp(14px,2vh,24px);
+    padding: clamp(8px,1.2vh,14px) clamp(20px,2.8vh,32px);
     border-radius: 999px; font-weight: 900;
-    font-size: clamp(14px,1.8vh,20px); letter-spacing: .04em;
+    font-size: clamp(18px,2.4vh,26px); letter-spacing: .04em;
     flex-shrink: 0;
+    box-shadow: 0 4px 12px rgba(239,68,68,.25);
   }
-  .phase-tag.post { background: linear-gradient(135deg,#10B981,#059669); }
+  .phase-tag.post {
+    background: linear-gradient(135deg,#10B981,#059669);
+    box-shadow: 0 4px 12px rgba(16,185,129,.25);
+  }
   .speak-title {
-    font-size: clamp(20px,3vh,36px); font-weight: 900;
+    font-size: clamp(26px,4vh,46px); font-weight: 900;
     color: var(--primary-dark); text-align: center;
     letter-spacing: -.02em; flex-shrink: 0;
     line-height: 1.3;
   }
   .speak-instruction {
-    font-size: clamp(14px,1.9vh,22px); color: var(--text);
+    font-size: clamp(20px,2.8vh,30px); color: var(--text);
     font-weight: 800; text-align: center;
-    max-width: min(820px, 95vw); line-height: 1.5;
+    max-width: min(900px, 95vw); line-height: 1.6;
     flex-shrink: 0;
   }
-  .speak-instruction b { color: var(--primary); font-weight: 900; }
+  .speak-instruction b { font-weight: 900; }
   .target-row {
-    display: flex; gap: clamp(10px,1.6vh,22px);
+    display: flex; gap: clamp(14px,2.4vh,32px);
     flex-wrap: wrap; justify-content: center; flex-shrink: 0;
   }
   .target-num {
-    background: white; border: 4px solid var(--primary-light);
-    border-radius: 22px;
-    padding: clamp(10px,1.6vh,22px) clamp(20px,3vh,42px);
-    font-size: clamp(34px,6vh,72px); font-weight: 900;
+    background: white; border: 5px solid var(--primary-light);
+    border-radius: 26px;
+    padding: clamp(14px,2.2vh,30px) clamp(26px,3.8vh,54px);
+    font-size: clamp(46px,8vh,96px); font-weight: 900;
     color: var(--primary); letter-spacing: .04em;
-    min-width: clamp(90px,13vh,170px); text-align: center;
-    box-shadow: 0 4px 14px rgba(14,165,233,.15);
+    min-width: clamp(120px,16vh,200px); text-align: center;
+    box-shadow: 0 6px 20px rgba(14,165,233,.18);
   }
 
   .mic-btn {
-    width: clamp(70px,9vh,120px); height: clamp(70px,9vh,120px);
+    width: clamp(90px,11vh,150px); height: clamp(90px,11vh,150px);
     border-radius: 50%; background: var(--primary); color: white;
     display: flex; flex-direction: column; align-items: center;
     justify-content: center;
-    box-shadow: 0 8px 24px rgba(14,165,233,.4); transition: all .15s;
-    gap: 2px; flex-shrink: 0;
+    box-shadow: 0 10px 28px rgba(14,165,233,.45); transition: all .15s;
+    gap: 4px; flex-shrink: 0;
   }
-  .mic-btn svg { width: 36%; height: 36%; }
-  .mic-btn span { font-size: clamp(11px,1.4vh,16px); font-weight: 900; }
+  .mic-btn svg { width: 38%; height: 38%; }
+  .mic-btn span { font-size: clamp(14px,1.8vh,20px); font-weight: 900; }
   .mic-btn:hover { transform: scale(1.05); }
   .mic-btn:disabled { opacity: .6; cursor: wait; }
   .mic-btn.recording {
@@ -264,26 +270,26 @@
     50% { box-shadow: 0 8px 36px rgba(239,68,68,.85); transform: scale(1.06); }
   }
   .mic-status {
-    font-size: clamp(14px,1.8vh,20px); font-weight: 900;
-    padding: clamp(5px,.8vh,10px) clamp(14px,2vh,24px); border-radius: 999px;
-    display: inline-flex; align-items: center; gap: 8px;
+    font-size: clamp(18px,2.4vh,26px); font-weight: 900;
+    padding: clamp(8px,1.2vh,14px) clamp(20px,2.8vh,32px); border-radius: 999px;
+    display: inline-flex; align-items: center; gap: 10px;
     transition: all .25s; flex-shrink: 0;
   }
   .mic-status.idle { background: #F1F5F9; color: var(--text-soft); }
   .mic-status.preparing { background: #FEF3C7; color: #92400E; }
   .mic-status.recording { background: #FEE2E2; color: var(--red); }
   .mic-status.recording .dot {
-    width: 10px; height: 10px; background: var(--red);
+    width: 14px; height: 14px; background: var(--red);
     border-radius: 50%; animation: blink 1s infinite;
   }
   @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: .3; } }
   .mic-status.done { background: var(--green-light); color: var(--green-d); }
   .transcript-box {
-    background: white; border: 3px dashed #CBD5E1;
-    padding: clamp(10px,1.4vh,18px); border-radius: 16px;
-    min-height: clamp(50px,7vh,80px); width: min(720px, 92%);
-    font-size: clamp(15px,1.9vh,22px); font-weight: 800;
-    color: var(--text); text-align: center; line-height: 1.4;
+    background: white; border: 4px dashed #CBD5E1;
+    padding: clamp(14px,2vh,24px); border-radius: 20px;
+    min-height: clamp(60px,8vh,90px); width: min(820px, 92%);
+    font-size: clamp(20px,2.6vh,28px); font-weight: 800;
+    color: var(--text); text-align: center; line-height: 1.5;
     flex-shrink: 0;
   }
   .transcript-box.empty { color: #94A3B8; font-weight: 500; }
@@ -433,6 +439,43 @@
                 inset 0 2px 0 rgba(255,255,255,.5),
                 inset 0 -2px 0 rgba(0,0,0,.1);
   }
+
+  /* ============ 활동 방법 (단계 카드) ============ */
+  .step-cards {
+    display: flex; gap: clamp(8px,1.4vh,16px);
+    flex-wrap: wrap; justify-content: center; flex-shrink: 0;
+    max-width: min(960px, 96vw);
+  }
+  .step-card {
+    background: white; border-radius: 20px;
+    padding: clamp(10px,1.6vh,18px) clamp(14px,2vh,22px);
+    border: 3px solid; display: flex; align-items: center;
+    gap: clamp(8px,1.2vh,14px); flex: 1 1 200px; min-width: 180px;
+    box-shadow: 0 3px 10px rgba(0,0,0,.06);
+  }
+  .step-card .num {
+    width: clamp(36px,4.4vh,52px); height: clamp(36px,4.4vh,52px);
+    border-radius: 50%; color: white; font-weight: 900;
+    font-size: clamp(18px,2.4vh,26px);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .step-card .text {
+    font-size: clamp(16px,2.2vh,24px); font-weight: 900;
+    line-height: 1.3;
+  }
+  .step-card.s1 { border-color: #BFDBFE; }
+  .step-card.s1 .num { background: var(--primary); }
+  .step-card.s1 .text { color: var(--primary-dark); }
+  .step-card.s2 { border-color: #DDD6FE; }
+  .step-card.s2 .num { background: var(--purple); }
+  .step-card.s2 .text { color: var(--purple-d); }
+  .step-card.s3 { border-color: #FCA5A5; }
+  .step-card.s3 .num { background: var(--red); }
+  .step-card.s3 .text { color: var(--red); }
+  .step-card.s4 { border-color: #86EFAC; }
+  .step-card.s4 .num { background: var(--green); }
+  .step-card.s4 .text { color: var(--green-d); }
   .interactive { cursor: pointer; transition: filter .12s, transform .12s; }
   .interactive:hover { filter: brightness(1.1); transform: scale(1.08); }
   .pop-in { animation: popIn .25s ease-out; }
@@ -874,14 +917,14 @@
   </div>
   <div class="speak-wrap">
     <span class="phase-tag" id="phaseTag">🎤 사전 말하기</span>
-    <h2 class="speak-title">아래 세 수를 큰 소리로 읽어볼까요?</h2>
+    <h2 class="speak-title">아래 세 수를<br>큰 소리로 또박또박 읽어 보세요!</h2>
     <div class="target-row" id="speakTargets"></div>
-    <p class="speak-instruction">
-      <span class="strong-blue">①&nbsp;녹음 시작</span> 누르기 →
-      <span class="strong-purple">②&nbsp;세 수 또박또박 읽기</span> →
-      <span class="strong-red">③&nbsp;녹음 완료</span> →
-      <span class="strong-green">④&nbsp;다음 단계</span>
-    </p>
+    <div class="step-cards">
+      <div class="step-card s1"><div class="num">1</div><div class="text">녹음 시작<br>누르기</div></div>
+      <div class="step-card s2"><div class="num">2</div><div class="text">세 수<br>또박또박 읽기</div></div>
+      <div class="step-card s3"><div class="num">3</div><div class="text">녹음 완료<br>누르기</div></div>
+      <div class="step-card s4"><div class="num">4</div><div class="text">다음 단계<br>이동</div></div>
+    </div>
     <button class="mic-btn" id="speakMicBtn" onclick="toggleSpeakRecording()">
       <svg id="speakMicIcon"><use href="#i-mic"/></svg>
       <span id="speakMicLabel">녹음 시작</span>
@@ -955,6 +998,27 @@
       </div>
     </div>
     <button class="btn-primary" onclick="startActivity(1)">활동 시작하기 <svg><use href="#i-arrow"/></svg></button>
+  </div>
+</div>
+
+<!-- ========== 활동 방법 안내 (활동 1·2·3 시작 전) ========== -->
+<div class="screen hidden" id="screenHowto">
+  <div class="top-bar">
+    <button class="icon-btn" onclick="goStudent()" aria-label="홈"><svg><use href="#i-home"/></svg></button>
+    <span class="stage-tag" id="howtoStage">활동 1</span>
+    <div class="progress-track" style="visibility:hidden"></div>
+    <button class="icon-btn muted" onclick="toggleSpeaker()" aria-label="스피커">
+      <svg id="speakerIconHowto"><use href="#i-volume-off"/></svg>
+    </button>
+  </div>
+  <div class="center-wrap">
+    <h2 class="h1-page" id="howtoTitle">📖 활동 방법</h2>
+    <div class="howto-card" id="howtoCard">
+      <!-- JS로 채움 -->
+    </div>
+    <button class="btn-primary" onclick="enterCurrentActivity()">
+      이제 시작! <svg><use href="#i-arrow"/></svg>
+    </button>
   </div>
 </div>
 
