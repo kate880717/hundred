@@ -234,6 +234,7 @@
     transition: all .25s;
   }
   .mic-status.idle { background: #F1F5F9; color: var(--text-soft); }
+  .mic-status.preparing { background: #FEF3C7; color: #92400E; }
   .mic-status.recording {
     background: #FEE2E2; color: var(--red);
   }
@@ -1067,7 +1068,6 @@
 
 <script>
 /* ============= 환경설정 ============= */
-// ⚠️ 본인의 Apps Script 웹앱 URL 로 바꾸세요
 const API_URL = 'https://script.google.com/macros/s/AKfycbzn2hPgqntopmv7J9fB3ArEQX60I52DqRya5DzVbCS_5OfCGi_2So2B-edw0ipqnbInKw/exec';
 
 /* ============= 전역 상태 ============= */
@@ -1264,13 +1264,21 @@ function speak(text, rate=1.0) {
   synth.speak(u);
 }
 function playSound(type) {
-  if (!STATE.speakerOn) return;
+  if (!STATE.speakerOn && type !== 'start') return;
+  // 'start' 신호음은 스피커 꺼져있어도 짧게 재생
   const ctx = getAudioCtx();
   const t = ctx.currentTime;
   const osc = ctx.createOscillator();
   const gain = ctx.createGain();
   osc.connect(gain); gain.connect(ctx.destination);
-  if (type === 'correct') {
+  if (type === 'start') {
+    // 짧고 명확한 "삐!" 신호음
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(880, t);
+    gain.gain.setValueAtTime(0.15, t);
+    gain.gain.exponentialRampToValueAtTime(0.01, t+0.2);
+    osc.start(t); osc.stop(t+0.2);
+  } else if (type === 'correct') {
     osc.frequency.setValueAtTime(523.25, t);
     osc.frequency.setValueAtTime(659.25, t+0.1);
     osc.frequency.setValueAtTime(783.99, t+0.2);
@@ -1323,10 +1331,11 @@ function setupSpeakingScreen(phase) {
 
 function setMicStatus(state) {
   const el = document.getElementById('micStatus');
-  el.classList.remove('idle','recording','done');
-  if (state === 'idle')      { el.classList.add('idle');      el.textContent = '⏸️ 대기 중'; }
+  el.classList.remove('idle','preparing','recording','done');
+  if (state === 'idle')           { el.classList.add('idle');      el.textContent = '⏸️ 대기 중'; }
+  else if (state === 'preparing') { el.classList.add('preparing'); el.textContent = '⏳ 마이크 준비 중...'; }
   else if (state === 'recording') { el.classList.add('recording'); el.innerHTML = '<span class="dot"></span> 녹음 중...'; }
-  else if (state === 'done') { el.classList.add('done');      el.textContent = '✅ 녹음 완료!'; }
+  else if (state === 'done')      { el.classList.add('done');      el.textContent = '✅ 녹음 완료!'; }
 }
 
 function toggleSpeakRecording() {
@@ -1336,42 +1345,41 @@ function toggleSpeakRecording() {
 
 async function startSpeakRecording() {
   STATE.recChunks = [];
-  STATE.isSpeakRecording = true;
-  setMicStatus('recording');
-  document.getElementById('speakMicBtn').classList.add('recording');
-  document.getElementById('speakMicLabel').textContent = '녹음 완료';
-  document.getElementById('speakMicIcon').innerHTML = '<use href="#i-stop"/>';
+  // 먼저 UI를 "준비 중" 상태로 (버튼 잠시 비활성)
+  const btn = document.getElementById('speakMicBtn');
+  btn.disabled = true;
+  setMicStatus('preparing');
+  document.getElementById('speakMicLabel').textContent = '준비 중...';
 
-  // 오디오
+  // 1) 마이크 권한 먼저 받기
+  let stream;
   try {
-    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-    const mr = new MediaRecorder(stream);
-    STATE.mediaRecorder = mr;
-    mr.ondataavailable = e => { if (e.data.size > 0) STATE.recChunks.push(e.data); };
-    mr.onstop = () => {
-      const blob = new Blob(STATE.recChunks, { type: mr.mimeType || 'audio/webm' });
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        const b64 = reader.result.split(',')[1];
-        const data = { base64: b64, mimeType: blob.type };
-        if (STATE.recPhase === 'pre') STATE.preAudio = data;
-        else STATE.postAudio = data;
-      };
-      reader.readAsDataURL(blob);
-      stream.getTracks().forEach(t => t.stop());
-    };
-    mr.start();
+    stream = await navigator.mediaDevices.getUserMedia({ audio: true });
   } catch(e) {
     alert('마이크를 사용할 수 없어요.\n브라우저의 마이크 권한을 허용해 주세요.\n\n' + e.message);
-    STATE.isSpeakRecording = false;
-    document.getElementById('speakMicBtn').classList.remove('recording');
-    document.getElementById('speakMicLabel').textContent = '녹음 시작';
-    document.getElementById('speakMicIcon').innerHTML = '<use href="#i-mic"/>';
+    btn.disabled = false;
     setMicStatus('idle');
+    document.getElementById('speakMicLabel').textContent = '녹음 시작';
     return;
   }
 
-  // 음성인식
+  // 2) MediaRecorder + STT 동시 시작
+  const mr = new MediaRecorder(stream);
+  STATE.mediaRecorder = mr;
+  mr.ondataavailable = e => { if (e.data.size > 0) STATE.recChunks.push(e.data); };
+  mr.onstop = () => {
+    const blob = new Blob(STATE.recChunks, { type: mr.mimeType || 'audio/webm' });
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      const b64 = reader.result.split(',')[1];
+      const data = { base64: b64, mimeType: blob.type };
+      if (STATE.recPhase === 'pre') STATE.preAudio = data;
+      else STATE.postAudio = data;
+    };
+    reader.readAsDataURL(blob);
+    stream.getTracks().forEach(t => t.stop());
+  };
+
   if ('webkitSpeechRecognition' in window) {
     const rec = new webkitSpeechRecognition();
     rec.lang = 'ko-KR';
@@ -1395,6 +1403,17 @@ async function startSpeakRecording() {
     STATE.recognition = rec;
     rec.start();
   }
+
+  // 3) 모든 준비 완료 → 한꺼번에 시작 + 사용자에게 명확히 알림
+  mr.start();
+  STATE.isSpeakRecording = true;
+  btn.disabled = false;
+  btn.classList.add('recording');
+  document.getElementById('speakMicLabel').textContent = '녹음 완료';
+  document.getElementById('speakMicIcon').innerHTML = '<use href="#i-stop"/>';
+  setMicStatus('recording');
+  // 효과음으로 "삐!" 시작 신호
+  playSound('start');
 }
 
 function stopSpeakRecording() {
@@ -1420,12 +1439,28 @@ function stopAllRecording() {
 }
 
 function finishSpeaking() {
-  setTimeout(() => {
-    const isPost = STATE.recPhase === 'post';
+  const isPost = STATE.recPhase === 'post';
+
+  // 화면은 즉시 넘기고, 저장은 백그라운드에서 (오디오 base64 인코딩이 끝날 때까지 기다린 뒤 전송)
+  const proceed = () => {
+    if (isPost) { show('screenSelfEval'); renderEvalStars(); }
+    else { startIntro(); }
+  };
+
+  // 인코딩이 끝났는지 확인 후 전송 (최대 3초 폴링)
+  let waited = 0;
+  const trySave = () => {
     const audioData = isPost ? STATE.postAudio : STATE.preAudio;
     const transcript = isPost ? STATE.postTranscript : STATE.preTranscript;
 
-    showLoading('저장하는 중...');
+    if (!audioData && waited < 3000) {
+      // 아직 인코딩 중 → 잠시 후 다시 시도
+      waited += 200;
+      setTimeout(trySave, 200);
+      return;
+    }
+
+    // 백그라운드에서 저장 (사용자는 이미 다음 화면)
     callAPI('saveRecord', {
       studentNo: STATE.student.no,
       studentName: STATE.student.name,
@@ -1435,16 +1470,12 @@ function finishSpeaking() {
       transcript: transcript || '',
       audioBase64: audioData ? audioData.base64 : null,
       mimeType: audioData ? audioData.mimeType : ''
-    }).then(() => {
-      hideLoading();
-      if (isPost) { show('screenSelfEval'); renderEvalStars(); }
-      else { startIntro(); }
-    }).catch(() => {
-      hideLoading();
-      if (isPost) { show('screenSelfEval'); renderEvalStars(); }
-      else { startIntro(); }
-    });
-  }, 600);
+    }).catch(err => console.warn('녹음 저장 실패:', err));
+  };
+
+  // 즉시 다음 화면으로 + 저장은 비동기로 진행
+  proceed();
+  trySave();
 }
 
 /* ============= 도입 ============= */
