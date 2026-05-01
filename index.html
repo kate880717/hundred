@@ -458,46 +458,46 @@
     position: relative; overflow: hidden; min-height: 0;
     box-shadow: inset 0 4px 14px rgba(0,0,0,.06);
   }
-  /* 모형 자동 축소 - 4단계 */
-  .blocks-area.s1 { gap: clamp(12px,2vh,28px); padding: clamp(12px,1.8vh,22px); }
+  /* 모형 자동 축소 - 4단계 (꽉 찼을 때만 작아짐) */
+  .blocks-area.s1 { gap: clamp(13px,2vh,32px); padding: clamp(13px,2vh,26px); }
   .blocks-area.s1 .h-block {
-    width: clamp(54px,8vh,118px); height: clamp(54px,8vh,118px);
+    width: clamp(70px,10.5vh,150px); height: clamp(70px,10.5vh,150px);
   }
   .blocks-area.s1 .t-block {
-    width: clamp(16px,2.1vh,28px); height: clamp(54px,8vh,118px);
+    width: clamp(20px,2.7vh,36px); height: clamp(70px,10.5vh,150px);
   }
   .blocks-area.s1 .o-block {
-    width: clamp(22px,2.7vh,38px); height: clamp(22px,2.7vh,38px);
+    width: clamp(28px,3.5vh,46px); height: clamp(28px,3.5vh,46px);
   }
-  .blocks-area.s2 { gap: clamp(10px,1.6vh,22px); padding: clamp(10px,1.5vh,18px); }
+  .blocks-area.s2 { gap: clamp(11px,1.7vh,26px); padding: clamp(11px,1.7vh,20px); }
   .blocks-area.s2 .h-block {
-    width: clamp(46px,6.8vh,98px); height: clamp(46px,6.8vh,98px);
+    width: clamp(58px,8.5vh,120px); height: clamp(58px,8.5vh,120px);
   }
   .blocks-area.s2 .t-block {
-    width: clamp(13px,1.7vh,22px); height: clamp(46px,6.8vh,98px);
+    width: clamp(16px,2.2vh,28px); height: clamp(58px,8.5vh,120px);
   }
   .blocks-area.s2 .o-block {
-    width: clamp(19px,2.3vh,32px); height: clamp(19px,2.3vh,32px);
+    width: clamp(23px,2.9vh,38px); height: clamp(23px,2.9vh,38px);
   }
-  .blocks-area.s3 { gap: clamp(7px,1.2vh,16px); padding: clamp(8px,1.2vh,14px); }
+  .blocks-area.s3 { gap: clamp(8px,1.3vh,18px); padding: clamp(9px,1.4vh,16px); }
   .blocks-area.s3 .h-block {
-    width: clamp(38px,5.5vh,78px); height: clamp(38px,5.5vh,78px);
+    width: clamp(46px,6.8vh,96px); height: clamp(46px,6.8vh,96px);
   }
   .blocks-area.s3 .t-block {
-    width: clamp(10px,1.4vh,18px); height: clamp(38px,5.5vh,78px);
+    width: clamp(13px,1.7vh,22px); height: clamp(46px,6.8vh,96px);
   }
   .blocks-area.s3 .o-block {
-    width: clamp(16px,1.9vh,26px); height: clamp(16px,1.9vh,26px);
+    width: clamp(19px,2.3vh,30px); height: clamp(19px,2.3vh,30px);
   }
   .blocks-area.s4 { gap: clamp(5px,.8vh,12px); padding: clamp(6px,1vh,12px); }
   .blocks-area.s4 .h-block {
-    width: clamp(30px,4.4vh,60px); height: clamp(30px,4.4vh,60px);
+    width: clamp(34px,5vh,72px); height: clamp(34px,5vh,72px);
   }
   .blocks-area.s4 .t-block {
-    width: clamp(8px,1.1vh,14px); height: clamp(30px,4.4vh,60px);
+    width: clamp(9px,1.3vh,16px); height: clamp(34px,5vh,72px);
   }
   .blocks-area.s4 .o-block {
-    width: clamp(13px,1.6vh,20px); height: clamp(13px,1.6vh,20px);
+    width: clamp(14px,1.7vh,22px); height: clamp(14px,1.7vh,22px);
   }
   .blocks-area .group {
     display: flex; flex-wrap: wrap; align-content: flex-end; justify-content: center;
@@ -532,9 +532,9 @@
   .now-tag .label-t { color: var(--ten-d); }
   .now-tag .label-o { color: var(--one-d); }
 
-  /* 수 모형 */
+  /* 수 모형 (기본 크기 - 크게) */
   .h-block {
-    width: clamp(60px,9vh,140px); height: clamp(60px,9vh,140px);
+    width: clamp(80px,12vh,180px); height: clamp(80px,12vh,180px);
     background: linear-gradient(135deg,#7DD3FC 0%,#0EA5E9 50%,#0369A1 100%);
     border: 4px solid var(--hundred-d); border-radius: 12px;
     display: grid; grid-template-columns: repeat(10,1fr); grid-template-rows: repeat(10,1fr);
@@ -545,7 +545,7 @@
   }
   .h-block > div { border: 1px solid rgba(2,132,199,.4); }
   .t-block {
-    width: clamp(18px,2.4vh,32px); height: clamp(60px,9vh,140px);
+    width: clamp(24px,3.2vh,42px); height: clamp(80px,12vh,180px);
     background: linear-gradient(135deg,#D8B4FE 0%,#A855F7 50%,#7E22CE 100%);
     border: 3px solid var(--ten-d); border-radius: 7px;
     display: grid; grid-template-rows: repeat(10,1fr);
@@ -556,7 +556,7 @@
   }
   .t-block > div { border: 1px solid rgba(126,34,206,.4); }
   .o-block {
-    width: clamp(24px,3vh,42px); height: clamp(24px,3vh,42px);
+    width: clamp(32px,4vh,54px); height: clamp(32px,4vh,54px);
     background: linear-gradient(135deg,#FDBA74 0%,#F97316 50%,#C2410C 100%);
     border: 3px solid var(--one-d); border-radius: 7px;
     box-shadow: 0 5px 14px rgba(194,65,12,.4),
@@ -2263,13 +2263,15 @@ function renderExplore() {
     grpO.appendChild(b);
   }
 
-  // 모형 개수에 따라 자동 축소 (가르기로 만들어지는 십·일이 많을 수 있음)
-  // 가중치: 백 1개 = 십 3개 = 일 5개 정도의 시각적 부피로 계산
-  const visualWeight = c.h * 5 + c.t * 1.2 + c.o * 0.5;
+  // 모형 개수에 따라 자동 축소 (4단계) - 정말 꽉 찰 때만 작아지게
+  // 가중치: 백 1개 = 십 5개 = 일 14개 정도의 가로 점유
+  const visualWeight = c.h * 5 + c.t * 1.0 + c.o * 0.36;
   const area = document.getElementById('blocksAreaExp');
-  area.classList.remove('dense','very-dense');
-  if (visualWeight >= 30) area.classList.add('very-dense');
-  else if (visualWeight >= 18) area.classList.add('dense');
+  area.classList.remove('s1','s2','s3','s4');
+  if (visualWeight >= 60) area.classList.add('s4');       // 백 9, 십 19, 일 19 같은 극단
+  else if (visualWeight >= 40) area.classList.add('s3');  // 700~900대 가르기 후
+  else if (visualWeight >= 25) area.classList.add('s2');  // 500대 정도
+  else if (visualWeight >= 14) area.classList.add('s1');  // 245 정도부터 살짝
 
   document.getElementById('nowTagExp').innerHTML =
     `<span class="label-h">백 ${c.h}</span>` +
@@ -2437,12 +2439,14 @@ function renderBlocks() {
     grpO.appendChild(b);
   }
 
-  // 모형 개수에 따라 자동 축소
-  const visualWeight = counts.h * 5 + counts.t * 1.2 + counts.o * 0.5;
+  // 모형 개수에 따라 자동 축소 (4단계) - 정말 꽉 찰 때만 작아지게
+  const visualWeight = counts.h * 5 + counts.t * 1.0 + counts.o * 0.36;
   const area = document.getElementById('blocksArea');
-  area.classList.remove('dense','very-dense');
-  if (visualWeight >= 30) area.classList.add('very-dense');
-  else if (visualWeight >= 18) area.classList.add('dense');
+  area.classList.remove('s1','s2','s3','s4');
+  if (visualWeight >= 60) area.classList.add('s4');
+  else if (visualWeight >= 40) area.classList.add('s3');
+  else if (visualWeight >= 25) area.classList.add('s2');
+  else if (visualWeight >= 14) area.classList.add('s1');
 
   document.getElementById('nowTag').innerHTML =
     `<span class="label-h">백 ${STATE.buildCounts.h}</span>` +
