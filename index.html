@@ -54,14 +54,13 @@
   @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
   .hidden { display: none !important; }
 
-  /* 색상 강조 */
   .strong-blue { color: var(--primary-dark); font-weight: 900; }
   .strong-orange { color: var(--orange-d); font-weight: 900; }
   .strong-green { color: var(--green-d); font-weight: 900; }
   .strong-purple { color: var(--purple-d); font-weight: 900; }
   .strong-red { color: var(--red); font-weight: 900; }
 
-  /* ============ 1행: 상단 바 (지금 어디?) ============ */
+  /* ============ 1행: 상단 바 ============ */
   .top-bar {
     display: flex; align-items: center; justify-content: space-between;
     gap: clamp(8px,1.4vh,16px);
@@ -106,7 +105,7 @@
     pointer-events: none;
   }
 
-  /* ============ 2행: 행동 가이드 (지금 뭐 할 거예요?) ============ */
+  /* ============ 2행: 행동 가이드 ============ */
   .guide-bar {
     display: flex; align-items: center; gap: clamp(10px,1.6vh,18px);
     padding: clamp(10px,1.6vh,18px) clamp(16px,2.4vh,28px);
@@ -130,7 +129,7 @@
   }
   .guide-bar .text b { color: var(--red); }
 
-  /* ============ 3행: 메인 영역 (가운데) ============ */
+  /* ============ 3행: 메인 영역 ============ */
   .main-area {
     display: flex; flex-direction: column; align-items: center;
     justify-content: center; gap: clamp(10px,1.6vh,20px);
@@ -141,10 +140,7 @@
     flex-direction: row; align-items: stretch;
     gap: clamp(8px,1.4vh,16px);
   }
-  /* 학습 메인용 - 좌우 여백 없이 꽉 채움 */
-  .main-area.no-pad {
-    padding: 0;
-  }
+  .main-area.no-pad { padding: 0; }
 
   /* ============ 4행: 하단 액션 ============ */
   .action-bar {
@@ -378,37 +374,45 @@
   .explore-info {
     background: linear-gradient(135deg,#FEF3C7,#FBBF24);
     border: 4px solid #F59E0B; border-radius: 24px;
-    padding: clamp(14px,2.2vh,24px);
+    padding: clamp(12px,1.8vh,20px) clamp(8px,1.4vh,16px);
     display: flex; flex-direction: column; align-items: center;
     gap: clamp(8px,1.4vh,14px);
     height: 100%; justify-content: center;
+    overflow: hidden;
   }
   .explore-info-title {
-    font-size: clamp(18px,2.4vh,26px); font-weight: 900;
+    font-size: clamp(15px,2vh,22px); font-weight: 900;
     color: #78350F; text-align: center;
+    line-height: 1.2;
   }
   .explore-info-num {
-    font-size: clamp(56px,9vh,108px); font-weight: 900;
-    color: #92400E; line-height: 1; letter-spacing: .04em;
+    font-size: clamp(40px,6.5vh,84px); font-weight: 900;
+    color: #92400E; line-height: 1; letter-spacing: .02em;
+    word-break: break-all;
   }
   .explore-info-read {
-    font-size: clamp(24px,3.4vh,38px); font-weight: 900;
+    font-size: clamp(18px,2.4vh,28px); font-weight: 900;
     color: #92400E; line-height: 1.2;
-    background: white; padding: clamp(8px,1.2vh,14px) clamp(14px,2vh,24px);
+    background: white;
+    padding: clamp(6px,1vh,10px) clamp(10px,1.4vh,16px);
     border-radius: 14px;
     border: 3px solid #F59E0B;
     text-align: center;
+    word-break: keep-all;
+    max-width: 100%;
   }
-  .explore-info-note {
-    font-size: clamp(15px,2vh,22px); font-weight: 800;
-    color: #78350F; line-height: 1.4;
-    text-align: center; margin-top: 4px;
+  .explore-hint {
+    font-size: clamp(13px,1.7vh,18px); font-weight: 800;
+    color: #92400E; text-align: center; line-height: 1.3;
+    background: rgba(255,255,255,.6);
+    padding: clamp(6px,1vh,10px); border-radius: 12px;
+    margin-top: clamp(4px,.8vh,8px);
   }
   .explore-total {
     position: absolute; top: clamp(12px,1.6vh,18px); right: clamp(14px,1.8vh,22px);
-    background: white; padding: clamp(8px,1.2vh,14px) clamp(16px,2.2vh,24px);
+    background: white; padding: clamp(8px,1.2vh,14px) clamp(14px,2vh,22px);
     border-radius: 14px;
-    font-size: clamp(32px,4.4vh,52px); font-weight: 900;
+    font-size: clamp(28px,4vh,46px); font-weight: 900;
     color: var(--primary-dark);
     border: 3px solid var(--primary);
     box-shadow: 0 3px 10px rgba(14,165,233,.2);
@@ -470,7 +474,7 @@
   .now-tag .label-t { color: var(--ten-d); }
   .now-tag .label-o { color: var(--one-d); }
 
-  /* 수 모형 (큼지막하지만 영역에 따라 자동 축소) */
+  /* 수 모형 */
   .h-block {
     width: clamp(60px,9vh,140px); height: clamp(60px,9vh,140px);
     background: linear-gradient(135deg,#7DD3FC 0%,#0EA5E9 50%,#0369A1 100%);
@@ -524,6 +528,7 @@
     display: flex; align-items: center; justify-content: center;
   }
   .add-btn:active { transform: translateY(3px); border-bottom-width: 2px; }
+  .add-btn:disabled { opacity: .35; cursor: not-allowed; }
   .add-btn.h { background: linear-gradient(180deg,#DBEAFE,#BFDBFE);
                color: var(--hundred-d); border-bottom-color: #60A5FA; }
   .add-btn.t { background: linear-gradient(180deg,#F3E8FF,#E9D5FF);
@@ -539,21 +544,22 @@
   .reset-btn svg { width: clamp(22px,3vh,30px); height: clamp(22px,3vh,30px); }
 
   .convert-row {
-    display: grid; grid-template-columns: repeat(4,1fr);
+    display: grid;
     gap: clamp(6px,1vh,10px);
     padding-top: clamp(8px,1.2vh,12px);
     border-top: 2px dashed #E2E8F0;
   }
   .conv-btn {
-    padding: clamp(10px,1.6vh,16px) clamp(4px,.8vh,8px);
-    border-radius: 14px;
-    font-size: clamp(13px,1.8vh,18px); font-weight: 900;
+    padding: clamp(12px,2vh,20px) clamp(6px,1vh,10px);
+    border-radius: 16px;
+    font-size: clamp(16px,2.2vh,22px); font-weight: 900;
     border-bottom: 4px solid; transition: all .1s;
     display: flex; flex-direction: column; align-items: center;
-    gap: 4px; line-height: 1.2;
+    gap: 6px; line-height: 1.3;
   }
   .conv-btn:active { transform: translateY(2px); border-bottom-width: 1px; }
-  .conv-btn .conv-icon { font-size: clamp(20px,2.8vh,28px); line-height: 1; }
+  .conv-btn:disabled { opacity: .35; cursor: not-allowed; }
+  .conv-btn .conv-icon { font-size: clamp(24px,3.4vh,34px); line-height: 1; }
   .conv-btn.h-side { background: #EFF6FF; color: var(--hundred-d);
                      border: 2px solid #BFDBFE; border-bottom-color: #60A5FA; }
   .conv-btn.t-side { background: #F5F3FF; color: var(--ten-d);
@@ -561,7 +567,7 @@
   .conv-btn.o-side { background: #FFF7ED; color: var(--one-d);
                      border: 2px solid #FED7AA; border-bottom-color: #FB923C; }
 
-  /* 정답 입력 모드 - 새 디자인 */
+  /* 정답 입력 모드 */
   .answer-mode {
     display: flex; flex-direction: column;
     gap: clamp(10px,1.6vh,18px);
@@ -583,7 +589,6 @@
     color: var(--text);
   }
 
-  /* 자릿값 칸 - 위/아래 화살표 포함 */
   .digit-input {
     display: inline-flex; flex-direction: column; align-items: center;
     gap: 3px;
@@ -624,7 +629,6 @@
   .digit-input.o .digit-value { color: var(--one-d); }
   .digit-input.active .digit-value { border-color: currentColor; }
 
-  /* 합친 수 칸 */
   .total-num-input {
     width: clamp(170px,21vh,280px); height: clamp(72px,9vh,114px);
     border: 4px solid var(--primary); border-radius: 22px;
@@ -639,7 +643,6 @@
     box-shadow: 0 6px 16px rgba(14,165,233,.3);
   }
 
-  /* 읽기 입력 */
   .read-input {
     width: clamp(260px,32vh,460px); height: clamp(72px,9vh,114px);
     border: 4px solid var(--orange); border-radius: 24px;
@@ -650,7 +653,6 @@
   .read-input.active { background: #FFEDD5; transform: scale(1.04); }
   .read-input::placeholder { color: #FDBA74; font-weight: 700; font-size: .85em; }
 
-  /* 입력 방법 아이콘 버튼 */
   .input-method-btn {
     width: clamp(72px,9vh,108px); height: clamp(72px,9vh,108px);
     border-radius: 22px;
@@ -673,7 +675,7 @@
     animation: micPulse 1.2s infinite;
   }
 
-  /* 키패드 (사이드용 - 학습 메인) */
+  /* 키패드 */
   .keypad {
     background: #F1F5F9; padding: clamp(8px,1.4vh,14px);
     border-radius: 24px;
@@ -682,7 +684,6 @@
     border: 2px solid #E2E8F0;
     box-shadow: inset 0 3px 6px rgba(0,0,0,.05);
   }
-  /* 가로 키패드 (정리·책쪽수용) */
   .keypad-wide {
     background: #F1F5F9; padding: clamp(8px,1.4vh,14px);
     border-radius: 22px;
@@ -697,9 +698,7 @@
     min-height: clamp(48px,6vh,72px);
     font-size: clamp(22px,3vh,32px);
   }
-  .keypad-wide .key.del {
-    grid-column: span 1;
-  }
+  .keypad-wide .key.del { grid-column: span 1; }
   .key {
     background: white; border-radius: 14px;
     font-size: clamp(24px,3.2vh,38px); font-weight: 900; color: #334155;
@@ -728,7 +727,7 @@
   .check-btn:active { transform: translateY(4px); border-bottom-width: 2px; }
   .check-btn svg { width: 1.3em; height: 1.3em; }
 
-  /* ============ 활동3: 책 쪽수 정하기 ============ */
+  /* 활동3: 책 쪽수 */
   .book-prompt {
     background: white; border: 5px solid var(--orange);
     border-radius: 28px;
@@ -754,7 +753,7 @@
   }
   .page-digit.active { border-color: var(--orange); background: #FFF7ED; }
 
-  /* ============ 정리: 빈칸 채우기 ============ */
+  /* 정리: 빈칸 채우기 */
   .summary-sentence {
     background: white; border: 5px solid var(--purple);
     border-radius: 32px; padding: clamp(24px,3.8vh,52px);
@@ -773,7 +772,7 @@
   .blank-input.active { border-color: var(--purple); background: #FAF5FF; transform: scale(1.05); }
   .blank-input.big { width: clamp(110px,13vh,170px); }
 
-  /* ============ 차시 예고 ============ */
+  /* 차시 예고 */
   .next-card {
     background: white; border: 5px solid var(--primary);
     border-radius: 36px; padding: clamp(32px,5vh,72px);
@@ -791,7 +790,7 @@
   }
   .next-card .ko-text b { color: var(--orange-d); }
 
-  /* ============ 자기평가 ============ */
+  /* 자기평가 */
   .eval-list {
     display: flex; flex-direction: column;
     gap: clamp(12px,1.8vh,18px);
@@ -820,7 +819,7 @@
   .star-btn.active svg { fill: var(--yellow); }
   .star-btn:hover { transform: scale(1.15); }
 
-  /* ============ 수료증 ============ */
+  /* 수료증 */
   #screenReport {
     background: linear-gradient(135deg,#E0F2FE,#FEF3C7);
     grid-template-rows: auto 1fr auto;
@@ -898,12 +897,12 @@
     text-align: center; line-height: 1.2;
   }
 
-  /* ============ 모달 (피드백 + 활동방법 팝업) ============ */
+  /* 모달 */
   .modal-bg {
     position: fixed; inset: 0; background: rgba(0,0,0,.55);
     backdrop-filter: blur(4px); z-index: 100;
     display: flex; align-items: center; justify-content: center;
-    padding: clamp(16px,2.4vh,28px); animation: fadeIn .2s;
+    padding: clamp(16px,2.4vh,28px);
   }
   .modal {
     background: white; border-radius: clamp(28px,4vh,56px);
@@ -911,11 +910,9 @@
     max-width: 720px; width: 100%;
     text-align: center; box-shadow: 0 22px 56px rgba(0,0,0,.3);
     border-top: 14px solid var(--primary);
-    animation: modalPop .3s ease-out;
     max-height: 92vh; overflow: hidden;
     display: flex; flex-direction: column; gap: clamp(14px,2.2vh,26px);
   }
-  @keyframes modalPop { from { transform: scale(.85) translateY(40px); } to { transform: scale(1); } }
   .modal .emoji {
     font-size: clamp(72px,11vh,150px); line-height: 1;
   }
@@ -930,6 +927,18 @@
     color: #334155; line-height: 1.6;
   }
   .modal p b { color: var(--orange-d); font-weight: 900; }
+  .modal-tip {
+    background: #FEF3C7; border: 3px solid var(--yellow);
+    border-radius: 20px;
+    padding: clamp(12px,1.8vh,20px) clamp(16px,2.4vh,28px);
+    font-size: clamp(18px,2.5vh,26px); font-weight: 900;
+    color: #92400E; line-height: 1.5;
+    display: flex; align-items: center; gap: 12px;
+    justify-content: center;
+  }
+  .modal-tip .tip-emoji {
+    font-size: clamp(28px,3.6vh,42px); flex-shrink: 0;
+  }
   .modal-btns {
     display: flex; gap: clamp(8px,1.4vh,14px); width: 100%;
   }
@@ -947,14 +956,12 @@
   .modal-btn.start { background: var(--primary); box-shadow: 0 6px 0 var(--primary-dark); }
   .modal-btn svg { width: 1.2em; height: 1.2em; }
 
-  /* 활동방법 팝업 (단계별) */
   .howto-step-num {
     background: var(--primary); color: white;
     border-radius: 999px;
     padding: clamp(8px,1.4vh,16px) clamp(20px,2.8vh,32px);
     font-size: clamp(20px,2.6vh,28px); font-weight: 900;
     display: inline-block;
-    box-shadow: 0 4px 12px rgba(14,165,233,.35);
   }
   .howto-step-content {
     font-size: clamp(24px,3.4vh,40px); font-weight: 900;
@@ -968,13 +975,12 @@
     display: flex; gap: clamp(6px,1vh,10px); justify-content: center;
   }
   .howto-dot {
-    width: clamp(14px,1.8vh,22px); height: clamp(14px,1.8vh,22px);
+    width: clamp(12px,1.5vh,18px); height: clamp(12px,1.5vh,18px);
     border-radius: 50%; background: #CBD5E1;
-    transition: all .2s;
   }
-  .howto-dot.active { background: var(--primary); transform: scale(1.3); }
+  .howto-dot.active { background: var(--primary); }
 
-  /* ============ 로딩 ============ */
+  /* 로딩 */
   .loading {
     position: fixed; inset: 0; background: rgba(255,255,255,.92);
     z-index: 200; display: flex; align-items: center; justify-content: center;
@@ -1006,7 +1012,7 @@
   <symbol id="i-star" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></symbol>
 </svg>
 
-<!-- ===== 시작 화면 ===== -->
+<!-- 시작 -->
 <div class="screen" id="screenStart">
   <div class="start-content" style="grid-row:1">
     <button class="start-icon" onclick="show('screenStudent')" aria-label="시작">
@@ -1017,7 +1023,7 @@
   </div>
 </div>
 
-<!-- ===== 학생 선택 ===== -->
+<!-- 학생 선택 -->
 <div class="screen hidden" id="screenStudent">
   <div class="top-bar">
     <button class="icon-btn" onclick="show('screenStart')" aria-label="처음으로">
@@ -1048,7 +1054,7 @@
   </div>
 </div>
 
-<!-- ===== 사전·사후 녹음 ===== -->
+<!-- 사전·사후 녹음 -->
 <div class="screen hidden" id="screenSpeaking">
   <div class="top-bar">
     <button class="icon-btn" onclick="goStudent()" aria-label="홈"><svg><use href="#i-home"/></svg></button>
@@ -1080,7 +1086,7 @@
   </div>
 </div>
 
-<!-- ===== 도입: 도서 대출증 ===== -->
+<!-- 도입 -->
 <div class="screen hidden" id="screenIntro">
   <div class="top-bar">
     <button class="icon-btn" onclick="goStudent()" aria-label="홈"><svg><use href="#i-home"/></svg></button>
@@ -1109,13 +1115,13 @@
       </div>
     </div>
   </div>
-  <div class="action-bar">
+  <div class="action-bar" style="flex-direction:column;gap:clamp(10px,1.6vh,18px)">
     <button class="btn-big bigger" onclick="introAnswer('big')">➕ 커요</button>
     <button class="btn-big smaller" onclick="introAnswer('small')">➖ 작아요</button>
   </div>
 </div>
 
-<!-- ===== 학습 문제·활동 안내 ===== -->
+<!-- 학습 활동 안내 -->
 <div class="screen hidden" id="screenActivities">
   <div class="top-bar">
     <button class="icon-btn" onclick="goStudent()" aria-label="홈"><svg><use href="#i-home"/></svg></button>
@@ -1150,20 +1156,26 @@
   </div>
 </div>
 
-<!-- ===== 자유 탐색 (활동 0) ===== -->
+<!-- 자유 탐색 (7단계) -->
 <div class="screen hidden" id="screenExplore">
   <div class="top-bar">
     <button class="icon-btn" onclick="goStudent()" aria-label="홈"><svg><use href="#i-home"/></svg></button>
-    <span class="stage-badge">🔬 수 모형 탐색</span>
-    <div class="progress-track" style="visibility:hidden"></div>
+    <span class="stage-badge" id="exploreStageBadge">🔬 모으기 1단계</span>
+    <button class="icon-btn" onclick="showExploreHelp()" aria-label="도움말" style="background:#FEF3C7;border-color:#F59E0B;color:#92400E">
+      <span style="font-size:clamp(20px,2.6vh,28px);font-weight:900">?</span>
+    </button>
+    <div class="progress-track">
+      <div class="progress-fill" id="exploreProgress" style="width:14%"></div>
+      <div class="progress-label" id="exploreProgressLabel">1 / 7</div>
+    </div>
     <button class="icon-btn muted" onclick="toggleSpeaker()" aria-label="스피커">
       <svg id="speakerIconExp"><use href="#i-volume-off"/></svg>
     </button>
   </div>
   <div class="guide-bar">
-    <div class="point-icon">🔬</div>
+    <div class="point-icon" id="exploreGuideIcon">🔬</div>
     <div class="text" id="exploreGuide">
-      <b>가르기·모으기</b>로 백↔십↔일이 어떻게 바뀌는지 자유롭게 해 봐요!
+      수 모형을 자유롭게 탐색해 봐요!
     </div>
   </div>
   <div class="main-area">
@@ -1182,28 +1194,13 @@
         </div>
         <div class="control-panel">
           <div class="add-row">
-            <button class="add-btn h" onclick="expAdd('h')">+100</button>
-            <button class="add-btn t" onclick="expAdd('t')">+10</button>
-            <button class="add-btn o" onclick="expAdd('o')">+1</button>
+            <button class="add-btn h" id="expAddH" onclick="expAdd('h')">+100</button>
+            <button class="add-btn t" id="expAddT" onclick="expAdd('t')">+10</button>
+            <button class="add-btn o" id="expAddO" onclick="expAdd('o')">+1</button>
             <button class="reset-btn" onclick="expReset()" aria-label="초기화"><svg><use href="#i-refresh"/></svg></button>
           </div>
-          <div class="convert-row">
-            <button class="conv-btn h-side" onclick="expConvert('h-split')">
-              <div class="conv-icon">💯→🟪</div>
-              <div>백 → 십 10개</div>
-            </button>
-            <button class="conv-btn t-side" onclick="expConvert('t-merge')">
-              <div class="conv-icon">🟪→💯</div>
-              <div>십 10개 → 백</div>
-            </button>
-            <button class="conv-btn t-side" onclick="expConvert('t-split')">
-              <div class="conv-icon">🟪→🟧</div>
-              <div>십 → 일 10개</div>
-            </button>
-            <button class="conv-btn o-side" onclick="expConvert('o-merge')">
-              <div class="conv-icon">🟧→🟪</div>
-              <div>일 10개 → 십</div>
-            </button>
+          <div class="convert-row" id="exploreConvertRow">
+            <!-- JS로 채움 -->
           </div>
         </div>
       </div>
@@ -1212,19 +1209,19 @@
           <div class="explore-info-title">📊 지금 만든 수</div>
           <div class="explore-info-num" id="exploreInfoNum">0</div>
           <div class="explore-info-read" id="exploreInfoRead">영</div>
-          <div class="explore-info-note">💡 백 모형을<br>'십 10개'로<br>바꿔 봐요!</div>
+          <div class="explore-hint" id="exploreHint">💡 일 모형부터 만들어 봐요!</div>
         </div>
       </div>
     </div>
   </div>
   <div class="action-bar">
-    <button class="btn-primary" onclick="show('screenActivities')">
-      활동으로 가기 <svg><use href="#i-arrow"/></svg>
+    <button class="btn-primary" id="exploreNextBtn" onclick="exploreNextStep()">
+      다음 <svg><use href="#i-arrow"/></svg>
     </button>
   </div>
 </div>
 
-<!-- ===== 학습 메인 (활동 1·2·3) ===== -->
+<!-- 학습 메인 -->
 <div class="screen hidden" id="screenMain">
   <div class="top-bar">
     <button class="icon-btn" onclick="goStudent()" aria-label="홈"><svg><use href="#i-home"/></svg></button>
@@ -1261,24 +1258,6 @@
               <button class="add-btn t" onclick="addBlock('t')">+10</button>
               <button class="add-btn o" onclick="addBlock('o')">+1</button>
               <button class="reset-btn" onclick="resetBlocks()" aria-label="초기화"><svg><use href="#i-refresh"/></svg></button>
-            </div>
-            <div class="convert-row">
-              <button class="conv-btn h-side" onclick="convert('h-split')">
-                <div class="conv-icon">💯→🟪</div>
-                <div>백 → 십 10개</div>
-              </button>
-              <button class="conv-btn t-side" onclick="convert('t-merge')">
-                <div class="conv-icon">🟪→💯</div>
-                <div>십 10개 → 백</div>
-              </button>
-              <button class="conv-btn t-side" onclick="convert('t-split')">
-                <div class="conv-icon">🟪→🟧</div>
-                <div>십 → 일 10개</div>
-              </button>
-              <button class="conv-btn o-side" onclick="convert('o-merge')">
-                <div class="conv-icon">🟧→🟪</div>
-                <div>일 10개 → 십</div>
-              </button>
             </div>
           </div>
           <div id="answerControls" class="answer-mode hidden">
@@ -1341,7 +1320,7 @@
   </div>
 </div>
 
-<!-- ===== 활동3: 책 쪽수 정하기 ===== -->
+<!-- 활동3: 책 쪽수 정하기 -->
 <div class="screen hidden" id="screenBookPick">
   <div class="top-bar">
     <button class="icon-btn" onclick="goStudent()" aria-label="홈"><svg><use href="#i-home"/></svg></button>
@@ -1388,7 +1367,7 @@
   </div>
 </div>
 
-<!-- ===== 정리: 빈칸 채우기 ===== -->
+<!-- 정리 -->
 <div class="screen hidden" id="screenSummary">
   <div class="top-bar">
     <button class="icon-btn" onclick="goStudent()" aria-label="홈"><svg><use href="#i-home"/></svg></button>
@@ -1430,7 +1409,7 @@
   </div>
 </div>
 
-<!-- ===== 차시 예고 ===== -->
+<!-- 차시 예고 -->
 <div class="screen hidden" id="screenNext">
   <div class="top-bar">
     <button class="icon-btn" onclick="goStudent()" aria-label="홈"><svg><use href="#i-home"/></svg></button>
@@ -1458,7 +1437,7 @@
   </div>
 </div>
 
-<!-- ===== 자기평가 ===== -->
+<!-- 자기평가 -->
 <div class="screen hidden" id="screenSelfEval">
   <div class="top-bar">
     <button class="icon-btn" onclick="goStudent()" aria-label="홈"><svg><use href="#i-home"/></svg></button>
@@ -1502,7 +1481,7 @@
   </div>
 </div>
 
-<!-- ===== 수료증 ===== -->
+<!-- 수료증 -->
 <div class="screen hidden" id="screenReport">
   <div class="top-bar">
     <button class="icon-btn" onclick="goStudent()" aria-label="홈"><svg><use href="#i-home"/></svg></button>
@@ -1520,9 +1499,7 @@
         이해하고 모든 활동을 훌륭하게 해결하였기에<br>
         이 박사 학위 증서를 수여합니다.
       </p>
-      <div class="cert-results" id="certResults">
-        <!-- JS로 채움 -->
-      </div>
+      <div class="cert-results" id="certResults"></div>
       <div class="cert-foot">
         <span class="cert-date" id="certDate"></span>
         <div class="cert-stamp">참 잘했어요</div>
@@ -1534,13 +1511,102 @@
   </div>
 </div>
 
-<!-- ===== 로딩 ===== -->
+<!-- 로딩 -->
 <div class="loading hidden" id="loading">
   <div class="spin"></div><span id="loadingMsg">잠시만요...</span>
 </div>
 
 <script>
 const API_URL = 'https://script.google.com/macros/s/AKfycbzn2hPgqntopmv7J9fB3ArEQX60I52DqRya5DzVbCS_5OfCGi_2So2B-edw0ipqnbInKw/exec';
+
+/* ===== 자유 탐색 7단계 정의 =====
+  1: 모으기 1단계 - 일만 쌓아서 십으로 모으기 (+1만, o-merge만)
+  2: 모으기 2단계 - 십만 쌓아서 백으로 모으기 (+10만, t-merge만)
+  3: 모으기 3단계 - 일+십을 쌓아서 자유롭게 모으기 (+1, +10, o-merge, t-merge)
+  4: 가르기 1단계 - 백을 십으로 가르기 (+100만, h-split만)
+  5: 가르기 2단계 - 십을 일로 가르기 (+10만, t-split만)
+  6: 가르기 3단계 - 백+십을 가르기 (+100, +10, h-split, t-split)
+  7: 통합 단계 - 모든 버튼 사용 가능
+*/
+const EXPLORE_STAGES = {
+  1: {
+    name: '🟧 모으기 1단계',
+    title: '일 모형으로 십 만들기',
+    guide: '<b>+1</b> 버튼만 계속 눌러서 일 모형을 모아 봐요! <b>10개</b>가 모이면 십 모형으로 바꿀 수 있어요',
+    icon: '🟧',
+    addEnabled: { h: false, t: false, o: true },
+    convertOps: ['o-merge'],
+    hint: '💡 일 10개 → 십 1개!',
+    nextLabel: '다음'
+  },
+  2: {
+    name: '🟪 모으기 2단계',
+    title: '십 모형으로 백 만들기',
+    guide: '<b>+10</b> 버튼만 계속 눌러서 십 모형을 모아 봐요! <b>10개</b>가 모이면 백 모형이 돼요',
+    icon: '🟪',
+    addEnabled: { h: false, t: true, o: false },
+    convertOps: ['t-merge'],
+    hint: '💡 십 10개 → 백 1개!',
+    nextLabel: '다음'
+  },
+  3: {
+    name: '✨ 모으기 3단계',
+    title: '일+십 자유롭게 모으기',
+    guide: '<b>+1, +10</b>으로 모형을 쌓고, 모이면 더 큰 모형으로 바꿔 봐요!',
+    icon: '✨',
+    addEnabled: { h: false, t: true, o: true },
+    convertOps: ['o-merge', 't-merge'],
+    hint: '💡 일·십을 자유롭게!',
+    nextLabel: '가르기로'
+  },
+  4: {
+    name: '💯 가르기 1단계',
+    title: '백 모형을 십으로 가르기',
+    guide: '<b>+100</b>으로 백 모형을 만든 뒤, <b>백 → 십 10개</b>로 갈라 봐요!',
+    icon: '💯',
+    addEnabled: { h: true, t: false, o: false },
+    convertOps: ['h-split'],
+    hint: '💡 백 1개 → 십 10개!',
+    nextLabel: '다음'
+  },
+  5: {
+    name: '🟪 가르기 2단계',
+    title: '십 모형을 일로 가르기',
+    guide: '<b>+10</b>으로 십 모형을 만든 뒤, <b>십 → 일 10개</b>로 갈라 봐요!',
+    icon: '🟪',
+    addEnabled: { h: false, t: true, o: false },
+    convertOps: ['t-split'],
+    hint: '💡 십 1개 → 일 10개!',
+    nextLabel: '다음'
+  },
+  6: {
+    name: '✂️ 가르기 3단계',
+    title: '백+십 자유롭게 가르기',
+    guide: '<b>+100, +10</b>으로 모형을 쌓고, 큰 모형을 작은 모형으로 갈라 봐요!',
+    icon: '✂️',
+    addEnabled: { h: true, t: true, o: false },
+    convertOps: ['h-split', 't-split'],
+    hint: '💡 백·십을 자유롭게!',
+    nextLabel: '통합 단계'
+  },
+  7: {
+    name: '🌟 통합 단계',
+    title: '가르기·모으기 한꺼번에',
+    guide: '이제 <b>모든 버튼</b>을 자유롭게 사용해서 가르기·모으기를 해 봐요!',
+    icon: '🌟',
+    addEnabled: { h: true, t: true, o: true },
+    convertOps: ['h-split', 't-merge', 't-split', 'o-merge'],
+    hint: '💡 자유롭게 탐색!',
+    nextLabel: '활동으로 가기'
+  }
+};
+
+const CONVERT_BTNS = {
+  'h-split':  { cls: 'h-side', icon: '💯→🟪', label: '백 → 십 10개' },
+  't-merge':  { cls: 't-side', icon: '🟪→💯', label: '십 10개 → 백' },
+  't-split':  { cls: 't-side', icon: '🟪→🟧', label: '십 → 일 10개' },
+  'o-merge':  { cls: 'o-side', icon: '🟧→🟪', label: '일 10개 → 십' }
+};
 
 const STATE = {
   speakerOn: false,
@@ -1560,6 +1626,7 @@ const STATE = {
   summaryDigits: ['','','',''], summaryPos: 0,
   introStep: 1,
   exploreCounts: { h:0, t:0, o:0 },
+  exploreStage: 1,            // 1~7
   selfEval: { model:0, placeValue:0, readWrite:0 },
   retry: false,
   speakingTargets: [],
@@ -1569,7 +1636,6 @@ const STATE = {
   isSpeakRecording: false,
   mediaRecorder: null, recChunks: [],
   recognition: null,
-  // 활동방법 팝업 상태
   howtoSteps: [], howtoIndex: 0, howtoOnComplete: null
 };
 
@@ -1690,6 +1756,8 @@ function syncSpeakerUI() {
     const el = document.getElementById('speakerIcon'+i);
     if (el) el.innerHTML = `<use href="${useId}"/>`;
   }
+  const expEl = document.getElementById('speakerIconExp');
+  if (expEl) expEl.innerHTML = `<use href="${useId}"/>`;
   document.querySelectorAll('.icon-btn').forEach(b => {
     if (b.querySelector('[id^=speakerIcon]')) {
       b.classList.toggle('muted', !STATE.speakerOn);
@@ -1750,7 +1818,6 @@ function playSound(type) {
   }
 }
 
-/* ===== 행동 가이드 갱신 ===== */
 function setMainGuide(text) {
   document.getElementById('mainGuideText').innerHTML = text;
 }
@@ -1919,6 +1986,7 @@ function introAnswer(choice) {
     showFeedback(true, isBigger
       ? `맞아요! <b>${STATE.intro.libraryNum}</b>은(는)<br><b>${target}</b>보다 커요!`
       : `맞아요! <b>${STATE.intro.libraryNum}</b>은(는)<br><b>${target}</b>보다 작아요!`,
+      null,
       () => {
         if (STATE.introStep < 2) { STATE.introStep++; updateIntroQuestion(); }
         else { startExplore(); }
@@ -1929,26 +1997,114 @@ function introAnswer(choice) {
   }
 }
 
-/* ===== 자유 탐색 ===== */
+/* ===== 자유 탐색 (7단계) ===== */
 function startExplore() {
   STATE.exploreCounts = { h:0, t:0, o:0 };
-  renderExplore();
+  STATE.exploreStage = 1;
+  setupExploreScreen();
   show('screenExplore');
-  // 활동 방법 팝업
+  // 첫 진입 안내
   showHowtoSteps([
-    { icon: '🔬', text: '먼저 <b>수 모형을 자유롭게</b><br>탐색해 봐요!' },
-    { icon: '🟦🟪🟧', text: '<b>+100, +10, +1</b> 버튼으로<br>모형을 쌓아 봐요.' },
-    { icon: '💯→🟪', text: '<b>백 → 십 10개</b>로 바꿔 봐요.<br>모양은 달라도 수는 같아요!' },
-    { icon: '🟪→🟧', text: '<b>십 → 일 10개</b>도 같은 수예요.<br>여러 가지로 만들어 봐요.' },
-    { icon: '✅', text: '다 했으면<br><b>[활동으로 가기]</b>를 눌러요!' }
+    { icon: '🔬', text: '<b>수 모형 탐색</b>을 시작해요!<br><br>총 <b>7단계</b>로 차근차근<br>가르기·모으기를 배워요' },
+    { icon: '1️⃣', text: '먼저 <b>모으기</b>부터!<br>일 모형을 모아<br>십 모형으로 바꿔 봐요' },
+    { icon: '👆', text: '단계마다 <b>필요한 버튼만</b><br>활성화돼요.<br>그 버튼을 눌러 봐요!' }
   ], () => {});
 }
+
+function setupExploreScreen() {
+  const stage = EXPLORE_STAGES[STATE.exploreStage];
+
+  document.getElementById('exploreStageBadge').textContent = stage.name;
+  document.getElementById('exploreGuide').innerHTML = stage.guide;
+  document.getElementById('exploreGuideIcon').textContent = stage.icon;
+  document.getElementById('exploreHint').innerHTML = stage.hint;
+
+  // 진행률
+  const pct = Math.round((STATE.exploreStage / 7) * 100);
+  document.getElementById('exploreProgress').style.width = pct + '%';
+  document.getElementById('exploreProgressLabel').textContent = `${STATE.exploreStage} / 7`;
+
+  // +버튼 활성화/비활성화
+  document.getElementById('expAddH').disabled = !stage.addEnabled.h;
+  document.getElementById('expAddT').disabled = !stage.addEnabled.t;
+  document.getElementById('expAddO').disabled = !stage.addEnabled.o;
+
+  // 변환 버튼들
+  const row = document.getElementById('exploreConvertRow');
+  row.innerHTML = '';
+  const ops = stage.convertOps;
+  row.style.gridTemplateColumns = `repeat(${Math.max(ops.length,1)},1fr)`;
+  ops.forEach(op => {
+    const cfg = CONVERT_BTNS[op];
+    const btn = document.createElement('button');
+    btn.className = `conv-btn ${cfg.cls}`;
+    btn.innerHTML = `<div class="conv-icon">${cfg.icon}</div><div>${cfg.label}</div>`;
+    btn.onclick = () => expConvert(op);
+    row.appendChild(btn);
+  });
+
+  // 다음 버튼 라벨
+  const nextBtn = document.getElementById('exploreNextBtn');
+  nextBtn.innerHTML = `${stage.nextLabel} <svg><use href="#i-arrow"/></svg>`;
+
+  renderExplore();
+}
+
+function exploreNextStep() {
+  if (STATE.exploreStage < 7) {
+    STATE.exploreStage++;
+    // 새 단계 시작 시 모형 초기화 (단계 4 시작 시는 가르기로 넘어가니 더 의미있게 초기화)
+    STATE.exploreCounts = { h:0, t:0, o:0 };
+    setupExploreScreen();
+  } else {
+    // 7단계 완료 → 활동으로
+    show('screenActivities');
+  }
+}
+
+function showExploreHelp() {
+  const stage = EXPLORE_STAGES[STATE.exploreStage];
+  const baseSteps = [
+    { icon: stage.icon, text: `<b>${stage.name}</b><br>${stage.title}` },
+    { icon: '👇', text: stage.guide }
+  ];
+  // 단계별 추가 팁
+  const extra = {
+    1: [{ icon: '🔟', text: '<b>일 모형 10개</b>가 모이면<br>아래 변환 버튼이 보여요!<br>눌러서 십 모형으로 바꿔 봐요' }],
+    2: [{ icon: '🔟', text: '<b>십 모형 10개</b>가 모이면<br>변환 버튼을 눌러<br>백 모형으로 바꿔요!' }],
+    3: [{ icon: '🤔', text: '두 가지 변환을<br>마음대로 사용해 봐요!' }],
+    4: [{ icon: '✂️', text: '큰 모형(백)을<br>작은 모형(십)으로<br>나누는 게 <b>가르기</b>예요' }],
+    5: [{ icon: '✂️', text: '<b>십 → 일 10개</b><br>이렇게 작은 단위로<br>가를 수 있어요' }],
+    6: [{ icon: '🤔', text: '백·십을 자유롭게 가르기!' }],
+    7: [{ icon: '🌟', text: '모든 버튼을 자유롭게!<br>가르기·모으기를<br>한꺼번에 해 봐요' }]
+  };
+  const allSteps = [...baseSteps, ...(extra[STATE.exploreStage]||[]),
+    { icon: '⚠️', text: '전체 수는<br><b>999를 넘지 않게</b>!' }];
+  showHowtoSteps(allSteps, () => {});
+}
+
 function expAdd(type) {
+  const stage = EXPLORE_STAGES[STATE.exploreStage];
+  if (!stage.addEnabled[type]) return;
   const max = type==='h' ? 9 : 19;
   if (STATE.exploreCounts[type] >= max) return;
+  const c = STATE.exploreCounts;
+  const next = { ...c, [type]: c[type]+1 };
+  if (next.h*100 + next.t*10 + next.o > 999) {
+    showSimpleAlert('🛑 999를 넘을 수 없어요!');
+    return;
+  }
   STATE.exploreCounts[type]++;
   speak(type==='h'?'백':type==='t'?'십':'일');
   renderExplore();
+
+  // 자동 변환 제안 (해당 단계에서 가능한 op만)
+  const ops = stage.convertOps;
+  if (ops.includes('o-merge') && STATE.exploreCounts.o >= 10) {
+    askAutoConvert('o-merge', '일 모형 10개가 모였어요!<br><b>십 모형 1개</b>로 바꿀까요?');
+  } else if (ops.includes('t-merge') && STATE.exploreCounts.t >= 10) {
+    askAutoConvert('t-merge', '십 모형 10개가 모였어요!<br><b>백 모형 1개</b>로 바꿀까요?');
+  }
 }
 function expRemove(type) {
   if (STATE.exploreCounts[type] <= 0) return;
@@ -1961,13 +2117,55 @@ function expReset() {
   renderExplore();
 }
 function expConvert(op) {
+  const stage = EXPLORE_STAGES[STATE.exploreStage];
+  if (!stage.convertOps.includes(op)) return;
   const c = STATE.exploreCounts;
-  if (op==='h-split' && c.h>0) { c.h--; c.t += 10; }
-  else if (op==='t-merge' && c.t>=10) { c.t -= 10; c.h++; }
-  else if (op==='t-split' && c.t>0) { c.t--; c.o += 10; }
-  else if (op==='o-merge' && c.o>=10) { c.o -= 10; c.t++; }
+  if (op==='h-split' && c.h>0) { c.h--; c.t += 10; playSound('correct'); }
+  else if (op==='t-merge' && c.t>=10) { c.t -= 10; c.h++; playSound('correct'); }
+  else if (op==='t-split' && c.t>0) { c.t--; c.o += 10; playSound('correct'); }
+  else if (op==='o-merge' && c.o>=10) { c.o -= 10; c.t++; playSound('correct'); }
+  else { return; }
   renderExplore();
 }
+
+/* 자동 변환 제안 */
+function askAutoConvert(op, msg) {
+  if (document.getElementById('autoConvertModal')) return;
+  const bg = document.createElement('div');
+  bg.className = 'modal-bg';
+  bg.id = 'autoConvertModal';
+  bg.innerHTML = `
+    <div class="modal">
+      <div class="emoji">✨</div>
+      <h3 class="correct">10개가 모였어요!</h3>
+      <p>${msg}</p>
+      <div class="modal-btns">
+        <button class="modal-btn again" id="acNo">아니요</button>
+        <button class="modal-btn next" id="acYes">네, 바꿀래요!</button>
+      </div>
+    </div>`;
+  document.body.appendChild(bg);
+  document.getElementById('acNo').onclick = () => bg.remove();
+  document.getElementById('acYes').onclick = () => {
+    bg.remove();
+    expConvert(op);
+  };
+}
+
+function showSimpleAlert(msg) {
+  const bg = document.createElement('div');
+  bg.className = 'modal-bg';
+  bg.innerHTML = `
+    <div class="modal">
+      <div class="emoji">⚠️</div>
+      <p style="font-size:clamp(22px,3vh,32px)">${msg}</p>
+      <div class="modal-btns">
+        <button class="modal-btn next" onclick="this.closest('.modal-bg').remove()">알겠어요</button>
+      </div>
+    </div>`;
+  document.body.appendChild(bg);
+}
+
 function renderExplore() {
   const c = STATE.exploreCounts;
   const grpH = document.getElementById('grpHexp');
@@ -1994,12 +2192,6 @@ function renderExplore() {
     b.onclick = () => expRemove('o');
     grpO.appendChild(b);
   }
-  // 모형이 많을 때 자동 축소
-  const total = c.h + c.t + c.o;
-  const area = document.getElementById('blocksAreaExp');
-  area.classList.remove('dense','very-dense');
-  if (total >= 30) area.classList.add('very-dense');
-  else if (total >= 15) area.classList.add('dense');
 
   document.getElementById('nowTagExp').innerHTML =
     `<span class="label-h">백 ${c.h}</span>` +
@@ -2011,7 +2203,7 @@ function renderExplore() {
   document.getElementById('exploreInfoRead').textContent = numberToKoreanRead(totalNum);
 }
 
-/* ===== 활동방법 팝업 (단계별) ===== */
+/* ===== 활동방법 팝업 ===== */
 function showHowtoSteps(steps, onComplete) {
   STATE.howtoSteps = steps;
   STATE.howtoIndex = 0;
@@ -2019,7 +2211,6 @@ function showHowtoSteps(steps, onComplete) {
   renderHowtoStep();
 }
 function renderHowtoStep() {
-  // 기존 모달 제거
   const old = document.getElementById('howtoModal');
   if (old) old.remove();
 
@@ -2079,7 +2270,6 @@ function startActivity(actNum) {
       { icon: '📕', text: '화면에 <b>도서 대출증의 수</b>가 나와요.<br>그 수만큼 모형을 쌓아요!' },
       { icon: '🟦🟪🟧', text: '<b>+100</b>은 백 모형,<br><b>+10</b>은 십 모형,<br><b>+1</b>은 일 모형이에요.' },
       { icon: '🤚', text: '⚠️ 잘못 놓은 모형은<br><b>모형을 손가락으로 콕!</b><br>누르면 사라져요.' },
-      { icon: '🔄', text: '<b>가르기·모으기</b> 버튼으로<br>백을 십 10개로 바꾸거나<br>십 10개를 백으로 모을 수 있어요.' },
       { icon: '✅', text: '다 쌓으면 오른쪽<br><b>[확인]</b> 버튼을 눌러요!' }
     ],
     2: [
@@ -2168,13 +2358,6 @@ function renderBlocks() {
     if (isBuilding) b.onclick = () => removeBlock('o');
     grpO.appendChild(b);
   }
-  // 모형이 많을 때 자동 축소
-  const total = counts.h + counts.t + counts.o;
-  const area = document.getElementById('blocksArea');
-  area.classList.remove('dense','very-dense');
-  if (total >= 30) area.classList.add('very-dense');
-  else if (total >= 15) area.classList.add('dense');
-
   document.getElementById('nowTag').innerHTML =
     `<span class="label-h">백 ${STATE.buildCounts.h}</span>` +
     `<span class="label-t">십 ${STATE.buildCounts.t}</span>` +
@@ -2184,6 +2367,12 @@ function addBlock(type) {
   if (STATE.phase !== 'building') return;
   const max = type==='h' ? 9 : 19;
   if (STATE.buildCounts[type] >= max) return;
+  const c = STATE.buildCounts;
+  const next = { ...c, [type]: c[type]+1 };
+  if (next.h*100 + next.t*10 + next.o > 999) {
+    showSimpleAlert('🛑 999를 넘을 수 없어요!');
+    return;
+  }
   STATE.buildCounts[type]++;
   speak(type==='h'?'백':type==='t'?'십':'일');
   renderBlocks();
@@ -2195,14 +2384,6 @@ function removeBlock(type) {
   playSound('remove'); renderBlocks();
 }
 function resetBlocks() { STATE.buildCounts = { h:0, t:0, o:0 }; renderBlocks(); }
-function convert(op) {
-  const c = STATE.buildCounts;
-  if (op==='h-split' && c.h>0) { c.h--; c.t += 10; }
-  else if (op==='t-merge' && c.t>=10) { c.t -= 10; c.h++; }
-  else if (op==='t-split' && c.t>0) { c.t--; c.o += 10; }
-  else if (op==='o-merge' && c.o>=10) { c.o -= 10; c.t++; }
-  renderBlocks();
-}
 
 function setActive(field) {
   STATE.activeField = field;
@@ -2211,7 +2392,6 @@ function setActive(field) {
       el.classList.toggle('active', el.dataset.field === field);
     }
   });
-  // digit-input 컨테이너도 활성화
   document.getElementById('digitH').classList.toggle('active', field === 'inputH');
   document.getElementById('digitT').classList.toggle('active', field === 'inputT');
   document.getElementById('digitO').classList.toggle('active', field === 'inputO');
@@ -2240,10 +2420,9 @@ function adjustDigit(type, delta) {
 
 function keypadInput(val) {
   if (STATE.phase !== 'answer') return;
-  if (STATE.activeField === 'inputRead') return; // 읽기는 키보드만
+  if (STATE.activeField === 'inputRead') return;
   const order = ['inputH','inputT','inputO','inputNum'];
   if (['inputH','inputT','inputO'].includes(STATE.activeField)) {
-    // 자릿값 칸은 한 자리 - 덮어쓰기
     STATE.inputs[STATE.activeField] = val;
     const idx = order.indexOf(STATE.activeField);
     if (idx < order.length - 1) setActive(order[idx + 1]);
@@ -2286,7 +2465,6 @@ function toggleAnswerMic() {
     btn.classList.remove('recording');
     return;
   }
-  // 읽기 칸 자동 활성화
   setActive('inputRead');
   const rec = new webkitSpeechRecognition();
   rec.lang = 'ko-KR';
@@ -2317,23 +2495,22 @@ function checkBuild() {
     playSound('correct');
     if (STATE.currentActivity === 1) {
       STATE.act1Correct++;
-      showFeedback(true, '정확하게 쌓았어요! 잘했어요 👏', nextProblem);
+      showFeedback(true, '정확하게 쌓았어요! 잘했어요 👏', null, nextProblem);
     } else if (STATE.currentActivity === 3) {
       STATE.act3Correct++;
-      showFeedback(true, '내 책의 쪽수만큼 잘 쌓았어요!', () => show('screenSummary'));
+      showFeedback(true, '내 책의 쪽수만큼 잘 쌓았어요!', null, () => show('screenSummary'));
     } else {
       STATE.phase = 'answer';
       document.getElementById('buildingControls').classList.add('hidden');
       document.getElementById('answerControls').classList.remove('hidden');
       document.getElementById('nowTag').style.display = 'none';
-      setInputMethod('keypad');
       setActive('inputH');
       syncInputUI();
       renderBlocks();
     }
   } else {
     playSound('incorrect');
-    showFeedback(false, reasons.join('<br>'));
+    showFeedback(false, reasons.join('<br>'), '잘못 놓은 모형이 있다면 <b>모형을 손가락으로 콕!</b> 눌러서 빼고 다시 만들어 봐요');
   }
 }
 function checkAnswer() {
@@ -2349,7 +2526,7 @@ function checkAnswer() {
   if (reasons.length === 0) {
     playSound('correct');
     if (STATE.currentActivity === 2) STATE.act2Correct++;
-    showFeedback(true, '박사님, 완벽해요!<br>자릿값을 정확히 알고 있네요 🎉', nextProblem);
+    showFeedback(true, '박사님, 완벽해요!<br>자릿값을 정확히 알고 있네요 🎉', null, nextProblem);
   } else {
     playSound('incorrect');
     showFeedback(false, reasons.join('<br>'));
@@ -2359,7 +2536,6 @@ function resetAllInputs() {
   STATE.inputs = { inputH:'', inputT:'', inputO:'', inputNum:'', inputRead:'' };
   STATE.buildCounts = { h:0, t:0, o:0 };
   STATE.activeField = 'inputH';
-  // 정답 입력 UI도 깨끗하게
   ['inputH','inputT','inputO'].forEach(f => {
     const el = document.querySelector(`.digit-value[data-field="${f}"]`);
     if (el) el.textContent = '0';
@@ -2418,7 +2594,7 @@ function bookPickConfirm() {
   enterProblem(); show('screenMain');
 }
 
-/* ===== 정리: 빈칸 채우기 ===== */
+/* ===== 정리 ===== */
 function summaryFocus(pos) {
   STATE.summaryPos = pos;
   document.querySelectorAll('.blank-input').forEach((el, i) => {
@@ -2456,7 +2632,7 @@ function checkSummary() {
   const num = parseInt(STATE.summaryDigits[3]);
   if (h*100 + t*10 + o === num) {
     playSound('correct');
-    showFeedback(true, '훌륭해요! 자릿값을<br>정확하게 이해했어요 ⭐', () => goPostSpeaking());
+    showFeedback(true, '훌륭해요! 자릿값을<br>정확하게 이해했어요 ⭐', null, () => goPostSpeaking());
   } else {
     playSound('incorrect');
     showFeedback(false, `100이 ${h}개, 10이 ${t}개, 1이 ${o}개이면<br><b>${h*100+t*10+o}</b>이에요!`);
@@ -2470,8 +2646,13 @@ function goPostSpeaking() {
   show('screenSpeaking');
 }
 
-/* ===== 피드백 모달 ===== */
-function showFeedback(isCorrect, msg, onNext) {
+/* ===== 피드백 모달 (tip 추가) ===== */
+function showFeedback(isCorrect, msg, tipMsg, onNext) {
+  const tipHtml = tipMsg ? `
+    <div class="modal-tip">
+      <span class="tip-emoji">🤚</span>
+      <span>${tipMsg}</span>
+    </div>` : '';
   const bg = document.createElement('div');
   bg.className = 'modal-bg';
   bg.innerHTML = `
@@ -2479,6 +2660,7 @@ function showFeedback(isCorrect, msg, onNext) {
       <div class="emoji">${isCorrect ? '🎉' : '🤔'}</div>
       <h3 class="${isCorrect?'correct':'incorrect'}">${isCorrect?'정답이에요!':'다시 해 봐요!'}</h3>
       <p>${msg}</p>
+      ${tipHtml}
       <div class="modal-btns">
         <button class="modal-btn ${isCorrect?'next':'again'}" id="modalBtn">
           ${isCorrect ? '계속하기 <svg><use href=\"#i-arrow\"/></svg>' : '다시 해 보기'}
@@ -2558,7 +2740,6 @@ function showCertificate() {
   document.getElementById('certName').textContent = `${STATE.student.name} 박사`;
   document.getElementById('certDate').textContent = '발행일: ' + new Date().toLocaleDateString('ko-KR');
 
-  // 학습 결과 채우기
   const e = STATE.selfEval;
   const total = STATE.act1Total + STATE.act2Total + STATE.act3Total;
   const correct = STATE.act1Correct + STATE.act2Correct + STATE.act3Correct;
