@@ -1140,6 +1140,141 @@
     border-radius: 50%; animation: spin 1s linear infinite; margin-right: 14px;
   }
   @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ============ [수정] 자유 탐색 하단 컨트롤 바 (누락분 추가) ============ */
+  .exp-bar {
+    display: flex; align-items: stretch; justify-content: center;
+    gap: clamp(6px,1.2vh,12px); flex-wrap: wrap;
+    background: white; border: 4px solid var(--primary-light);
+    border-radius: 24px; padding: clamp(8px,1.4vh,14px);
+    box-shadow: 0 4px 14px rgba(0,0,0,.06);
+  }
+  .exp-total {
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    background: linear-gradient(135deg,var(--primary-light),#BAE6FD);
+    border: 3px solid var(--primary); border-radius: 16px;
+    padding: clamp(6px,1vh,12px) clamp(12px,2vh,22px);
+    min-width: clamp(112px,14vh,170px);
+  }
+  .exp-total .t-lbl {
+    font-size: clamp(13px,1.7vh,18px); font-weight: 900;
+    color: var(--primary-dark);
+  }
+  .exp-total .t-num {
+    font-size: clamp(34px,4.6vh,56px); font-weight: 900;
+    color: var(--primary-dark); line-height: 1.1;
+  }
+  .exp-total .t-read {
+    font-size: clamp(14px,1.9vh,22px); font-weight: 800;
+    color: var(--text-soft);
+  }
+  .exp-add {
+    border-radius: 16px;
+    padding: clamp(10px,1.8vh,18px) clamp(14px,2.2vh,26px);
+    font-size: clamp(20px,3vh,32px); font-weight: 900;
+    border-bottom: 6px solid; transition: all .1s;
+    display: flex; align-items: center; justify-content: center;
+    min-width: clamp(82px,10vh,120px);
+  }
+  .exp-add:active { transform: translateY(3px); border-bottom-width: 2px; }
+  .exp-add:disabled { opacity: .35; cursor: not-allowed; }
+  .exp-add.h { background: linear-gradient(180deg,#DBEAFE,#BFDBFE);
+               color: var(--hundred-d); border-bottom-color: #60A5FA; }
+  .exp-add.t { background: linear-gradient(180deg,#F3E8FF,#E9D5FF);
+               color: var(--ten-d); border-bottom-color: #C084FC; }
+  .exp-add.o { background: linear-gradient(180deg,#FFEDD5,#FED7AA);
+               color: var(--one-d); border-bottom-color: #FB923C; }
+  .exp-reset {
+    background: #F1F5F9; color: #64748B; border-radius: 16px;
+    padding: 0 clamp(14px,2vh,22px); border-bottom: 5px solid #CBD5E1;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .exp-reset:active { transform: translateY(2px); border-bottom-width: 2px; }
+  .exp-reset svg { width: clamp(24px,3.2vh,34px); height: clamp(24px,3.2vh,34px); }
+  .exp-conv { display: flex; gap: clamp(6px,1.2vh,12px); flex-wrap: wrap; }
+  .exp-next-btn {
+    padding: clamp(10px,1.8vh,18px) clamp(20px,3vh,38px);
+    background: var(--primary); color: white; border-radius: 16px;
+    font-size: clamp(18px,2.6vh,28px); font-weight: 900;
+    border-bottom: 6px solid var(--primary-dark);
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    transition: all .1s;
+  }
+  .exp-next-btn:active { transform: translateY(3px); border-bottom-width: 2px; }
+  .exp-next-btn svg { width: 1.1em; height: 1.1em; }
+  .exp-next-btn.pulse-attention {
+    animation: pulseGlow 1.2s infinite;
+  }
+
+  /* ============ [수정] 변환 애니메이션 (누락분 추가) ============ */
+  .convert-overlay {
+    position: absolute; inset: 0;
+    background: rgba(255,255,255,.96); border-radius: 28px;
+    display: flex; flex-direction: column; align-items: center;
+    justify-content: center; gap: clamp(8px,1.6vh,18px);
+    z-index: 20; animation: fadeIn .2s;
+  }
+  .convert-msg {
+    font-size: clamp(20px,3vh,34px); font-weight: 900;
+    color: var(--text); text-align: center; line-height: 1.4;
+    padding: 0 clamp(12px,2vh,24px);
+  }
+  .convert-msg .hl-merge { color: var(--ten-d); font-weight: 900; }
+  .convert-msg .hl-split { color: var(--hundred-d); font-weight: 900; }
+  .conv-stage {
+    position: relative;
+    width: clamp(260px,40vh,460px);
+    height: clamp(160px,26vh,300px);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .conv-flash {
+    position: absolute; left: 50%; top: 50%;
+    width: 40px; height: 40px;
+    transform: translate(-50%,-50%) scale(0);
+    background: radial-gradient(circle,#FDE68A 0%,rgba(253,224,71,0) 70%);
+    border-radius: 50%; pointer-events: none;
+  }
+  .conv-flash.go { animation: flashGo .5s ease-out; }
+  @keyframes flashGo {
+    0%   { transform: translate(-50%,-50%) scale(0); opacity: 1; }
+    100% { transform: translate(-50%,-50%) scale(9); opacity: 0; }
+  }
+  .cv-piece { position: absolute; left: 50%; top: 50%; }
+  @keyframes gatherIn {
+    from { transform: translate(calc(-50% + var(--fx,0px)),calc(-50% + var(--fy,0px))) scale(1); opacity: 1; }
+    to   { transform: translate(-50%,-50%) scale(.35); opacity: 0; }
+  }
+  @keyframes resultPop {
+    from { transform: translate(-50%,-50%) scale(0); }
+    to   { transform: translate(-50%,-50%) scale(1); }
+  }
+  @keyframes spreadOut {
+    from { transform: translate(-50%,-50%) scale(.2); opacity: .4; }
+    to   { transform: translate(calc(-50% + var(--tx,0px)),calc(-50% + var(--ty,0px))) scale(1); opacity: 1; }
+  }
+  .conv-h {
+    width: clamp(54px,8vh,84px); height: clamp(54px,8vh,84px);
+    background: #0EA5E9; border: 3px solid var(--hundred-d);
+    border-radius: 7px;
+    display: grid; grid-template-columns: repeat(10,1fr); grid-template-rows: repeat(10,1fr);
+    box-shadow: 0 3px 7px rgba(0,0,0,.25);
+  }
+  .conv-h > div { border: 1px solid rgba(255,255,255,.5); }
+  .conv-t {
+    width: clamp(16px,2.4vh,26px); height: clamp(54px,8vh,84px);
+    background: #A855F7; border: 3px solid var(--ten-d);
+    border-radius: 5px;
+    display: grid; grid-template-rows: repeat(10,1fr);
+    box-shadow: 0 3px 7px rgba(0,0,0,.25);
+  }
+  .conv-t > div { border-bottom: 1.5px solid var(--ten-d); }
+  .conv-t > div:last-child { border-bottom: none; }
+  .conv-o {
+    width: clamp(22px,3.4vh,38px); height: clamp(22px,3.4vh,38px);
+    background: #F97316; border: 3px solid var(--one-d);
+    border-radius: 5px; box-shadow: 0 3px 7px rgba(0,0,0,.25);
+  }
 </style>
 </head>
 <body>
@@ -2919,7 +3054,8 @@ function checkBuild() {
       STATE.phase = 'answer';
       document.getElementById('buildingControls').classList.add('hidden');
       document.getElementById('answerControls').classList.remove('hidden');
-      document.getElementById('nowTag').style.display = 'none';
+      // [수정] nowTag 요소가 없을 수 있으므로 null 체크
+      const _nt = document.getElementById('nowTag'); if (_nt) _nt.style.display = 'none';
       // 정답 입력 단계: 키패드 다시 표시
       document.querySelector('#screenMain .main-row').classList.remove('building-only');
       setActive('inputH');
