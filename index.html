@@ -1360,13 +1360,15 @@
           <span class="num" id="exploreInfoNum">0</span>
           <span class="read" id="exploreInfoRead">영</span>
         </div>
-        <div class="exp-btn-group">
-          <button class="add-btn h" id="expAddH" onclick="expAdd('h')">+100</button>
-          <button class="add-btn t" id="expAddT" onclick="expAdd('t')">+10</button>
-          <button class="add-btn o" id="expAddO" onclick="expAdd('o')">+1</button>
-          <button class="reset-btn" onclick="expReset()" aria-label="초기화"><svg><use href="#i-refresh"/></svg></button>
+        <div class="exp-btn-area">
+          <div class="exp-btn-group">
+            <button class="add-btn h" id="expAddH" onclick="expAdd('h')">+100</button>
+            <button class="add-btn t" id="expAddT" onclick="expAdd('t')">+10</button>
+            <button class="add-btn o" id="expAddO" onclick="expAdd('o')">+1</button>
+            <button class="reset-btn" onclick="expReset()" aria-label="초기화"><svg><use href="#i-refresh"/></svg></button>
+          </div>
+          <div class="exp-convert-group" id="exploreConvertRow"></div>
         </div>
-        <div class="exp-convert-group" id="exploreConvertRow"></div>
         <button class="btn-primary exp-next" id="exploreNextBtn" onclick="exploreNextStep()">
           다음 <svg><use href="#i-arrow"/></svg>
         </button>
