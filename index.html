@@ -1331,49 +1331,43 @@
   </div>
   <div class="guide-bar">
     <div class="point-icon" id="exploreGuideIcon">🔬</div>
-    <div class="text" id="exploreGuide">
-      수 모형을 자유롭게 탐색해 봐요!
+    <div class="text" id="exploreGuide">수 모형을 자유롭게 탐색해 봐요!</div>
+  </div>
+
+  <!-- 모형 영역 (화면의 주인공) -->
+  <div class="blocks-area" id="blocksAreaExp">
+    <div class="place-col h">
+      <div class="place-label">백의 자리<span class="sub">100짜리</span></div>
+      <div class="place-blocks h" id="grpHexp"></div>
+      <div class="place-count" id="countHexp"><span class="big">0</span>개</div>
+    </div>
+    <div class="place-col t">
+      <div class="place-label">십의 자리<span class="sub">10짜리</span></div>
+      <div class="place-blocks t" id="grpTexp"></div>
+      <div class="place-count" id="countTexp"><span class="big">0</span>개</div>
+    </div>
+    <div class="place-col o">
+      <div class="place-label">일의 자리<span class="sub">1짜리</span></div>
+      <div class="place-blocks o" id="grpOexp"></div>
+      <div class="place-count" id="countOexp"><span class="big">0</span>개</div>
     </div>
   </div>
-  <div class="main-area no-pad">
-    <div class="explore-layout">
-      <div class="blocks-area" id="blocksAreaExp">
-        <div class="place-col h">
-          <div class="place-label">백의 자리<span class="sub">100짜리</span></div>
-          <div class="place-blocks h" id="grpHexp"></div>
-          <div class="place-count" id="countHexp"><span class="big">0</span>개</div>
-        </div>
-        <div class="place-col t">
-          <div class="place-label">십의 자리<span class="sub">10짜리</span></div>
-          <div class="place-blocks t" id="grpTexp"></div>
-          <div class="place-count" id="countTexp"><span class="big">0</span>개</div>
-        </div>
-        <div class="place-col o">
-          <div class="place-label">일의 자리<span class="sub">1짜리</span></div>
-          <div class="place-blocks o" id="grpOexp"></div>
-          <div class="place-count" id="countOexp"><span class="big">0</span>개</div>
-        </div>
-      </div>
-      <div class="explore-controls">
-        <div class="exp-total-chip">
-          <span class="lbl">지금 만든 수</span>
-          <span class="num" id="exploreInfoNum">0</span>
-          <span class="read" id="exploreInfoRead">영</span>
-        </div>
-        <div class="exp-btn-area">
-          <div class="exp-btn-group">
-            <button class="add-btn h" id="expAddH" onclick="expAdd('h')">+100</button>
-            <button class="add-btn t" id="expAddT" onclick="expAdd('t')">+10</button>
-            <button class="add-btn o" id="expAddO" onclick="expAdd('o')">+1</button>
-            <button class="reset-btn" onclick="expReset()" aria-label="초기화"><svg><use href="#i-refresh"/></svg></button>
-          </div>
-          <div class="exp-convert-group" id="exploreConvertRow"></div>
-        </div>
-        <button class="btn-primary exp-next" id="exploreNextBtn" onclick="exploreNextStep()">
-          다음 <svg><use href="#i-arrow"/></svg>
-        </button>
-      </div>
+
+  <!-- 컨트롤 바 (한 줄, 평평한 구조) -->
+  <div class="exp-bar">
+    <div class="exp-total">
+      <span class="t-lbl">지금 만든 수</span>
+      <span class="t-num" id="exploreInfoNum">0</span>
+      <span class="t-read" id="exploreInfoRead">영</span>
     </div>
+    <button class="exp-add h" id="expAddH" onclick="expAdd('h')">+100</button>
+    <button class="exp-add t" id="expAddT" onclick="expAdd('t')">+10</button>
+    <button class="exp-add o" id="expAddO" onclick="expAdd('o')">+1</button>
+    <button class="exp-reset" onclick="expReset()" aria-label="초기화"><svg><use href="#i-refresh"/></svg></button>
+    <div class="exp-conv" id="exploreConvertRow"></div>
+    <button class="exp-next-btn" id="exploreNextBtn" onclick="exploreNextStep()">
+      다음 <svg><use href="#i-arrow"/></svg>
+    </button>
   </div>
 </div>
 
