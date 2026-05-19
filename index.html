@@ -465,75 +465,111 @@
     gap: clamp(8px,1.4vh,14px);
   }
 
-  /* 수 모형 영역 */
+  /* 수 모형 영역 - 자릿값 3칸 분리 */
   .blocks-area {
     background: linear-gradient(180deg,#F0FDF4 0%,#ECFCCB 100%);
     border: 5px solid var(--green); border-radius: 32px;
-    padding: clamp(16px,2.4vh,32px);
-    display: flex; flex-wrap: wrap; align-content: center; align-items: flex-end;
-    justify-content: center; gap: clamp(16px,2.4vh,40px);
+    padding: clamp(12px,1.8vh,22px);
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: clamp(8px,1.4vh,16px);
     position: relative; overflow: hidden; min-height: 0;
     box-shadow: inset 0 4px 14px rgba(0,0,0,.06);
   }
-  /* 모형 자동 축소 - 4단계 (꽉 찼을 때만 작아짐) */
-  .blocks-area.s1 { gap: clamp(13px,2vh,32px); padding: clamp(13px,2vh,26px); }
-  .blocks-area.s1 .h-block {
-    width: clamp(80px,12vh,170px); height: clamp(80px,12vh,170px);
+  /* 각 자릿값 칸 */
+  .place-col {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    gap: clamp(4px,.8vh,8px);
+    background: white;
+    border-radius: 20px;
+    border: 4px solid;
+    overflow: hidden;
+    min-height: 0;
   }
-  .blocks-area.s1 .t-block {
-    width: clamp(30px,4vh,50px); height: clamp(80px,12vh,170px);
+  .place-col.h { border-color: var(--hundred); background: #FFFFFF; }
+  .place-col.t { border-color: var(--ten); background: #FFFFFF; }
+  .place-col.o { border-color: var(--one); background: #FFFFFF; }
+  /* 자리 이름 라벨 */
+  .place-label {
+    text-align: center; font-weight: 900;
+    padding: clamp(7px,1.2vh,12px) 4px;
+    font-size: clamp(18px,2.7vh,30px);
+    color: white;
+    line-height: 1.15;
   }
-  .blocks-area.s1 .o-block {
-    width: clamp(33px,4.1vh,54px); height: clamp(33px,4.1vh,54px);
+  .place-col.h .place-label { background: var(--hundred-d); }
+  .place-col.t .place-label { background: var(--ten-d); }
+  .place-col.o .place-label { background: var(--one-d); }
+  .place-label .sub {
+    display: block; font-size: .62em; font-weight: 800;
+    opacity: .92; margin-top: 2px;
   }
-  .blocks-area.s2 { gap: clamp(11px,1.7vh,26px); padding: clamp(11px,1.7vh,20px); }
-  .blocks-area.s2 .h-block {
-    width: clamp(66px,9.8vh,140px); height: clamp(66px,9.8vh,140px);
+  /* 모형 담기는 칸 */
+  .place-blocks {
+    display: flex; flex-wrap: wrap;
+    align-content: flex-end; justify-content: center;
+    align-items: flex-end;
+    gap: clamp(4px,.8vh,9px);
+    padding: clamp(6px,1vh,12px);
+    overflow: hidden; min-height: 0;
   }
-  .blocks-area.s2 .t-block {
-    width: clamp(25px,3.3vh,42px); height: clamp(66px,9.8vh,140px);
+  .place-blocks.h { gap: clamp(7px,1.2vh,13px); }
+  /* 자리별 개수 표시 */
+  .place-count {
+    text-align: center; font-weight: 900;
+    padding: clamp(6px,1vh,11px) 4px;
+    font-size: clamp(19px,2.8vh,32px);
+    border-top: 3px dashed;
   }
-  .blocks-area.s2 .o-block {
-    width: clamp(27px,3.4vh,44px); height: clamp(27px,3.4vh,44px);
+  .place-col.h .place-count { color: var(--hundred-d); border-color: #BAE6FD; }
+  .place-col.t .place-count { color: var(--ten-d); border-color: #E9D5FF; }
+  .place-col.o .place-count { color: var(--one-d); border-color: #FED7AA; }
+  .place-count .big { font-size: 1.35em; }
+
+  /* 10개 모인 자릿값 칸 - 금색으로 통째 강조 */
+  .place-col.full-ten {
+    border-color: #F59E0B !important;
+    background: #FFFBEB !important;
+    box-shadow: 0 0 0 4px #FBBF24, 0 6px 18px rgba(245,158,11,.4);
+    animation: colGlow 1.1s ease-in-out infinite;
   }
-  .blocks-area.s3 { gap: clamp(8px,1.3vh,18px); padding: clamp(9px,1.4vh,16px); }
-  .blocks-area.s3 .h-block {
-    width: clamp(52px,7.7vh,108px); height: clamp(52px,7.7vh,108px);
+  @keyframes colGlow {
+    0%,100% { box-shadow: 0 0 0 4px #FBBF24, 0 6px 18px rgba(245,158,11,.4); }
+    50%     { box-shadow: 0 0 0 8px #FCD34D, 0 8px 26px rgba(245,158,11,.65); }
   }
-  .blocks-area.s3 .t-block {
-    width: clamp(19px,2.5vh,32px); height: clamp(52px,7.7vh,108px);
+  .place-col.full-ten .place-label {
+    background: #D97706 !important;
   }
-  .blocks-area.s3 .o-block {
-    width: clamp(21px,2.6vh,34px); height: clamp(21px,2.6vh,34px);
+  .place-col.full-ten .place-count {
+    color: #B45309 !important;
+    border-color: #FDE68A !important;
   }
-  .blocks-area.s4 { gap: clamp(5px,.8vh,12px); padding: clamp(6px,1vh,12px); }
-  .blocks-area.s4 .h-block {
-    width: clamp(38px,5.6vh,80px); height: clamp(38px,5.6vh,80px);
+
+  /* 학습 메인 - 한 자리에 10개 이상 = 주의 (빨강) */
+  .place-col.over-ten {
+    border-color: #DC2626 !important;
+    background: #FEF2F2 !important;
+    box-shadow: 0 0 0 4px #FCA5A5, 0 6px 18px rgba(220,38,38,.35);
   }
-  .blocks-area.s4 .t-block {
-    width: clamp(14px,1.9vh,24px); height: clamp(38px,5.6vh,80px);
+  .place-col.over-ten .place-label {
+    background: #B91C1C !important;
   }
-  .blocks-area.s4 .o-block {
-    width: clamp(15px,1.9vh,24px); height: clamp(15px,1.9vh,24px);
+  .place-col.over-ten .place-count {
+    color: #B91C1C !important;
+    border-color: #FECACA !important;
   }
-  .blocks-area .group {
-    display: flex; flex-wrap: wrap; align-content: flex-end; justify-content: center;
-    gap: clamp(4px,.8vh,10px);
-    max-height: 100%;
+  .ready-warn {
+    border-color: #DC2626 !important;
+    border-width: 5px !important;
+    box-shadow: 0 0 0 3px #FCA5A5, 0 3px 10px rgba(220,38,38,.5) !important;
+    z-index: 3;
   }
-  .blocks-area .group.h { gap: clamp(8px,1.4vh,14px); }
-  .blocks-area.s1 .group.h { gap: clamp(7px,1.2vh,12px); }
-  .blocks-area.s2 .group.h { gap: clamp(6px,1vh,10px); }
-  .blocks-area.s3 .group.h { gap: clamp(4px,.7vh,8px); }
-  .blocks-area.s4 .group.h { gap: clamp(3px,.5vh,6px); }
-  .blocks-area .group.t { gap: clamp(3px,.6vh,6px); }
-  .blocks-area.s2 .group.t { gap: clamp(2px,.5vh,5px); }
-  .blocks-area.s3 .group.t { gap: clamp(2px,.4vh,4px); }
-  .blocks-area.s4 .group.t { gap: 2px; }
-  .blocks-area .group.o { gap: clamp(4px,.6vh,8px); }
-  .blocks-area.s2 .group.o { gap: clamp(3px,.5vh,6px); }
-  .blocks-area.s3 .group.o { gap: clamp(2px,.4vh,5px); }
-  .blocks-area.s4 .group.o { gap: 2px; }
+  /* 자동 축소 단계별 모형 크기 - place-blocks 안에서 적용 */
+  .blocks-area.s1 { gap: clamp(7px,1.2vh,14px); }
+  .blocks-area.s2 { gap: clamp(6px,1vh,12px); }
+  .blocks-area.s3 { gap: clamp(5px,.8vh,10px); }
+  .blocks-area.s4 { gap: clamp(4px,.7vh,8px); }
   .now-tag {
     position: absolute; top: clamp(10px,1.4vh,16px); left: clamp(12px,1.6vh,20px);
     background: white; color: var(--text);
@@ -549,69 +585,81 @@
   .now-tag .label-t { color: var(--ten-d); }
   .now-tag .label-o { color: var(--one-d); }
 
-  /* 수 모형 (기본 크기 - 크게, 단색) */
+  /* 수 모형 (단색, 또렷하게) */
   .h-block {
-    width: clamp(92px,14vh,200px); height: clamp(92px,14vh,200px);
+    width: clamp(54px,9vh,128px); height: clamp(54px,9vh,128px);
     background: #0EA5E9;
-    border: 5px solid var(--hundred-d); border-radius: 12px;
+    border: 4px solid var(--hundred-d); border-radius: 10px;
     display: grid; grid-template-columns: repeat(10,1fr); grid-template-rows: repeat(10,1fr);
-    box-shadow: 0 6px 16px rgba(2,132,199,.4),
-                inset 0 -4px 0 rgba(0,0,0,.18);
+    box-shadow: 0 3px 8px rgba(0,0,0,.25);
     flex-shrink: 0;
   }
-  .h-block > div { border: 1px solid rgba(255,255,255,.55); }
+  .h-block > div { border: 1px solid rgba(255,255,255,.6); }
   .t-block {
-    width: clamp(34px,4.6vh,58px); height: clamp(92px,14vh,200px);
+    width: clamp(22px,3vh,40px); height: clamp(54px,9vh,128px);
     background: #A855F7;
-    border: 5px solid var(--ten-d); border-radius: 7px;
+    border: 4px solid var(--ten-d); border-radius: 6px;
     display: grid; grid-template-rows: repeat(10,1fr);
-    box-shadow: 0 5px 14px rgba(126,34,206,.4),
-                inset 0 -4px 0 rgba(0,0,0,.18);
+    box-shadow: 0 3px 8px rgba(0,0,0,.25);
     flex-shrink: 0;
   }
   .t-block > div { border-bottom: 2px solid var(--ten-d); }
   .t-block > div:last-child { border-bottom: none; }
-  .blocks-area.s3 .t-block > div,
-  .blocks-area.s4 .t-block > div { border-bottom-width: 1px; }
   .o-block {
-    width: clamp(38px,4.8vh,64px); height: clamp(38px,4.8vh,64px);
+    width: clamp(26px,3.6vh,46px); height: clamp(26px,3.6vh,46px);
     background: #F97316;
-    border: 5px solid var(--one-d); border-radius: 7px;
-    box-shadow: 0 5px 14px rgba(194,65,12,.4),
-                inset 0 -4px 0 rgba(0,0,0,.18);
+    border: 4px solid var(--one-d); border-radius: 6px;
+    box-shadow: 0 3px 8px rgba(0,0,0,.25);
     flex-shrink: 0;
   }
+  /* 축소 단계별 모형 크기 */
+  .blocks-area.s1 .h-block { width: clamp(46px,7.6vh,104px); height: clamp(46px,7.6vh,104px); }
+  .blocks-area.s1 .t-block { width: clamp(19px,2.6vh,34px); height: clamp(46px,7.6vh,104px); }
+  .blocks-area.s1 .o-block { width: clamp(22px,3vh,38px);   height: clamp(22px,3vh,38px); }
+  .blocks-area.s2 .h-block { width: clamp(38px,6.2vh,84px); height: clamp(38px,6.2vh,84px); }
+  .blocks-area.s2 .t-block { width: clamp(16px,2.2vh,28px); height: clamp(38px,6.2vh,84px); }
+  .blocks-area.s2 .o-block { width: clamp(19px,2.5vh,32px); height: clamp(19px,2.5vh,32px); }
+  .blocks-area.s3 .h-block { width: clamp(30px,5vh,66px);   height: clamp(30px,5vh,66px); }
+  .blocks-area.s3 .t-block { width: clamp(13px,1.8vh,22px); height: clamp(30px,5vh,66px); }
+  .blocks-area.s3 .o-block { width: clamp(16px,2vh,26px);   height: clamp(16px,2vh,26px); }
+  .blocks-area.s4 .h-block { width: clamp(24px,3.9vh,52px); height: clamp(24px,3.9vh,52px); }
+  .blocks-area.s4 .t-block { width: clamp(10px,1.4vh,17px); height: clamp(24px,3.9vh,52px); }
+  .blocks-area.s4 .o-block { width: clamp(13px,1.6vh,21px); height: clamp(13px,1.6vh,21px); }
+  .blocks-area.s3 .t-block > div,
+  .blocks-area.s4 .t-block > div { border-bottom-width: 1px; }
   .interactive { cursor: pointer; transition: filter .12s, transform .12s; }
   .interactive:hover { filter: brightness(1.1); transform: scale(1.08); }
   .pop-in { animation: popIn .25s ease-out; }
   @keyframes popIn { from { transform: scale(0); } to { transform: scale(1); } }
 
-  /* 10개 모이면 빨간 테두리로 강조 */
+  /* 10개 모이면 강조 - 자릿값 색은 유지하되 노란빛으로 눈에 띄게 */
   .ready-merge {
-    border-color: #DC2626 !important;
-    border-width: 6px !important;
-    animation: readyPulse 1s ease-in-out infinite;
+    border-color: #F59E0B !important;
+    border-width: 5px !important;
+    box-shadow: 0 0 0 3px #FCD34D, 0 3px 10px rgba(245,158,11,.5) !important;
+    filter: brightness(1.12) saturate(1.15);
     z-index: 3;
   }
-  @keyframes readyPulse {
-    0%,100% { box-shadow: 0 0 0 0 rgba(220,38,38,.5); }
-    50% { box-shadow: 0 0 0 8px rgba(220,38,38,0); }
-  }
   .merge-banner {
-    position: absolute; top: 50%; left: 50%;
-    transform: translate(-50%,-50%);
-    background: #DC2626; color: white;
-    padding: clamp(10px,1.6vh,18px) clamp(20px,3vh,36px);
+    position: absolute; top: clamp(8px,1.2vh,14px); left: 50%;
+    transform: translateX(-50%);
+    background: #D97706; color: white;
+    padding: clamp(8px,1.3vh,15px) clamp(16px,2.6vh,32px);
     border-radius: 999px;
-    font-size: clamp(18px,2.6vh,30px); font-weight: 900;
-    box-shadow: 0 6px 20px rgba(220,38,38,.5);
-    z-index: 8; white-space: nowrap;
+    font-size: clamp(16px,2.3vh,27px); font-weight: 900;
+    box-shadow: 0 4px 16px rgba(217,119,6,.55);
+    z-index: 9; white-space: nowrap;
     animation: bannerPop .3s ease-out;
     pointer-events: none;
   }
   @keyframes bannerPop {
-    from { transform: translate(-50%,-50%) scale(0); }
-    to { transform: translate(-50%,-50%) scale(1); }
+    from { transform: translateX(-50%) scale(0); }
+    to { transform: translateX(-50%) scale(1); }
+  }
+  /* 학습 메인 배너 - 주의 톤 (빨강) */
+  .merge-banner.warn {
+    background: #DC2626;
+    box-shadow: 0 4px 16px rgba(220,38,38,.55);
   }
 
   /* 컨트롤 패널 */
@@ -1326,15 +1374,21 @@
     <div class="main-row">
       <div class="main-col-left">
         <div class="blocks-area" id="blocksAreaExp">
-          <div class="now-tag" id="nowTagExp">
-            <span class="label-h">백 0</span>
-            <span class="label-t">십 0</span>
-            <span class="label-o">일 0</span>
+          <div class="place-col h">
+            <div class="place-label">백의 자리<span class="sub">100짜리</span></div>
+            <div class="place-blocks h" id="grpHexp"></div>
+            <div class="place-count" id="countHexp"><span class="big">0</span>개</div>
           </div>
-          <div class="explore-total" id="exploreTotal">0</div>
-          <div class="group h" id="grpHexp"></div>
-          <div class="group t" id="grpTexp"></div>
-          <div class="group o" id="grpOexp"></div>
+          <div class="place-col t">
+            <div class="place-label">십의 자리<span class="sub">10짜리</span></div>
+            <div class="place-blocks t" id="grpTexp"></div>
+            <div class="place-count" id="countTexp"><span class="big">0</span>개</div>
+          </div>
+          <div class="place-col o">
+            <div class="place-label">일의 자리<span class="sub">1짜리</span></div>
+            <div class="place-blocks o" id="grpOexp"></div>
+            <div class="place-count" id="countOexp"><span class="big">0</span>개</div>
+          </div>
         </div>
         <div class="control-panel">
           <div class="add-row">
@@ -1386,14 +1440,21 @@
     <div class="main-row">
       <div class="main-col-left">
         <div class="blocks-area" id="blocksArea">
-          <div id="nowTag" class="now-tag" style="display:none">
-            <span class="label-h">백 0</span>
-            <span class="label-t">십 0</span>
-            <span class="label-o">일 0</span>
+          <div class="place-col h">
+            <div class="place-label">백의 자리<span class="sub">100짜리</span></div>
+            <div class="place-blocks h" id="grpH"></div>
+            <div class="place-count" id="countH"><span class="big">0</span>개</div>
           </div>
-          <div class="group h" id="grpH"></div>
-          <div class="group t" id="grpT"></div>
-          <div class="group o" id="grpO"></div>
+          <div class="place-col t">
+            <div class="place-label">십의 자리<span class="sub">10짜리</span></div>
+            <div class="place-blocks t" id="grpT"></div>
+            <div class="place-count" id="countT"><span class="big">0</span>개</div>
+          </div>
+          <div class="place-col o">
+            <div class="place-label">일의 자리<span class="sub">1짜리</span></div>
+            <div class="place-blocks o" id="grpO"></div>
+            <div class="place-count" id="countO"><span class="big">0</span>개</div>
+          </div>
         </div>
         <div class="control-panel" id="controlPanel">
           <div id="buildingControls">
@@ -2268,6 +2329,8 @@ function showExploreHelp() {
 }
 
 function expAdd(type) {
+  // 변환 애니메이션 진행 중이면 무시
+  if (document.querySelector('#blocksAreaExp .convert-overlay')) return;
   const stage = EXPLORE_STAGES[STATE.exploreStage];
   if (!stage.addEnabled[type]) return;
   const max = type==='h' ? 9 : 19;
@@ -2291,12 +2354,14 @@ function expAdd(type) {
   }
 }
 function expRemove(type) {
+  if (document.querySelector('#blocksAreaExp .convert-overlay')) return;
   if (STATE.exploreCounts[type] <= 0) return;
   STATE.exploreCounts[type]--;
   playSound('remove');
   renderExplore();
 }
 function expReset() {
+  if (document.querySelector('#blocksAreaExp .convert-overlay')) return;
   STATE.exploreCounts = { h:0, t:0, o:0 };
   renderExplore();
 }
@@ -2304,12 +2369,87 @@ function expConvert(op) {
   const stage = EXPLORE_STAGES[STATE.exploreStage];
   if (!stage.convertOps.includes(op)) return;
   const c = STATE.exploreCounts;
-  if (op==='h-split' && c.h>0) { c.h--; c.t += 10; playSound('correct'); }
-  else if (op==='t-merge' && c.t>=10) { c.t -= 10; c.h++; playSound('correct'); }
-  else if (op==='t-split' && c.t>0) { c.t--; c.o += 10; playSound('correct'); }
-  else if (op==='o-merge' && c.o>=10) { c.o -= 10; c.t++; playSound('correct'); }
-  else { return; }
-  renderExplore();
+
+  // 변환 가능 여부 검사
+  if (op==='h-split' && c.h<=0) return;
+  if (op==='t-merge' && c.t<10) return;
+  if (op==='t-split' && c.t<=0) return;
+  if (op==='o-merge' && c.o<10) return;
+
+  // 애니메이션 후 실제 변환 적용
+  playConvertAnimation('blocksAreaExp', op, () => {
+    if (op==='h-split')      { c.h--; c.t += 10; }
+    else if (op==='t-merge') { c.t -= 10; c.h++; }
+    else if (op==='t-split') { c.t--; c.o += 10; }
+    else if (op==='o-merge') { c.o -= 10; c.t++; }
+    playSound('correct');
+    renderExplore();
+  });
+}
+
+/* ===== 변환 애니메이션 (가르기·모으기 등가 시각화) ===== */
+function playConvertAnimation(areaId, op, onDone) {
+  const area = document.getElementById(areaId);
+  if (!area) { onDone(); return; }
+  // 이미 진행 중이면 무시
+  if (area.querySelector('.convert-overlay')) return;
+
+  // op별 from/to 정의
+  let fromHtml = '', toHtml = '', msg = '';
+  if (op === 'o-merge') {
+    // 일 10개 → 십 1개
+    for (let i=0;i<10;i++) fromHtml += convMini('o');
+    toHtml = convMini('t');
+    msg = '🟧 <b>일 모형 10개</b>가 모이면<br>🟪 <b>십 모형 1개</b>가 돼요!';
+  } else if (op === 't-merge') {
+    // 십 10개 → 백 1개
+    for (let i=0;i<10;i++) fromHtml += convMini('t');
+    toHtml = convMini('h');
+    msg = '🟪 <b>십 모형 10개</b>가 모이면<br>🟦 <b>백 모형 1개</b>가 돼요!';
+  } else if (op === 'h-split') {
+    // 백 1개 → 십 10개
+    fromHtml = convMini('h');
+    for (let i=0;i<10;i++) toHtml += convMini('t');
+    msg = '🟦 <b>백 모형 1개</b>를 가르면<br>🟪 <b>십 모형 10개</b>가 돼요!';
+  } else if (op === 't-split') {
+    // 십 1개 → 일 10개
+    fromHtml = convMini('t');
+    for (let i=0;i<10;i++) toHtml += convMini('o');
+    msg = '🟪 <b>십 모형 1개</b>를 가르면<br>🟧 <b>일 모형 10개</b>가 돼요!';
+  } else { onDone(); return; }
+
+  const overlay = document.createElement('div');
+  overlay.className = 'convert-overlay';
+  overlay.innerHTML =
+    `<div class="convert-msg">${msg}</div>` +
+    `<div class="convert-stage">` +
+      `<div class="convert-side from-shrink">${fromHtml}</div>` +
+      `<div class="convert-equals pop">=</div>` +
+      `<div class="convert-side to-grow">${toHtml}</div>` +
+    `</div>`;
+  area.appendChild(overlay);
+  speak(msg.replace(/<[^>]*>/g, ''));
+
+  // 애니메이션 끝나면 오버레이 제거 + 실제 변환
+  setTimeout(() => {
+    if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
+    onDone();
+  }, 1500);
+}
+
+/* 변환 미리보기용 작은 모형 HTML */
+function convMini(type) {
+  if (type === 'h') {
+    let inner = '';
+    for (let j=0;j<100;j++) inner += '<div></div>';
+    return `<div class="conv-h">${inner}</div>`;
+  }
+  if (type === 't') {
+    let inner = '';
+    for (let j=0;j<10;j++) inner += '<div></div>';
+    return `<div class="conv-t">${inner}</div>`;
+  }
+  return `<div class="conv-o"></div>`;
 }
 
 /* 자동 변환 제안 */
@@ -2382,6 +2522,17 @@ function renderExplore() {
     grpO.appendChild(b);
   }
 
+  // 자리별 개수 표시
+  document.getElementById('countHexp').innerHTML = `<span class="big">${c.h}</span>개`;
+  document.getElementById('countTexp').innerHTML = `<span class="big">${c.t}</span>개`;
+  document.getElementById('countOexp').innerHTML = `<span class="big">${c.o}</span>개`;
+
+  // 10개 모인 자릿값 칸 금색 강조
+  const colT = grpT.closest('.place-col');
+  const colO = grpO.closest('.place-col');
+  if (colT) colT.classList.toggle('full-ten', tReady);
+  if (colO) colO.classList.toggle('full-ten', oReady);
+
   // 10개 모임 배너 표시
   const area = document.getElementById('blocksAreaExp');
   const oldBanner = document.getElementById('mergeBannerExp');
@@ -2400,7 +2551,7 @@ function renderExplore() {
     area.appendChild(banner);
   }
 
-  // 모형 개수에 따라 자동 축소 (4단계) - 정말 꽉 찰 때만 작아지게
+  // 모형 개수에 따라 자동 축소 (4단계)
   const visualWeight = c.h * 5 + c.t * 1.0 + c.o * 0.36;
   area.classList.remove('s1','s2','s3','s4');
   if (visualWeight >= 70) area.classList.add('s4');
@@ -2408,12 +2559,7 @@ function renderExplore() {
   else if (visualWeight >= 33) area.classList.add('s2');
   else if (visualWeight >= 20) area.classList.add('s1');
 
-  document.getElementById('nowTagExp').innerHTML =
-    `<span class="label-h">백 ${c.h}</span>` +
-    `<span class="label-t">십 ${c.t}</span>` +
-    `<span class="label-o">일 ${c.o}</span>`;
   const totalNum = c.h*100 + c.t*10 + c.o;
-  document.getElementById('exploreTotal').textContent = totalNum;
   document.getElementById('exploreInfoNum').textContent = totalNum;
   document.getElementById('exploreInfoRead').textContent = numberToKoreanRead(totalNum);
 }
@@ -2532,7 +2678,6 @@ function enterProblem() {
     `${STATE.qIndex + 1} / ${STATE.problems.length}`;
   document.getElementById('buildingControls').classList.remove('hidden');
   document.getElementById('answerControls').classList.add('hidden');
-  document.getElementById('nowTag').style.display = 'flex';
   // 모형 쌓기 단계: 키패드 숨김
   document.querySelector('#screenMain .main-row').classList.add('building-only');
   renderBlocks();
@@ -2569,48 +2714,54 @@ function renderBlocks() {
   }
   for (let i=0; i<counts.t; i++) {
     const b = document.createElement('div');
-    b.className = 't-block pop-in' + (isBuilding ? ' interactive' : '') + (tReady ? ' ready-merge' : '');
+    b.className = 't-block pop-in' + (isBuilding ? ' interactive' : '') + (tReady ? ' ready-warn' : '');
     for (let j=0; j<10; j++) b.appendChild(document.createElement('div'));
     if (isBuilding) b.onclick = () => removeBlock('t');
     grpT.appendChild(b);
   }
   for (let i=0; i<counts.o; i++) {
     const b = document.createElement('div');
-    b.className = 'o-block pop-in' + (isBuilding ? ' interactive' : '') + (oReady ? ' ready-merge' : '');
+    b.className = 'o-block pop-in' + (isBuilding ? ' interactive' : '') + (oReady ? ' ready-warn' : '');
     if (isBuilding) b.onclick = () => removeBlock('o');
     grpO.appendChild(b);
   }
 
-  // 10개 모임 배너
+  // 자리별 개수 표시
+  document.getElementById('countH').innerHTML = `<span class="big">${counts.h}</span>개`;
+  document.getElementById('countT').innerHTML = `<span class="big">${counts.t}</span>개`;
+  document.getElementById('countO').innerHTML = `<span class="big">${counts.o}</span>개`;
+
+  // 한 자리에 10개 이상 = 주의 (빨강 강조)
+  const colT = grpT.closest('.place-col');
+  const colO = grpO.closest('.place-col');
+  if (colT) colT.classList.toggle('over-ten', tReady);
+  if (colO) colO.classList.toggle('over-ten', oReady);
+
+  // 10개 모임 배너 (학습 메인 = 주의 톤)
   const area = document.getElementById('blocksArea');
   const oldBanner = document.getElementById('mergeBanner');
   if (oldBanner) oldBanner.remove();
   if (oReady) {
     const banner = document.createElement('div');
-    banner.className = 'merge-banner';
+    banner.className = 'merge-banner warn';
     banner.id = 'mergeBanner';
-    banner.textContent = '🟧 일이 10개! 너무 많아요';
+    banner.textContent = '🟧 일이 10개! 다시 살펴봐요';
     area.appendChild(banner);
   } else if (tReady) {
     const banner = document.createElement('div');
-    banner.className = 'merge-banner';
+    banner.className = 'merge-banner warn';
     banner.id = 'mergeBanner';
-    banner.textContent = '🟪 십이 10개! 너무 많아요';
+    banner.textContent = '🟪 십이 10개! 다시 살펴봐요';
     area.appendChild(banner);
   }
 
-  // 모형 개수에 따라 자동 축소 (4단계) - 정말 꽉 찰 때만 작아지게
+  // 모형 개수에 따라 자동 축소 (4단계)
   const visualWeight = counts.h * 5 + counts.t * 1.0 + counts.o * 0.36;
   area.classList.remove('s1','s2','s3','s4');
   if (visualWeight >= 70) area.classList.add('s4');
   else if (visualWeight >= 50) area.classList.add('s3');
   else if (visualWeight >= 33) area.classList.add('s2');
   else if (visualWeight >= 20) area.classList.add('s1');
-
-  document.getElementById('nowTag').innerHTML =
-    `<span class="label-h">백 ${STATE.buildCounts.h}</span>` +
-    `<span class="label-t">십 ${STATE.buildCounts.t}</span>` +
-    `<span class="label-o">일 ${STATE.buildCounts.o}</span>`;
 }
 function addBlock(type) {
   if (STATE.phase !== 'building') return;
