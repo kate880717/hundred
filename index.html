@@ -1416,6 +1416,56 @@
   .size-dot.done {
     background: var(--green);
   }
+
+  /* [수정] 크기 안내 화면 - 라벨 겹침 방지 (바닥 정렬 + 칸 최소 너비) */
+  .size-stage { align-items: flex-end; }
+  .si-wrap { min-width: clamp(86px,12vh,128px); }
+
+  /* [신규] 사전·사후 녹음 - 키보드 입력 + 건너뛰기 */
+  .speak-output-area {
+    display: flex; flex-direction: column;
+    gap: clamp(8px,1.4vh,14px);
+    width: min(95%, 1100px);
+  }
+  .speak-alt-input {
+    display: flex; flex-direction: column;
+    gap: clamp(6px,1vh,10px);
+    background: #FFFBEB;
+    border: 3px dashed var(--yellow);
+    border-radius: 18px;
+    padding: clamp(10px,1.6vh,18px) clamp(14px,2.2vh,24px);
+  }
+  .speak-alt-input .alt-label {
+    font-size: clamp(14px,2vh,20px);
+    font-weight: 800; color: #78350F;
+    text-align: center;
+  }
+  .speak-alt-input .alt-label b { color: var(--orange-d); }
+  .speak-alt-input textarea {
+    border: 3px solid var(--orange);
+    border-radius: 14px;
+    padding: clamp(8px,1.4vh,14px) clamp(12px,1.8vh,18px);
+    font-family: inherit;
+    font-size: clamp(18px,2.4vh,26px);
+    font-weight: 700;
+    background: white; color: var(--one-d);
+    outline: none;
+    min-height: clamp(50px,7vh,80px);
+    resize: none; width: 100%;
+  }
+  .speak-alt-input textarea::placeholder {
+    color: #FDBA74; font-weight: 500;
+  }
+  .btn-skip {
+    padding: clamp(12px,2vh,22px) clamp(22px,3.2vh,42px);
+    background: #F1F5F9; color: var(--text-soft);
+    border-radius: 999px;
+    font-size: clamp(17px,2.2vh,24px); font-weight: 900;
+    box-shadow: 0 5px 0 #CBD5E1;
+    display: inline-flex; align-items: center; gap: 8px;
+    transition: all .1s;
+  }
+  .btn-skip:active { transform: translateY(3px); box-shadow: 0 2px 0 #CBD5E1; }
 </style>
 </head>
 <body>
@@ -1501,9 +1551,16 @@
       </button>
       <div class="mic-status idle" id="micStatus">⏸️ 대기 중</div>
     </div>
-    <div class="transcript-box empty" id="speakTranscript" style="grid-row:3">읽은 내용이 여기에 보여요</div>
+    <div class="speak-output-area" style="grid-row:3">
+      <div class="transcript-box empty" id="speakTranscript">읽은 내용이 여기에 보여요</div>
+      <div class="speak-alt-input">
+        <div class="alt-label">⌨️ 녹음이 어려우면 <b>여기에 직접 써도</b> 좋아요</div>
+        <textarea id="speakTypedText" placeholder="예: 백이십삼, 사백오십육, 칠백팔십구" oninput="onSpeakTypedInput()"></textarea>
+      </div>
+    </div>
   </div>
   <div class="action-bar">
+    <button class="btn-skip" onclick="skipSpeaking()">⏭️ 건너뛰기</button>
     <button class="btn-primary" id="speakNextBtn" onclick="finishSpeaking()" disabled>
       다음으로 <svg><use href="#i-arrow"/></svg>
     </button>
@@ -2435,7 +2492,7 @@ function setupSpeakingScreen(phase) {
   STATE.recPhase = phase;
   document.getElementById('speakStageBadge').textContent =
     phase === 'pre' ? '🎤 사전 말하기' : '🌟 사후 말하기';
-  setSpeakGuide('<b>녹음 시작</b> 버튼을 누르고 세 수를 <b>자연스럽게</b> 큰 소리로 읽어요!');
+  setSpeakGuide('<b>녹음</b>하거나 아래 칸에 <b>키보드로 직접</b> 써도 좋아요!');
 
   const row = document.getElementById('speakTargets');
   row.innerHTML = '';
@@ -2452,10 +2509,60 @@ function setupSpeakingScreen(phase) {
   document.getElementById('speakMicLabel').textContent = '녹음 시작';
   document.getElementById('speakMicIcon').innerHTML = '<use href="#i-mic"/>';
   document.getElementById('speakMicBtn').classList.remove('recording');
+  // [신규] 직접 입력 칸 초기화
+  const typedEl = document.getElementById('speakTypedText');
+  if (typedEl) typedEl.value = '';
   const nextBtn = document.getElementById('speakNextBtn');
   nextBtn.disabled = true;
   nextBtn.classList.remove('pulse-attention');
   nextBtn.innerHTML = (phase === 'pre' ? '학습 시작' : '자기평가') + ' <svg><use href="#i-arrow"/></svg>';
+}
+
+/* ===== [신규] 직접 입력 / 건너뛰기 ===== */
+function onSpeakTypedInput() {
+  const el = document.getElementById('speakTypedText');
+  if (!el) return;
+  const txt = el.value.trim();
+  if (STATE.recPhase === 'pre') STATE.preTranscript = txt;
+  else STATE.postTranscript = txt;
+
+  const tBox = document.getElementById('speakTranscript');
+  const hasAudio = STATE.recPhase === 'pre' ? !!STATE.preAudio : !!STATE.postAudio;
+  if (txt.length > 0) {
+    tBox.textContent = txt;
+    tBox.classList.remove('empty');
+  } else if (!hasAudio) {
+    tBox.textContent = '읽은 내용이 여기에 보여요';
+    tBox.classList.add('empty');
+  }
+  const nextBtn = document.getElementById('speakNextBtn');
+  const hasInput = txt.length > 0 || hasAudio;
+  nextBtn.disabled = !hasInput;
+  if (hasInput) nextBtn.classList.add('pulse-attention');
+  else nextBtn.classList.remove('pulse-attention');
+}
+
+function skipSpeaking() {
+  const bg = document.createElement('div');
+  bg.className = 'modal-bg';
+  bg.innerHTML = `
+    <div class="modal">
+      <div class="emoji">⏭️</div>
+      <h3 class="incorrect">녹음 없이 넘어갈까요?</h3>
+      <p><b>녹음이나 키보드 입력 없이</b><br>다음으로 갈 수 있어요.</p>
+      <div class="modal-btns">
+        <button class="modal-btn again" id="cancelSkip">아니요</button>
+        <button class="modal-btn next" id="confirmSkip">네, 건너뛰기</button>
+      </div>
+    </div>`;
+  document.body.appendChild(bg);
+  document.getElementById('cancelSkip').onclick = () => bg.remove();
+  document.getElementById('confirmSkip').onclick = () => {
+    bg.remove();
+    if (STATE.recPhase === 'pre') STATE.preTranscript = '(건너뜀)';
+    else STATE.postTranscript = '(건너뜀)';
+    finishSpeaking();
+  };
 }
 function setMicStatus(state) {
   const el = document.getElementById('micStatus');
