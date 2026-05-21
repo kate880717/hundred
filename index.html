@@ -1275,6 +1275,147 @@
     background: #F97316; border: 3px solid var(--one-d);
     border-radius: 5px; box-shadow: 0 3px 7px rgba(0,0,0,.25);
   }
+
+  /* ============ [신규] 수 모형 크기 안내 화면 ============ */
+  .size-intro-area {
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: clamp(12px,2.2vh,24px);
+    width: 100%; height: 100%;
+    overflow: hidden;
+  }
+  .size-caption {
+    font-size: clamp(20px,3.2vh,34px); font-weight: 900;
+    color: var(--text); text-align: center; line-height: 1.4;
+    padding: 0 clamp(16px,2.4vh,28px);
+    min-height: clamp(56px,8vh,96px);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .size-caption b { color: var(--primary-dark); }
+  .size-caption .h-color { color: var(--hundred-d); }
+  .size-caption .t-color { color: var(--ten-d); }
+  .size-caption .o-color { color: var(--one-d); }
+  .size-stage {
+    --su: clamp(14px,2.5vh,26px);
+    position: relative;
+    width: min(820px, 95%);
+    flex: 1 1 auto;
+    min-height: clamp(260px,42vh,440px);
+    background: white;
+    border: 4px solid var(--primary-light);
+    border-radius: 28px;
+    display: flex; align-items: center; justify-content: center;
+    flex-wrap: wrap;
+    gap: clamp(14px,2.6vh,38px);
+    overflow: hidden;
+    padding: clamp(20px,3vh,40px) clamp(16px,2.4vh,30px);
+    box-shadow: inset 0 4px 12px rgba(0,0,0,.05);
+  }
+  .si-wrap {
+    position: relative;
+    display: flex; flex-direction: column;
+    align-items: center;
+    padding-bottom: clamp(24px,3.6vh,36px);
+  }
+  .si-label {
+    position: absolute; bottom: 0;
+    left: 50%; transform: translateX(-50%);
+    font-size: clamp(13px,1.9vh,18px); font-weight: 900;
+    white-space: nowrap;
+  }
+  .si-label-h { color: var(--hundred-d); }
+  .si-label-t { color: var(--ten-d); }
+  .si-label-o { color: var(--one-d); }
+  .si-hundred {
+    width: calc(var(--su) * 10);
+    height: calc(var(--su) * 10);
+    background: #0EA5E9;
+    border: 4px solid var(--hundred-d);
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: repeat(10,1fr);
+    grid-template-rows: repeat(10,1fr);
+    box-shadow: 0 4px 12px rgba(0,0,0,.2);
+  }
+  .si-hundred > div {
+    border: 1px solid rgba(255,255,255,.6);
+    position: relative;
+  }
+  .si-hundred > div.hl-cell {
+    background: #FBBF24;
+    box-shadow: inset 0 0 0 2px #D97706;
+    animation: cellPulse 1s ease-in-out infinite;
+    z-index: 2;
+  }
+  .si-hundred > div.hl-row {
+    background: #C084FC;
+    box-shadow: inset 0 0 0 1px #7E22CE;
+    animation: rowPulse 1.4s ease-in-out infinite;
+  }
+  @keyframes cellPulse {
+    0%,100% { transform: scale(1); }
+    50%     { transform: scale(1.7); box-shadow: inset 0 0 0 2px #D97706, 0 0 8px #F59E0B; }
+  }
+  @keyframes rowPulse {
+    0%,100% { filter: brightness(1); }
+    50%     { filter: brightness(1.35); }
+  }
+  .si-ten-true {
+    width: var(--su);
+    height: calc(var(--su) * 10);
+    background: #A855F7;
+    border: 4px solid var(--ten-d);
+    border-radius: 5px;
+    display: grid; grid-template-rows: repeat(10,1fr);
+    box-shadow: 0 4px 12px rgba(0,0,0,.2);
+  }
+  .si-ten-true > div { border-bottom: 2px solid var(--ten-d); }
+  .si-ten-true > div:last-child { border-bottom: none; }
+  .si-one-true {
+    width: var(--su);
+    height: var(--su);
+    background: #F97316;
+    border: 4px solid var(--one-d);
+    border-radius: 4px;
+    box-shadow: 0 4px 12px rgba(0,0,0,.2);
+  }
+  .si-ten-true.display-size {
+    width: calc(var(--su) * 3.4);
+    animation: growT 1.2s ease-out;
+  }
+  @keyframes growT {
+    0%   { width: var(--su); filter: brightness(1); }
+    50%  { width: calc(var(--su) * 2.2); filter: brightness(1.4) drop-shadow(0 0 10px #FBBF24); }
+    100% { width: calc(var(--su) * 3.4); filter: brightness(1); }
+  }
+  .si-one-true.display-size {
+    width: calc(var(--su) * 4.2);
+    height: calc(var(--su) * 4.2);
+    animation: growO 1.2s ease-out;
+  }
+  @keyframes growO {
+    0%   { width: var(--su); height: var(--su); filter: brightness(1); }
+    50%  { filter: brightness(1.4) drop-shadow(0 0 10px #FBBF24); }
+    100% { width: calc(var(--su) * 4.2); height: calc(var(--su) * 4.2); filter: brightness(1); }
+  }
+  .size-progress {
+    display: flex; gap: clamp(8px,1.2vh,14px);
+    justify-content: center;
+  }
+  .size-dot {
+    width: clamp(14px,1.8vh,20px);
+    height: clamp(14px,1.8vh,20px);
+    border-radius: 50%;
+    background: #CBD5E1;
+    transition: all .3s;
+  }
+  .size-dot.active {
+    background: var(--primary);
+    transform: scale(1.3);
+  }
+  .size-dot.done {
+    background: var(--green);
+  }
 </style>
 </head>
 <body>
@@ -1403,6 +1544,36 @@
     </div>
   </div>
   <div class="action-bar" style="visibility:hidden;height:0;padding:0;margin:0"></div>
+</div>
+
+<!-- 수 모형 크기 안내 (도입 후, 자유 탐색 전) -->
+<div class="screen hidden" id="screenSizeIntro">
+  <div class="top-bar">
+    <button class="icon-btn" onclick="goStudent()" aria-label="홈"><svg><use href="#i-home"/></svg></button>
+    <span class="stage-badge">📏 수 모형 크기 알기</span>
+    <div class="progress-track">
+      <div class="progress-fill" id="sizeIntroProgress" style="width:20%"></div>
+      <div class="progress-label" id="sizeIntroProgressLabel">1 / 5</div>
+    </div>
+    <button class="icon-btn muted" onclick="toggleSpeaker()" aria-label="스피커">
+      <svg id="speakerIconSize"><use href="#i-volume-off"/></svg>
+    </button>
+  </div>
+  <div class="guide-bar">
+    <div class="point-icon">🔍</div>
+    <div class="text">수 모형의 <b>진짜 크기</b>를 알아봐요!</div>
+  </div>
+  <div class="size-intro-area">
+    <div class="size-caption" id="sizeCaption"></div>
+    <div class="size-stage" id="sizeStage"></div>
+    <div class="size-progress" id="sizeProgress"></div>
+  </div>
+  <div class="action-bar">
+    <button class="btn-soft" onclick="sizeIntroPrev()" id="sizeIntroPrevBtn">← 이전</button>
+    <button class="btn-primary" onclick="sizeIntroNext()" id="sizeIntroNextBtn">
+      다음 <svg><use href="#i-arrow"/></svg>
+    </button>
+  </div>
 </div>
 
 <!-- 학습 활동 안내 -->
@@ -2042,13 +2213,134 @@ function syncSpeakerUI() {
     const el = document.getElementById('speakerIcon'+i);
     if (el) el.innerHTML = `<use href="${useId}"/>`;
   }
-  const expEl = document.getElementById('speakerIconExp');
-  if (expEl) expEl.innerHTML = `<use href="${useId}"/>`;
+  ['speakerIconExp','speakerIconSize'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.innerHTML = `<use href="${useId}"/>`;
+  });
   document.querySelectorAll('.icon-btn').forEach(b => {
     if (b.querySelector('[id^=speakerIcon]')) {
       b.classList.toggle('muted', !STATE.speakerOn);
     }
   });
+}
+
+/* ===== [신규] 수 모형 크기 안내 (도입 후, 자유 탐색 전) ===== */
+const SIZE_INTRO_STEPS = [
+  { caption: '<b class="h-color">백 모형</b>은 작은 칸 <b>100개</b>로<br>이루어져 있어요!',
+    speak: '백 모형은 작은 칸 백 개로 이루어져 있어요' },
+  { caption: '이 작은 칸 <b>한 개</b>가 바로<br><b class="o-color">일 모형</b> 1개예요!',
+    speak: '이 작은 칸 한 개가 바로 일 모형 한 개예요' },
+  { caption: '<b>한 줄(10칸)</b>이 바로<br><b class="t-color">십 모형</b> 1개예요!',
+    speak: '한 줄이 바로 십 모형 한 개예요' },
+  { caption: '진짜 크기로 나란히!<br><b class="h-color">백</b> = <b class="t-color">십 10개</b> = <b class="o-color">일 100개</b>',
+    speak: '진짜 크기로 보면, 백은 십 열 개, 일 백 개와 같아요' },
+  { caption: '화면에서 잘 보이라고<br><b class="t-color">십·</b><b class="o-color">일 모형</b>을 조금 더 크게 보여줄게요!',
+    speak: '화면에서 잘 보이라고 십과 일 모형을 조금 더 크게 보여줄게요. 진짜 크기는 꼭 기억해요' }
+];
+let sizeIntroStep = 0;
+
+function goSizeIntro() {
+  sizeIntroStep = 0;
+  show('screenSizeIntro');
+  syncSpeakerUI();
+  renderSizeIntroStep();
+}
+
+function renderSizeIntroStep() {
+  const total = SIZE_INTRO_STEPS.length;
+  const step = SIZE_INTRO_STEPS[sizeIntroStep];
+  document.getElementById('sizeIntroProgress').style.width = ((sizeIntroStep + 1) / total * 100) + '%';
+  document.getElementById('sizeIntroProgressLabel').textContent = `${sizeIntroStep + 1} / ${total}`;
+  document.getElementById('sizeCaption').innerHTML = step.caption;
+  speak(step.speak);
+
+  const prog = document.getElementById('sizeProgress');
+  prog.innerHTML = '';
+  for (let i = 0; i < total; i++) {
+    const dot = document.createElement('div');
+    dot.className = 'size-dot' + (i === sizeIntroStep ? ' active' : (i < sizeIntroStep ? ' done' : ''));
+    prog.appendChild(dot);
+  }
+
+  document.getElementById('sizeIntroPrevBtn').style.visibility = sizeIntroStep === 0 ? 'hidden' : 'visible';
+  const nextBtn = document.getElementById('sizeIntroNextBtn');
+  if (sizeIntroStep === total - 1) {
+    nextBtn.innerHTML = '시작하기! <svg><use href="#i-arrow"/></svg>';
+    nextBtn.classList.add('pulse-attention');
+  } else {
+    nextBtn.innerHTML = '다음 <svg><use href="#i-arrow"/></svg>';
+    nextBtn.classList.remove('pulse-attention');
+  }
+
+  renderSizeStage(sizeIntroStep);
+}
+
+function renderSizeStage(stepIdx) {
+  const stage = document.getElementById('sizeStage');
+  stage.innerHTML = '';
+
+  // 백 모형 (항상 표시)
+  const hWrap = document.createElement('div');
+  hWrap.className = 'si-wrap';
+  const hundred = document.createElement('div');
+  hundred.className = 'si-hundred';
+  for (let i = 0; i < 100; i++) {
+    const cell = document.createElement('div');
+    if (stepIdx === 1 && i === 0) cell.classList.add('hl-cell');
+    if (stepIdx === 2 && i < 10) cell.classList.add('hl-row');
+    hundred.appendChild(cell);
+  }
+  hWrap.appendChild(hundred);
+  const hLabel = document.createElement('div');
+  hLabel.className = 'si-label si-label-h';
+  hLabel.textContent = '백 모형 (100)';
+  hWrap.appendChild(hLabel);
+  stage.appendChild(hWrap);
+
+  // 십 모형: 스텝 2부터 등장 (스텝 4에서 디스플레이 크기로 성장)
+  if (stepIdx >= 2) {
+    const tWrap = document.createElement('div');
+    tWrap.className = 'si-wrap';
+    const ten = document.createElement('div');
+    ten.className = 'si-ten-true' + (stepIdx === 4 ? ' display-size' : '');
+    for (let i = 0; i < 10; i++) ten.appendChild(document.createElement('div'));
+    tWrap.appendChild(ten);
+    const tLabel = document.createElement('div');
+    tLabel.className = 'si-label si-label-t';
+    tLabel.textContent = '십 모형 (10)';
+    tWrap.appendChild(tLabel);
+    stage.appendChild(tWrap);
+  }
+
+  // 일 모형: 스텝 1부터 등장 (스텝 4에서 디스플레이 크기로 성장)
+  if (stepIdx >= 1) {
+    const oWrap = document.createElement('div');
+    oWrap.className = 'si-wrap';
+    const one = document.createElement('div');
+    one.className = 'si-one-true' + (stepIdx === 4 ? ' display-size' : '');
+    oWrap.appendChild(one);
+    const oLabel = document.createElement('div');
+    oLabel.className = 'si-label si-label-o';
+    oLabel.textContent = '일 모형 (1)';
+    oWrap.appendChild(oLabel);
+    stage.appendChild(oWrap);
+  }
+}
+
+function sizeIntroNext() {
+  if (sizeIntroStep < SIZE_INTRO_STEPS.length - 1) {
+    sizeIntroStep++;
+    renderSizeIntroStep();
+  } else {
+    startExplore();
+  }
+}
+
+function sizeIntroPrev() {
+  if (sizeIntroStep > 0) {
+    sizeIntroStep--;
+    renderSizeIntroStep();
+  }
 }
 let audioCtx = null;
 function getAudioCtx() {
@@ -2302,7 +2594,7 @@ function introAnswer(choice) {
       null,
       () => {
         if (STATE.introStep < 2) { STATE.introStep++; updateIntroQuestion(); }
-        else { startExplore(); }
+        else { goSizeIntro(); }
       });
   } else {
     playSound('incorrect');
